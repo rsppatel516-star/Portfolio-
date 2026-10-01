@@ -42,6 +42,26 @@ export default function Footer() {
     { name: 'CONTACT', to: 'contact' },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1,
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
+    }
+  };
+
   return (
     <footer className="pt-16 pb-10 relative overflow-hidden bg-[#03040c] backdrop-blur-3xl border-t border-white/[0.08] text-white">
       {/* Animated Multi-Color Gradient Top Border Shimmer */}
@@ -87,10 +107,16 @@ export default function Footer() {
         </div>*/}
 
         {/* Top Info Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-8 pb-12">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-8 pb-12"
+        >
 
           {/* Column 1: Brand Signature & System Status */}
-          <div className="sm:col-span-2 lg:col-span-4 space-y-5 sm:space-y-6 lg:pr-8">
+          <motion.div variants={itemVariants} className="sm:col-span-2 lg:col-span-4 space-y-5 sm:space-y-6 lg:pr-8">
             <div className="flex items-center gap-3.5 sm:gap-4">
               <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 p-1 relative overflow-hidden group bg-gradient-to-br from-purple-600/30 to-indigo-600/30 border border-purple-500/30">
                 <img
@@ -146,10 +172,10 @@ export default function Footer() {
                 </MagneticButton>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Column 2: Quick Links */}
-          <div className="lg:col-span-2 space-y-4 sm:space-y-6">
+          <motion.div variants={itemVariants} className="lg:col-span-2 space-y-4 sm:space-y-6">
             <h4 className="text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-[#6366f1] flex items-center gap-2 font-display group/hdr cursor-default select-none relative w-max">
               <Code2 size={15} />
               Navigation
@@ -171,10 +197,10 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Column 3: Services Grid */}
-          <div className="lg:col-span-3 space-y-4 sm:space-y-6">
+          <motion.div variants={itemVariants} className="lg:col-span-3 space-y-4 sm:space-y-6">
             <h4 className="text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-[#6366f1] flex items-center gap-2 font-display group/hdr cursor-default select-none relative w-max">
               <Globe size={16} className="transition-transform duration-300" />
               Specialization
@@ -194,10 +220,10 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Column 4: Quick Connect & Newsletter */}
-          <div className="lg:col-span-3 space-y-4 sm:space-y-5 relative">
+          <motion.div variants={itemVariants} className="lg:col-span-3 space-y-4 sm:space-y-5 relative">
             <h4 className="text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-[#6366f1] flex items-center gap-2 font-display group/hdr cursor-default select-none relative w-max">
               <Mail size={16} className="transition-transform duration-300" />
               Quick Dispatch
@@ -247,9 +273,9 @@ export default function Footer() {
                 <span className="text-white/90 font-bold">Vadodara, Gujarat, India</span>
               </li>
             </ul>
-          </div>
+          </motion.div>
 
-        </div>
+        </motion.div>
 
         {/* Scrolling Background Marquee Text 
         <div className="relative my-4 select-none pointer-events-none overflow-hidden opacity-[0.03]">
@@ -270,7 +296,13 @@ export default function Footer() {
         </div>*/}
 
         {/* Bottom Bar: Copyright & Back To Top */}
-        <div className="pt-6 border-t border-white/[0.08] flex flex-col sm:flex-row justify-between items-center gap-4">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.6, duration: 0.6 }}
+          className="pt-6 border-t border-white/[0.08] flex flex-col sm:flex-row justify-between items-center gap-4"
+        >
           {/* Copyright Text */}
           <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-3 gap-y-1 text-[11px] font-mono text-white/50 uppercase tracking-widest text-center sm:text-left">
             <div className="flex items-center gap-2">
@@ -292,7 +324,7 @@ export default function Footer() {
               <ArrowUp size={12} />
             </div>
           </button>
-        </div>
+        </motion.div>
 
       </div>
     </footer>

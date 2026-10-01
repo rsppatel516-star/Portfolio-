@@ -55,7 +55,7 @@ const BentoCard = ({ children, className = "", onClick = null }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={onClick}
-      className={`card-dark p-4 sm:p-5 md:p-6 flex flex-col justify-between group/card relative ${className}`}
+      className={`backdrop-blur-xl bg-gradient-to-br from-white/[0.08] to-transparent border border-white/10 border-t-white/20 border-l-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)] rounded-3xl p-4 sm:p-5 md:p-6 flex flex-col justify-between group/card relative ${className}`}
       style={{
         position: 'relative',
         overflow: 'hidden'
@@ -182,7 +182,7 @@ export default function About() {
 
           {/* Developer Portrait Image Showcase Card */}
           <BentoCard className="col-span-2 md:col-span-2 lg:col-span-2 lg:row-span-2 relative overflow-hidden group p-0 min-h-[300px] h-full border-purple-500/20 transition-all duration-500">
-            <div className="relative w-full h-full min-h-[300px] overflow-hidden rounded-md">
+            <div className="relative w-full h-full min-h-[300px] overflow-hidden rounded-xl">
               <img
                 src="/images/0R7A7684.webp"
                 alt="Rudra Patel - Developer Profile"

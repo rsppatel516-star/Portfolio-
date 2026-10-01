@@ -220,7 +220,7 @@ const CredentialCard = ({ cert, onOpen, cardVariants }) => {
         borderColor: isHovered ? `${cert.brandColor}80` : 'rgba(255,255,255,0.05)',
         boxShadow: isHovered ? `0 0 35px ${cert.brandColor}15` : 'none'
       }}
-      className="group relative bg-dark-surface/20 backdrop-blur-xl border rounded-3xl p-8 flex flex-col justify-between overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.15)] hover:bg-dark-surface/30 transition-all duration-500 cursor-pointer"
+      className="group relative backdrop-blur-xl bg-gradient-to-br from-white/[0.08] to-transparent border border-white/10 border-t-white/20 border-l-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:bg-white/[0.05] rounded-3xl p-8 flex flex-col justify-between overflow-hidden transition-all duration-500 cursor-pointer"
       onClick={onOpen}
     >
       {/* Corner brackets */}

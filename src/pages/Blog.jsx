@@ -47,6 +47,7 @@ export default function Blog() {
   }, [blogs, activeCategory, searchQuery]);
 
   const featuredBlog = filteredBlogs.length > 0 ? filteredBlogs[0] : null;
+  const standardBlogs = filteredBlogs.length > 1 ? filteredBlogs.slice(1) : [];
   const blogPageSchema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -205,7 +206,7 @@ export default function Blog() {
                 >
                   <Link to={`/blog/${featuredBlog.id || featuredBlog._id}`} className="group block">
                     <ClickSpark sparkColor="rgba(var(--dark-primary-rgb), 1)" sparkColor2="rgba(var(--dark-secondary-rgb), 1)">
-                      <div className="relative overflow-hidden rounded-[3rem] bg-white/[0.01] border border-white/5 hover:border-dark-primary/30 transition-all duration-700 p-4 lg:p-8 hover:bg-white/[0.03] shadow-2xl hover:shadow-[0_20px_60px_-15px_rgba(124,58,237,0.2)]">
+                      <div className="relative overflow-hidden rounded-[3rem] backdrop-blur-xl bg-gradient-to-br from-white/[0.08] to-transparent border border-white/10 border-t-white/20 border-l-white/20 hover:border-dark-primary/30 transition-all duration-700 p-4 lg:p-8 hover:bg-white/[0.1] shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:shadow-[0_20px_60px_-15px_rgba(124,58,237,0.2)]">
                         <div className="flex flex-col lg:flex-row gap-10 lg:gap-16">
                           {/* Image Container */}
                           <div className="w-full lg:w-[55%] relative aspect-[16/9] lg:aspect-square xl:aspect-[16/10] rounded-[2.5rem] overflow-hidden shadow-2xl border border-dark-border/50">
@@ -290,7 +291,7 @@ export default function Blog() {
                   >
                     <Link to={`/blog/${blog.id || blog._id}`} className="flex flex-col h-full overflow-hidden group/card">
                       <ClickSpark sparkColor="rgba(var(--dark-primary-rgb), 1)" sparkColor2="rgba(var(--dark-secondary-rgb), 1)" className="h-full">
-                        <div className="flex flex-col h-full rounded-[2.5rem] bg-white/[0.01] border border-white/5 hover:border-dark-primary/30 transition-all duration-500 hover:bg-white/[0.03] overflow-hidden shadow-xl hover:shadow-[0_15px_40px_-10px_rgba(124,58,237,0.15)] hover:-translate-y-1">
+                        <div className="flex flex-col h-full rounded-[2.5rem] backdrop-blur-xl bg-gradient-to-br from-white/[0.08] to-transparent border border-white/10 border-t-white/20 border-l-white/20 hover:border-dark-primary/30 transition-all duration-500 hover:bg-white/[0.1] overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:shadow-[0_15px_40px_-10px_rgba(124,58,237,0.15)] hover:-translate-y-1">
                           <div className="relative h-56 md:h-64 overflow-hidden shrink-0 border-b border-white/5">
                             <motion.img
                               whileHover={{ scale: 1.08 }}

@@ -119,9 +119,9 @@ const FilterButton = ({ cat, activeTab, onSelect, icon }) => {
       <button
         ref={buttonRef}
         onMouseMove={handleMouseMove}
-        className={`relative flex items-center gap-2 sm:gap-2.5 px-3.5 sm:px-5 md:px-7 py-2.5 sm:py-3 md:py-3.5 rounded-xl text-[9px] sm:text-[10px] font-black uppercase tracking-[0.15em] sm:tracking-[0.25em] transition-all duration-500 border overflow-hidden group/btn cursor-pointer whitespace-nowrap ${activeTab === cat
-          ? 'text-white border-violet-500/50 shadow-[0_0_25px_rgba(124,58,237,0.25)]'
-          : ' bg-white/[0.01] border-white/5 hover:border-violet-500/30 text-dark-textMuted hover:text-white'
+        className={`relative flex items-center gap-2 sm:gap-2.5 px-3.5 sm:px-5 md:px-7 py-2.5 sm:py-3 md:py-3.5 rounded-xl text-[9px] sm:text-[10px] font-black uppercase tracking-[0.15em] sm:tracking-[0.25em] transition-all duration-500 border overflow-hidden group/btn cursor-pointer whitespace-nowrap backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.3)] ${activeTab === cat
+          ? 'bg-gradient-to-br from-violet-600/30 to-indigo-600/30 text-white border-white/20 border-t-white/40 border-l-white/40'
+          : 'bg-gradient-to-br from-white/[0.08] to-transparent border-white/10 border-t-white/20 border-l-white/20 text-dark-textMuted hover:text-white hover:bg-white/[0.12]'
           }`}
       >
         {activeTab === cat && (
@@ -329,7 +329,7 @@ export default function Skills() {
                         borderColor: hoveredTech === tech.name ? `${techHexColors[tech.icon]}45` : undefined,
                         boxShadow: hoveredTech === tech.name ? `0 0 25px -5px ${techHexColors[tech.icon]}25` : undefined
                       }}
-                      className="group relative h-48 bg-white/[0.02] border border-white/5 rounded-3xl p-6 flex flex-col items-center justify-center text-center overflow-hidden transition-all duration-500 hover:bg-white/[0.04] cursor-default"
+                      className="group relative h-48 backdrop-blur-xl bg-gradient-to-br from-white/[0.08] to-transparent border border-white/10 border-t-white/20 border-l-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)] rounded-3xl p-6 flex flex-col items-center justify-center text-center overflow-hidden transition-all duration-500 hover:bg-white/[0.1] cursor-default"
                     >
 
 

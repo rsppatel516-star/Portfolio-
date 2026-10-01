@@ -445,7 +445,6 @@ export default function ProjectsPage() {
           <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <AnimatePresence mode="popLayout">
               {filteredProjects.map((project, idx) => {
-                const hasCaseStudy = caseStudyIds.has(project.id);
                 return (
                   <motion.div
                     key={project.id}

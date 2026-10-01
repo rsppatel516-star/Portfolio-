@@ -7,6 +7,19 @@ import {
 } from 'lucide-react';
 import MagneticButton from './MagneticButton';
 
+const modalContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.1 }
+  }
+};
+
+const modalItemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { type: 'spring', damping: 25, stiffness: 300 } }
+};
+
 export default function ProjectModal({
   project,
   onClose,
@@ -70,12 +83,18 @@ export default function ProjectModal({
 
           {/* Modal Body Content (Scrollable with custom scrollbar) */}
           <div className="overflow-y-auto custom-scrollbar pr-1 sm:pr-2 space-y-6 sm:space-y-8 -webkit-overflow-scrolling-touch pt-2 sm:pt-0">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10">
+            <motion.div 
+              variants={modalContainerVariants}
+              initial="hidden"
+              animate="visible"
+              className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10"
+            >
 
               {/* ── LEFT COLUMN: Interactive Cover Image & Action Suite (5 Cols) ── */}
               <div className="lg:col-span-5 flex flex-col gap-4 sm:gap-5">
                 {/* Poster Image Container */}
-                <div
+                <motion.div
+                  variants={modalItemVariants}
                   onClick={() => setIsZoomed(true)}
                   className="relative w-full aspect-[4/3] lg:aspect-[4/5] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-white/15 group/img bg-black/40 cursor-pointer"
                   title="Click to view high-resolution image"
@@ -127,10 +146,10 @@ export default function ProjectModal({
                       </div>
                     )}
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Action Link Buttons Suite */}
-                <div className="flex flex-col gap-2.5">
+                <motion.div variants={modalItemVariants} className="flex flex-col gap-2.5">
                   {project.liveUrl && project.liveUrl !== '#' && (
                     <MagneticButton>
                       <a
@@ -173,14 +192,14 @@ export default function ProjectModal({
                       </Link>
                     )}
                   </div>
-                </div>
+                </motion.div>
               </div>
 
               {/* ── RIGHT COLUMN: Technical Details & Core Features (7 Cols) ── */}
               <div className="lg:col-span-7 flex flex-col pt-1 sm:pt-2">
 
                 {/* Status & Metadata Header */}
-                <div className="flex items-center justify-between mb-4 sm:mb-5">
+                <motion.div variants={modalItemVariants} className="flex items-center justify-between mb-4 sm:mb-5">
                   <div className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-mono font-bold uppercase tracking-wider border backdrop-blur-sm ${project.status === 'Completed'
                     ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/30'
                     : 'text-amber-400 bg-amber-500/10 border-amber-500/30'
@@ -198,10 +217,10 @@ export default function ProjectModal({
                       #{project.id < 10 ? `0${project.id}` : project.id}
                     </span>
                   </div>*/}
-                </div>
+                </motion.div>
 
                 {/* ── HIGH-VALUE PROJECT SPECS BAR ── */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 p-3 rounded-2xl bg-white/[0.02] border border-white/10 mb-6">
+                <motion.div variants={modalItemVariants} className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 p-3 rounded-2xl bg-white/[0.02] border border-white/10 mb-6">
                   {/* Role */}
                   <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/5">
                     <span className="text-[10px] font-mono uppercase tracking-wider text-white/40 flex items-center gap-1 mb-1">
@@ -241,19 +260,21 @@ export default function ProjectModal({
                       {project.performance || 'Production Standard'}
                     </span>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* About Section */}
-                <h4 className="text-lg sm:text-xl font-display font-extrabold mb-2.5 text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-300">
-                  About the Project
-                </h4>
-                <p className="text-white/80 leading-relaxed text-xs sm:text-sm md:text-base mb-6 font-syne font-normal">
-                  {project.description}
-                </p>
+                <motion.div variants={modalItemVariants}>
+                  <h4 className="text-lg sm:text-xl font-display font-extrabold mb-2.5 text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-300">
+                    About the Project
+                  </h4>
+                  <p className="text-white/80 leading-relaxed text-xs sm:text-sm md:text-base mb-6 font-syne font-normal">
+                    {project.description}
+                  </p>
+                </motion.div>
 
                 {/* Core Features Section */}
                 {project.keyFeatures && project.keyFeatures.length > 0 && (
-                  <div className="mb-6">
+                  <motion.div variants={modalItemVariants} className="mb-6">
                     <h4 className="flex items-center gap-2 text-xs sm:text-sm font-mono font-bold text-white uppercase tracking-wider mb-3.5 border-b border-white/10 pb-2.5">
                       <Zap size={15} className="text-violet-400" /> Core Features
                     </h4>
@@ -270,11 +291,11 @@ export default function ProjectModal({
                         </div>
                       ))}
                     </div>
-                  </div>
+                  </motion.div>
                 )}
 
                 {/* Tech Stack & Skills Utilized Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-auto pt-4 border-t border-white/10">
+                <motion.div variants={modalItemVariants} className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-auto pt-4 border-t border-white/10">
                   {/* Tech Stack */}
                   {project.tags && project.tags.length > 0 && (
                     <div>
@@ -312,17 +333,17 @@ export default function ProjectModal({
                       </div>
                     </div>
                   )}
-                </div>
+                </motion.div>
 
                 {/* Technical Architecture Footer Note */}
-                <div className="mt-5 p-3 rounded-xl bg-purple-500/5 border border-purple-500/15 flex items-center gap-2.5 text-[11px] font-mono text-purple-200/80">
+                <motion.div variants={modalItemVariants} className="mt-5 p-3 rounded-xl bg-purple-500/5 border border-purple-500/15 flex items-center gap-2.5 text-[11px] font-mono text-purple-200/80">
                   <ShieldCheck size={15} className="text-purple-400 shrink-0" />
                   <span>Engineered with modern component architecture, accessible UI tokens, and fast performance optimization.</span>
-                </div>
+                </motion.div>
 
               </div>
 
-            </div>
+            </motion.div>
           </div>
         </motion.div>
 

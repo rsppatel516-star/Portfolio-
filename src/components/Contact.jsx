@@ -160,7 +160,7 @@ export default function Contact({ isPage = false }) {
                   variants={itemVariants}
                   whileHover={{ y: -3, scale: 1.01 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  className="flex items-center justify-between p-4 sm:p-5 bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl hover:border-[var(--accent-primary)]/40 hover:bg-white/[0.05] transition-all duration-300 group"
+                  className="flex items-center justify-between p-4 sm:p-5 backdrop-blur-xl bg-gradient-to-br from-white/[0.08] to-transparent border border-white/10 border-t-white/20 border-l-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)] rounded-2xl hover:border-[var(--accent-primary)]/40 hover:bg-white/[0.12] transition-all duration-300 group"
                 >
                   <a
                     href="mailto:patelrudra99098@gmail.com"
@@ -190,7 +190,7 @@ export default function Contact({ isPage = false }) {
                   variants={itemVariants}
                   whileHover={{ y: -3, scale: 1.01 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  className="flex items-center justify-between p-4 sm:p-5 bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl hover:border-[var(--accent-primary)]/40 hover:bg-white/[0.05] transition-all duration-300 group"
+                  className="flex items-center justify-between p-4 sm:p-5 backdrop-blur-xl bg-gradient-to-br from-white/[0.08] to-transparent border border-white/10 border-t-white/20 border-l-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)] rounded-2xl hover:border-[var(--accent-primary)]/40 hover:bg-white/[0.12] transition-all duration-300 group"
                 >
                   <a
                     href="tel:+916354825621"
@@ -220,7 +220,7 @@ export default function Contact({ isPage = false }) {
                   variants={itemVariants}
                   whileHover={{ y: -3, scale: 1.01 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  className="flex items-center gap-3.5 sm:gap-4 p-4 sm:p-5 bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl hover:border-[var(--accent-primary)]/40 hover:bg-white/[0.05] transition-all duration-300 group"
+                  className="flex items-center gap-3.5 sm:gap-4 p-4 sm:p-5 backdrop-blur-xl bg-gradient-to-br from-white/[0.08] to-transparent border border-white/10 border-t-white/20 border-l-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)] rounded-2xl hover:border-[var(--accent-primary)]/40 hover:bg-white/[0.12] transition-all duration-300 group"
                 >
                   <div className="p-3 sm:p-3.5 bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20 rounded-xl text-[var(--accent-primary)] group-hover:bg-[var(--accent-primary)]/30 group-hover:text-white transition-all shrink-0">
                     <MapPin size={18} className="sm:w-5 sm:h-5" />
@@ -237,10 +237,11 @@ export default function Contact({ isPage = false }) {
           {/* Right Column: Interactive Contact Form Lab */}
           <div className="lg:w-7/12">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
-              className="backdrop-blur-[16px] border border-white/15 rounded-2xl sm:rounded-xl p-5 sm:p-8 md:p-12 relative overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.8),inset_0_1px_2px_rgba(255,255,255,0.15)]"
+              className="backdrop-blur-xl bg-gradient-to-br from-white/[0.08] to-transparent border border-white/10 border-t-white/20 border-l-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)] rounded-2xl sm:rounded-xl p-5 sm:p-8 md:p-12 relative overflow-hidden"
             >
               {/* High-Tech HUD Ambient Header
               <div className="flex items-center justify-between mb-6 sm:mb-8 pb-3.5 sm:pb-4 border-b border-white/10">
@@ -258,7 +259,7 @@ export default function Contact({ isPage = false }) {
                 <input type="hidden" name="project_type" value="General Inquiry" />
 
                 {/* User Name & Email */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
+                <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
                   {/* Name Input */}
                   <div className="space-y-2 group/input">
                     <label htmlFor="user_name" className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-white/60 flex items-center gap-2">
@@ -294,10 +295,10 @@ export default function Contact({ isPage = false }) {
                       />
                     </div>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Subject Input */}
-                <div className="space-y-2 group/input">
+                <motion.div variants={itemVariants} className="space-y-2 group/input">
                   <label htmlFor="subject" className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-white/60 flex items-center gap-2">
                     <Globe size={13} className="text-indigo-400" />
                     Subject / Objective
@@ -312,10 +313,10 @@ export default function Contact({ isPage = false }) {
                       placeholder="Project Inquiry / Job Opportunity / Hello"
                     />
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Message Brief */}
-                <div className="space-y-2 group/input">
+                <motion.div variants={itemVariants} className="space-y-2 group/input">
                   <label htmlFor="message" className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-white/60 flex items-center gap-2">
                     <MessageSquare size={13} className="text-indigo-400" />
                     Project Details / Message
@@ -330,10 +331,10 @@ export default function Contact({ isPage = false }) {
                       placeholder="Share your goals, scope, Timeline, or questions..."
                     ></textarea>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Submit Action */}
-                <div className="pt-1 sm:pt-2 flex justify-center">
+                <motion.div variants={itemVariants} className="pt-1 sm:pt-2 flex justify-center">
                   <MagneticButton disabled={isSubmitting} className="w-full max-w-md cursor-pointer flex justify-center">
                     <button
                       type="submit"
@@ -361,7 +362,7 @@ export default function Contact({ isPage = false }) {
                       </div>
                     </button>
                   </MagneticButton>
-                </div>
+                </motion.div>
 
               </form>
             </motion.div>

@@ -79,7 +79,7 @@ export default function Experience() {
                   transition={{ delay: idx * 0.1, duration: 0.6 }}
                   className="relative group"
                 >
-                  <div className="p-6 sm:p-8 rounded-lg backdrop-blur-md border border-white/10 hover:border-indigo-500/40 hover:bg-white/[0.03] hover:shadow-[0_12px_40px_-10px_rgba(99,102,241,0.2)] transition-all duration-500 group-hover:-translate-y-1 relative overflow-hidden">
+                  <div className="p-6 sm:p-8 rounded-lg backdrop-blur-xl bg-gradient-to-br from-white/[0.08] to-transparent border border-white/10 border-t-white/20 border-l-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:border-indigo-500/40 hover:shadow-[0_12px_40px_-10px_rgba(99,102,241,0.4)] transition-all duration-500 group-hover:-translate-y-1 relative overflow-hidden">
                     {/* Hover Glow Gradient */}
                     <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
@@ -144,7 +144,7 @@ export default function Experience() {
                     viewport={{ once: true }}
                     transition={{ delay: idx * 0.08, duration: 0.5 }}
                     whileHover={{ y: -6, scale: 1.02 }}
-                    className="group relative backdrop-blur-md border border-white/10 hover:border-white/20 rounded-lg p-6 flex flex-col justify-between overflow-hidden transition-all duration-500 cursor-default shadow-lg"
+                    className="group relative backdrop-blur-xl bg-gradient-to-br from-white/[0.08] to-transparent border border-white/10 border-t-white/20 border-l-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:border-white/30 rounded-lg p-6 flex flex-col justify-between overflow-hidden transition-all duration-500 cursor-default"
                   >
                     {/* Top Row: Icon + Verified Badge */}
                     <div className="flex items-center justify-between mb-4 z-10">

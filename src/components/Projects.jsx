@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { projects, projectFilters } from '../data/projects';
@@ -39,9 +39,9 @@ const ProjectFilterButton = ({ filter, count, activeFilter, setActiveFilter, set
   return (
     <MagneticButton onClick={() => { setActiveFilter(filter); setVisibleCount(6); }}>
       <button
-        className={`relative px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm md:text-base font-bold transition-all duration-300 focus:outline-none flex items-center gap-2.5 cursor-pointer select-none group border ${isActive
-          ? 'text-white border-violet-500/50 shadow-[0_0_25px_rgba(99,102,241,0.35)]'
-          : 'text-white/60 border-white/5 bg-white/[0.01] hover:text-white hover:border-violet-500/30 hover:bg-white/[0.04]'
+        className={`relative px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm md:text-base font-bold transition-all duration-300 focus:outline-none flex items-center gap-2.5 cursor-pointer select-none group border backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.3)] ${isActive
+          ? 'bg-gradient-to-br from-violet-600/30 to-indigo-600/30 text-white border-white/20 border-t-white/40 border-l-white/40'
+          : 'bg-gradient-to-br from-white/[0.08] to-transparent border-white/10 border-t-white/20 border-l-white/20 text-white/60 hover:text-white hover:bg-white/[0.12]'
           }`}
       >
         {isActive && (
@@ -120,10 +120,10 @@ export default function Projects() {
   // Math calculation for circular progress ring
   const totalCount = projects.length;
   const filteredCount = filteredProjects.length;
-  const percentage = totalCount > 0 ? (filteredCount / totalCount) * 100 : 0;
-  const radius = 8;
-  const circumference = 2 * Math.PI * radius;
-  const strokeDashoffset = circumference - (percentage / 100) * circumference;
+  // const percentage = totalCount > 0 ? (filteredCount / totalCount) * 100 : 0;
+  // const radius = 8;
+  // const circumference = 2 * Math.PI * radius;
+  // const strokeDashoffset = circumference - (percentage / 100) * circumference;
 
   return (
     <section id="projects" className="py-16  relative overflow-hidden">
@@ -228,7 +228,7 @@ export default function Projects() {
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
                 onClick={() => setSelectedProject(project)}
-                className="group relative h-[340px] sm:h-[420px] md:h-[500px] rounded-3xl overflow-hidden border border-dark-border bg-dark-surface cursor-pointer"
+                className="group relative h-[340px] sm:h-[420px] md:h-[500px] rounded-3xl overflow-hidden backdrop-blur-xl bg-gradient-to-br from-white/[0.08] to-transparent border border-white/10 border-t-white/20 border-l-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)] cursor-pointer"
               >
                 <ClickSpark sparkColor="#8b5cf6" sparkColor2="#6366f1">
                   <div className="w-full h-full relative">
@@ -270,7 +270,7 @@ export default function Projects() {
           {visibleCount < filteredProjects.length && (
             <MagneticButton
               onClick={() => setVisibleCount(filteredProjects.length)}
-              className="px-6 py-3.5 sm:px-10 sm:py-4.5 border border-dark-border rounded-full font-bold hover:border-dark-primary transition-all group overflow-hidden relative font-syne tracking-tighter-tight"
+              className="px-6 py-3.5 sm:px-10 sm:py-4.5 backdrop-blur-xl bg-gradient-to-br from-white/[0.08] to-transparent border border-white/10 border-t-white/20 border-l-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)] rounded-full font-bold hover:bg-white/[0.1] hover:border-dark-primary transition-all group overflow-hidden relative font-syne tracking-tighter-tight"
             >
               <span className="relative z-10 flex items-center gap-2 sm:gap-3 uppercase tracking-wider sm:tracking-widest whitespace-nowrap text-xs sm:text-sm">
                 More Artifacts
@@ -284,7 +284,7 @@ export default function Projects() {
 
           {/* Explore Case Studies → /artifacts page */}
           <Link to="/artifacts" className="inline-block">
-            <MagneticButton className="px-6 py-3.5 sm:px-10 sm:py-4.5 bg-dark-primary text-dark-bg rounded-full font-bold hover:scale-105 transition-all group overflow-hidden relative">
+            <MagneticButton className="px-6 py-3.5 sm:px-10 sm:py-4.5 backdrop-blur-xl bg-gradient-to-br from-indigo-500/80 to-purple-600/80 border border-white/20 border-t-white/40 border-l-white/40 shadow-[0_8px_32px_rgba(99,102,241,0.4)] text-white rounded-full font-bold hover:scale-105 hover:shadow-[0_8px_40px_rgba(99,102,241,0.6)] transition-all group overflow-hidden relative">
               <span className="font-display relative z-10 flex items-center gap-2 sm:gap-3 uppercase tracking-wider sm:tracking-widest whitespace-nowrap text-xs sm:text-sm">
                 Explore Case Studies
                 <ArrowRight className="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5 group-hover:translate-x-2 transition-transform" />

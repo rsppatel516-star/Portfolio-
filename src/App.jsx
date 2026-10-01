@@ -1,4 +1,4 @@
-import { useEffect, lazy, Suspense } from 'react';
+import { useEffect, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import FeatureNavbar from './components/FeatureNavbar';
@@ -25,15 +25,9 @@ const PageFallback = () => (
 function App() {
   const location = useLocation();
 
-  // Track pageviews on client-side route changes
+  // Removed Google Analytics tracking for privacy
   useEffect(() => {
-    if (typeof window.gtag === 'function') {
-      window.gtag('event', 'page_view', {
-        page_path: location.pathname + location.search,
-        page_title: document.title,
-        page_location: window.location.href,
-      });
-    }
+    // Tracking logic removed
   }, [location]);
 
   const isCaseStudyPage = location.pathname.startsWith('/artifacts/');

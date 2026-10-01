@@ -351,7 +351,7 @@ export default function Artifacts() {
                     transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                     className="w-full lg:w-[54%] relative group"
                   >
-                    <div className="relative aspect-[16/10] rounded-xl md:rounded-xl overflow-hidden border border-white/10 bg-dark-surface shadow-2xl group-hover:border-dark-primary/40 transition-colors duration-500">
+                    <div className="relative aspect-[16/10] rounded-xl md:rounded-xl overflow-hidden backdrop-blur-xl bg-gradient-to-br from-white/[0.08] to-transparent border border-white/10 border-t-white/20 border-l-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)] group-hover:border-dark-primary/40 transition-all duration-500">
                       <motion.img
                         whileHover={{ scale: 1.04 }}
                         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
@@ -504,7 +504,7 @@ export default function Artifacts() {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.92, opacity: 0, y: 20 }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="bg-[#070814]/95 backdrop-blur-2xl border border-white/15 p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl md:rounded-[16px] max-w-5xl w-full relative flex flex-col max-h-[90vh] md:max-h-[85vh] shadow-[0_25px_60px_rgba(0,0,0,0.85)] overflow-hidden"
+              className="backdrop-blur-2xl bg-gradient-to-br from-[#070814]/95 to-[#070814]/70 border border-white/10 border-t-white/20 border-l-white/20 p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl md:rounded-[16px] max-w-5xl w-full relative flex flex-col max-h-[90vh] md:max-h-[85vh] shadow-[0_25px_60px_rgba(0,0,0,0.85)] overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Floating Close Button */}

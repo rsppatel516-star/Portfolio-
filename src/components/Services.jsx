@@ -4,6 +4,19 @@ import { services } from '../data/services';
 import { Zap, Terminal, Cpu, X, CheckCircle2, ArrowRight, Sparkles, MessageSquare } from 'lucide-react';
 import MagneticButton from './ui/MagneticButton';
 
+const modalContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.1 }
+  }
+};
+
+const modalItemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { type: 'spring', damping: 25, stiffness: 300 } }
+};
+
 export default function Services() {
   const [selectedService, setSelectedService] = useState(null);
 
@@ -79,7 +92,7 @@ export default function Services() {
               viewport={{ once: true }}
               transition={{ delay: idx * 0.08, duration: 0.4 }}
               onClick={() => setSelectedService(service)}
-              className="bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-xl border border-white/10 hover:border-accent-primary rounded-2xl sm:rounded-3xl group p-6 sm:p-8 md:p-10 flex flex-col justify-between relative overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-1.5"
+              className="backdrop-blur-xl bg-gradient-to-br from-white/[0.08] to-transparent border border-white/10 border-t-white/20 border-l-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:bg-white/[0.1] hover:border-accent-primary rounded-2xl sm:rounded-3xl group p-6 sm:p-8 md:p-10 flex flex-col justify-between relative overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-1.5"
             >
               {/* Radial Glow on Hover */}
               <div className="absolute top-0 right-0 w-32 sm:w-36 h-32 sm:h-36 bg-gradient-to-bl from-accent-primary/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
@@ -141,10 +154,15 @@ export default function Services() {
               </button>
 
               {/* Modal Body Content (Scrollable with custom scrollbar) */}
-              <div className="overflow-y-auto custom-scrollbar pr-2 sm:pr-3 space-y-6 sm:space-y-8 -webkit-overflow-scrolling-touch">
+              <motion.div 
+                variants={modalContainerVariants}
+                initial="hidden"
+                animate="visible"
+                className="overflow-y-auto custom-scrollbar pr-2 sm:pr-3 space-y-6 sm:space-y-8 -webkit-overflow-scrolling-touch"
+              >
 
                 {/* Header Info */}
-                <div className="pr-12 sm:pr-14 md:pr-16">
+                <motion.div variants={modalItemVariants} className="pr-12 sm:pr-14 md:pr-16">
                   <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-br from-[var(--accent-primary)]/20 via-[var(--accent-secondary)]/10 to-cyan-500/10 border border-[var(--accent-primary)]/30 flex items-center justify-center text-2xl sm:text-3xl text-[var(--accent-primary)] mb-4 sm:mb-6 shadow-[0_0_25px_rgba(99,102,241,0.2)]">
                     <selectedService.icon />
                   </div>
@@ -154,10 +172,10 @@ export default function Services() {
                   <p className="text-dark-textMuted leading-relaxed text-xs sm:text-base md:text-lg font-syne">
                     {selectedService.description}
                   </p>
-                </div>
+                </motion.div>
 
                 {/* Grid Layout for Desktop & Tablet */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+                <motion.div variants={modalItemVariants} className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
 
                   {/* What's Included (Features) */}
                   {selectedService.features && selectedService.features.length > 0 && (
@@ -198,11 +216,11 @@ export default function Services() {
                       </ul>
                     </div>
                   )}
-                </div>
+                </motion.div>
 
                 {/* Recommended Tech Stack */}
                 {selectedService.techStack && selectedService.techStack.length > 0 && (
-                  <div className="bg-white/[0.02] border border-white/10 rounded-xl sm:rounded-2xl p-4 sm:p-6">
+                  <motion.div variants={modalItemVariants} className="bg-white/[0.02] border border-white/10 rounded-xl sm:rounded-2xl p-4 sm:p-6">
                     <h4 className="text-[11px] sm:text-xs md:text-sm font-bold text-white uppercase tracking-[0.15em] mb-3 sm:mb-4 flex items-center gap-2 font-mono">
                       <Cpu size={15} className="text-cyan-400" />
                       Recommended Tech Stack
@@ -217,11 +235,11 @@ export default function Services() {
                         </span>
                       ))}
                     </div>
-                  </div>
+                  </motion.div>
                 )}
 
                 {/* Modal CTA Button */}
-                <div className="pt-4 sm:pt-6 border-t border-white/10 flex justify-end">
+                <motion.div variants={modalItemVariants} className="pt-4 sm:pt-6 border-t border-white/10 flex justify-end">
                   <MagneticButton>
                     <motion.button
                       whileHover={{ scale: 1.03 }}
@@ -243,9 +261,9 @@ export default function Services() {
                       </span>
                     </motion.button>
                   </MagneticButton>
-                </div>
+                </motion.div>
 
-              </div>
+              </motion.div>
 
             </motion.div>
           </motion.div>
