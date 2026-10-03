@@ -83,7 +83,7 @@ export default function Blog() {
   };
 
   return (
-    <div className="min-h-screen bg-dark-bg text-dark-textMain pt-32 pb-20 relative overflow-hidden">
+    <div className="min-h-screen bg-transparent text-dark-textMain pt-32 pb-20 relative overflow-hidden">
       <SEO
         title="Insights & Thoughts | Blog"
         description="Deep dives into AI, Frontend web development, SwiftUI iOS apps, and modern UI/UX design principles by Rudra Patel."
@@ -128,14 +128,14 @@ export default function Blog() {
               className="relative group max-w-md w-full"
             >
               <div className="absolute inset-0 bg-dark-primary/20 blur-xl group-hover:bg-dark-primary/30 transition-all duration-500 rounded-full" />
-              <div className="relative flex items-center bg-white/[0.03] border border-white/10 rounded-2xl px-6 py-4 backdrop-blur-xl focus-within:border-dark-primary/50 transition-all">
-                <Search size={20} className="text-white/40 group-focus-within:text-dark-primary transition-colors" />
+              <div className="relative flex items-center bg-dark-textMain/[0.03] border border-dark-textMain/10 rounded-2xl px-6 py-4 backdrop-blur-xl focus-within:border-dark-primary/50 transition-all">
+                <Search size={20} className="text-dark-textMain/40 group-focus-within:text-dark-primary transition-colors" />
                 <input
                   type="text"
                   placeholder="Search articles, tags..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="bg-transparent border-none outline-none w-full px-4 text-white placeholder:text-white/20 text-sm font-medium"
+                  className="bg-transparent border-none outline-none w-full px-4 text-dark-textMain placeholder:text-dark-textMain/20 text-sm font-medium"
                 />
               </div>
             </motion.div>
@@ -155,8 +155,8 @@ export default function Blog() {
                 <button
                   onClick={() => setActiveCategory(cat)}
                   className={`px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] whitespace-nowrap transition-all duration-300 relative group flex items-center gap-2 border ${activeCategory === cat
-                    ? 'text-white border-violet-500/50 shadow-[0_0_25px_rgba(124,58,237,0.25)]'
-                    : 'text-white/50 hover:text-white bg-white/[0.01] border-white/5 hover:border-violet-500/30'
+                    ? 'text-dark-textMain border-violet-500/50 shadow-[0_0_25px_rgba(124,58,237,0.25)]'
+                    : 'text-dark-textMain/50 hover:text-dark-textMain bg-dark-textMain/[0.01] border-dark-textMain/5 hover:border-violet-500/30'
                     }`}
                 >
                   {activeCategory === cat && (
@@ -188,11 +188,11 @@ export default function Blog() {
               exit={{ opacity: 0 }}
               className="py-32 text-center"
             >
-              <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/5 border border-white/10 mb-6 text-white/20">
+              <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-dark-textMain/5 border border-dark-textMain/10 mb-6 text-dark-textMain/20">
                 <Search size={32} />
               </div>
-              <h3 className="text-2xl font-display font-bold text-white mb-2">No results found</h3>
-              <p className="text-white/40">Try adjusting your search or category filter.</p>
+              <h3 className="text-2xl font-display font-bold text-dark-textMain mb-2">No results found</h3>
+              <p className="text-dark-textMain/40">Try adjusting your search or category filter.</p>
             </motion.div>
           ) : (
             <div className="space-y-16">
@@ -206,7 +206,7 @@ export default function Blog() {
                 >
                   <Link to={`/blog/${featuredBlog.id || featuredBlog._id}`} className="group block">
                     <ClickSpark sparkColor="rgba(var(--dark-primary-rgb), 1)" sparkColor2="rgba(var(--dark-secondary-rgb), 1)">
-                      <div className="relative overflow-hidden rounded-[3rem] backdrop-blur-xl bg-gradient-to-br from-white/[0.08] to-transparent border border-white/10 border-t-white/20 border-l-white/20 hover:border-dark-primary/30 transition-all duration-700 p-4 lg:p-8 hover:bg-white/[0.1] shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:shadow-[0_20px_60px_-15px_rgba(124,58,237,0.2)]">
+                      <div className="relative overflow-hidden rounded-[3rem] backdrop-blur-xl bg-gradient-to-br from-white/[0.08] to-transparent border border-dark-textMain/10 border-t-dark-textMain/20 border-l-dark-textMain/20 hover:border-dark-primary/30 transition-all duration-700 p-4 lg:p-8 hover:bg-dark-textMain/[0.1] shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:shadow-[0_20px_60px_-15px_rgba(124,58,237,0.2)]">
                         <div className="flex flex-col lg:flex-row gap-10 lg:gap-16">
                           {/* Image Container */}
                           <div className="w-full lg:w-[55%] relative aspect-[16/9] lg:aspect-square xl:aspect-[16/10] rounded-[2.5rem] overflow-hidden shadow-2xl border border-dark-border/50">
@@ -223,7 +223,7 @@ export default function Blog() {
                                 <span className="w-1.5 h-1.5 rounded-full bg-dark-primary animate-pulse" />
                                 Featured Post
                               </span>
-                              <span className="px-4 py-2 bg-white/10 text-white text-[10px] font-black uppercase tracking-widest rounded-full backdrop-blur-md border border-white/10">
+                              <span className="px-4 py-2 bg-dark-textMain/10 text-dark-textMain text-[10px] font-black uppercase tracking-widest rounded-full backdrop-blur-md border border-dark-textMain/10">
                                 {featuredBlog.category}
                               </span>
                             </div>
@@ -231,7 +231,7 @@ export default function Blog() {
 
                           {/* Text Content */}
                           <div className="w-full lg:w-[45%] flex flex-col justify-center lg:pr-10">
-                            <div className="flex items-center gap-6 text-[10px] font-code text-white/40 mb-8 uppercase tracking-[0.2em]">
+                            <div className="flex items-center gap-6 text-[10px] font-code text-dark-textMain/40 mb-8 uppercase tracking-[0.2em]">
                               <span className="flex items-center gap-2">
                                 <Calendar size={12} className="text-dark-primary" />
                                 {featuredBlog.date}
@@ -242,31 +242,31 @@ export default function Blog() {
                               </span>
                             </div>
 
-                            <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-black text-white py-2 mb-6 group-hover:text-dark-primary transition-colors duration-500 leading-[1.15] break-words">
+                            <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-black text-dark-textMain py-2 mb-6 group-hover:text-dark-primary transition-colors duration-500 leading-[1.15] break-words">
                               {featuredBlog.title}
                             </h2>
 
-                            <p className="text-white/60 text-lg leading-relaxed mb-10 line-clamp-3 font-medium">
+                            <p className="text-dark-textMain/60 text-lg leading-relaxed mb-10 line-clamp-3 font-medium">
                               {featuredBlog.excerpt}
                             </p>
 
                             <div className="flex flex-wrap gap-2 mb-10">
                               {featuredBlog.tags?.map(tag => (
-                                <span key={tag} className="flex items-center gap-1.5 px-3 py-1 bg-white/5 border border-white/10 rounded-lg text-[9px] font-bold text-white/40 uppercase tracking-widest group-hover:border-dark-primary/20 transition-colors">
+                                <span key={tag} className="flex items-center gap-1.5 px-3 py-1 bg-dark-textMain/5 border border-dark-textMain/10 rounded-lg text-[9px] font-bold text-dark-textMain/40 uppercase tracking-widest group-hover:border-dark-primary/20 transition-colors">
                                   <Hash size={10} className="text-dark-primary/50" />
                                   {tag}
                                 </span>
                               ))}
                             </div>
 
-                            <div className="mt-auto pt-8 flex items-center justify-between border-t border-white/5">
+                            <div className="mt-auto pt-8 flex items-center justify-between border-t border-dark-textMain/5">
                               <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-full bg-dark-surface border border-white/10 flex items-center justify-center overflow-hidden">
+                                <div className="w-10 h-10 rounded-full bg-dark-surface border border-dark-textMain/10 flex items-center justify-center overflow-hidden">
                                   <User size={18} className="text-dark-primary" />
                                 </div>
-                                <span className="text-[11px] font-black uppercase tracking-widest text-white/60">{featuredBlog.author}</span>
+                                <span className="text-[11px] font-black uppercase tracking-widest text-dark-textMain/60">{featuredBlog.author}</span>
                               </div>
-                              <span className="flex items-center gap-3 px-6 py-3 bg-white/5 hover:bg-dark-primary text-white text-[10px] font-black uppercase tracking-[0.3em] rounded-full transition-all duration-300 border border-white/10 hover:border-dark-primary">
+                              <span className="flex items-center gap-3 px-6 py-3 bg-dark-textMain/5 hover:bg-dark-primary text-dark-textMain text-[10px] font-black uppercase tracking-[0.3em] rounded-full transition-all duration-300 border border-dark-textMain/10 hover:border-dark-primary">
                                 Read Deep Dive <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                               </span>
                             </div>
@@ -291,8 +291,8 @@ export default function Blog() {
                   >
                     <Link to={`/blog/${blog.id || blog._id}`} className="flex flex-col h-full overflow-hidden group/card">
                       <ClickSpark sparkColor="rgba(var(--dark-primary-rgb), 1)" sparkColor2="rgba(var(--dark-secondary-rgb), 1)" className="h-full">
-                        <div className="flex flex-col h-full rounded-[2.5rem] backdrop-blur-xl bg-gradient-to-br from-white/[0.08] to-transparent border border-white/10 border-t-white/20 border-l-white/20 hover:border-dark-primary/30 transition-all duration-500 hover:bg-white/[0.1] overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:shadow-[0_15px_40px_-10px_rgba(124,58,237,0.15)] hover:-translate-y-1">
-                          <div className="relative h-56 md:h-64 overflow-hidden shrink-0 border-b border-white/5">
+                        <div className="flex flex-col h-full rounded-[2.5rem] backdrop-blur-xl bg-gradient-to-br from-white/[0.08] to-transparent border border-dark-textMain/10 border-t-dark-textMain/20 border-l-dark-textMain/20 hover:border-dark-primary/30 transition-all duration-500 hover:bg-dark-textMain/[0.1] overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:shadow-[0_15px_40px_-10px_rgba(124,58,237,0.15)] hover:-translate-y-1">
+                          <div className="relative h-56 md:h-64 overflow-hidden shrink-0 border-b border-dark-textMain/5">
                             <motion.img
                               whileHover={{ scale: 1.08 }}
                               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
@@ -302,7 +302,7 @@ export default function Blog() {
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-dark-bg/90 via-transparent to-transparent opacity-80 group-hover/card:opacity-100 transition-opacity duration-500" />
                             <div className="absolute top-5 left-5">
-                              <span className="px-3 py-1.5 bg-dark-surface/80 backdrop-blur-md border border-white/10 rounded-full text-[9px] font-black uppercase tracking-widest text-white shadow-2xl flex items-center gap-1.5">
+                              <span className="px-3 py-1.5 bg-dark-surface/80 backdrop-blur-md border border-dark-textMain/10 rounded-full text-[9px] font-black uppercase tracking-widest text-dark-textMain shadow-2xl flex items-center gap-1.5">
                                 <span className="w-1.5 h-1.5 rounded-full bg-dark-primary opacity-70 group-hover/card:opacity-100 group-hover/card:animate-pulse transition-opacity" />
                                 {blog.category}
                               </span>
@@ -310,35 +310,35 @@ export default function Blog() {
                           </div>
 
                           <div className="p-8 flex flex-col flex-grow">
-                            <div className="flex items-center gap-4 text-[9px] font-code text-white/30 mb-6 uppercase tracking-widest">
+                            <div className="flex items-center gap-4 text-[9px] font-code text-dark-textMain/30 mb-6 uppercase tracking-widest">
                               <span className="flex items-center gap-1.5"><Calendar size={10} /> {blog.date}</span>
                               <span className="flex items-center gap-1.5"><Clock size={10} /> {blog.readTime}</span>
                             </div>
 
-                            <h3 className="text-2xl font-display font-bold text-white mb-4 group-hover/card:text-dark-primary transition-colors duration-300 line-clamp-2 leading-tight">
+                            <h3 className="text-2xl font-display font-bold text-dark-textMain mb-4 group-hover/card:text-dark-primary transition-colors duration-300 line-clamp-2 leading-tight">
                               {blog.title}
                             </h3>
 
-                            <p className="text-white/50 text-sm leading-relaxed mb-8 flex-grow line-clamp-3">
+                            <p className="text-dark-textMain/50 text-sm leading-relaxed mb-8 flex-grow line-clamp-3">
                               {blog.excerpt}
                             </p>
 
                             <div className="flex flex-wrap gap-2 mb-8">
                               {blog.tags?.slice(0, 3).map(tag => (
-                                <span key={tag} className="px-2.5 py-1 bg-white/5 border border-white/10 rounded-md text-[8px] font-bold text-white/30 uppercase tracking-widest">
+                                <span key={tag} className="px-2.5 py-1 bg-dark-textMain/5 border border-dark-textMain/10 rounded-md text-[8px] font-bold text-dark-textMain/30 uppercase tracking-widest">
                                   #{tag}
                                 </span>
                               ))}
                             </div>
 
-                            <div className="mt-auto pt-6 border-t border-white/5 flex items-center justify-between">
+                            <div className="mt-auto pt-6 border-t border-dark-textMain/5 flex items-center justify-between">
                               <div className="flex items-center gap-3">
-                                <div className="w-8 h-8 rounded-full bg-dark-surface border border-white/10 flex items-center justify-center overflow-hidden">
+                                <div className="w-8 h-8 rounded-full bg-dark-surface border border-dark-textMain/10 flex items-center justify-center overflow-hidden">
                                   <User size={12} className="text-dark-primary/70 group-hover/card:text-dark-primary transition-colors" />
                                 </div>
-                                <span className="text-[9px] font-black uppercase tracking-widest text-white/50">{blog.author}</span>
+                                <span className="text-[9px] font-black uppercase tracking-widest text-dark-textMain/50">{blog.author}</span>
                               </div>
-                              <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover/card:bg-dark-primary group-hover/card:text-white text-white/30 transition-all duration-300">
+                              <div className="w-8 h-8 rounded-full bg-dark-textMain/5 flex items-center justify-center group-hover/card:bg-dark-primary group-hover/card:text-dark-textMain text-dark-textMain/30 transition-all duration-300">
                                 <ArrowRight size={14} className="group-hover/card:translate-x-0.5 transition-transform" />
                               </div>
                             </div>

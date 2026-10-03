@@ -28,7 +28,7 @@ const achievementsSchema = {
 
 export default function AchievementsPage() {
   return (
-    <div className="min-h-screen bg-dark-bg pt-16 sm:pt-20 flex flex-col justify-between">
+    <div className="min-h-screen bg-transparent pt-16 sm:pt-20 flex flex-col justify-between relative">
       <SEO 
         title="Technical Credentials & Certifications"
         description="Explore the technical credentials, specialized badges, and verified achievements of Rudra Patel."

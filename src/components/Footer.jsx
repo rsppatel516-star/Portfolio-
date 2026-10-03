@@ -55,15 +55,15 @@ export default function Footer() {
 
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
+    visible: {
+      opacity: 1,
+      y: 0,
       transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
     }
   };
 
   return (
-    <footer className="pt-16 pb-10 relative overflow-hidden bg-[#03040c] backdrop-blur-3xl border-t border-white/[0.08] text-white">
+    <footer className="pt-16 pb-10 relative overflow-hidden bg-[#03040c] backdrop-blur-3xl border-t border-dark-textMain/[0.08] text-dark-textMain">
       {/* Animated Multi-Color Gradient Top Border Shimmer */}
       <div className="absolute top-0 left-0 w-full h-[1.5px] bg-gradient-to-r from-transparent via-purple-500 via-indigo-400 via-cyan-400 to-transparent opacity-80 animate-pulse" />
 
@@ -73,8 +73,8 @@ export default function Footer() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[400px] bg-gradient-to-r from-violet-600/5 via-cyan-500/5 to-purple-600/5 rounded-full blur-[180px] pointer-events-none z-0" />
 
       {/* Cybernetic Tech-Grid Pattern Background */}
-      <div 
-        className="absolute inset-0 pointer-events-none z-0 opacity-30" 
+      <div
+        className="absolute inset-0 pointer-events-none z-0 opacity-30"
         style={{
           backgroundImage: `
             linear-gradient(to right, rgba(99, 102, 241, 0.05) 1px, transparent 1px),
@@ -89,12 +89,12 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
 
         {/* Top System Status & Telemetry Header
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-10 mb-12 border-b border-white/[0.08]">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-10 mb-12 border-b border-dark-textMain/[0.08]">
           <div className="flex items-center gap-3 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono font-bold tracking-wider uppercase">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
             <span>Status: Available for Full-Time & Freelance Roles</span>
           </div>
-          <div className="flex items-center gap-6 text-xs font-mono text-white/50 tracking-wider">
+          <div className="flex items-center gap-6 text-xs font-mono text-dark-textMain/50 tracking-wider">
             <span className="flex items-center gap-2">
               <ShieldCheck size={14} className="text-purple-400" />
               <span>High Security Architecture</span>
@@ -107,7 +107,7 @@ export default function Footer() {
         </div>*/}
 
         {/* Top Info Grid */}
-        <motion.div 
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -126,14 +126,14 @@ export default function Footer() {
                 />
               </div>
               <div>
-                <h3 className="text-xl sm:text-2xl font-display font-bold tracking-tight text-white">
+                <h3 className="text-xl sm:text-2xl font-display font-bold tracking-tight text-dark-textMain">
                   Rudra Patel<span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-indigo-400 to-cyan-400 font-extrabold ml-0.5">.</span>
                 </h3>
                 <p className="text-[12px] font-poppins text-purple-400 tracking-[0.2em] font-semibold mt-0.5 sm:mt-1">Frontend & iOS Developer</p>
               </div>
             </div>
 
-            <p className="text-white/60 max-w-sm leading-relaxed text-xs sm:text-sm font-display">
+            <p className="text-dark-textMain/60 max-w-sm leading-relaxed text-xs sm:text-sm font-display">
               Designed and engineered with absolute precision, utilizing an immersive midnight glass aesthetic, responsive layout hierarchies, and ultra-high performance code structures.
             </p>
 
@@ -150,7 +150,7 @@ export default function Footer() {
                     <motion.div
                       whileHover={{ y: -4 }}
                       whileTap={{ scale: 0.95 }}
-                      className="group relative w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center transition-all duration-500 overflow-hidden hover:border-purple-500/50"
+                      className="group relative w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-dark-textMain/5 border border-dark-textMain/10 flex items-center justify-center transition-all duration-500 overflow-hidden hover:border-purple-500/50"
                     >
                       <Icon
                         className="w-4 h-4 sm:w-4.5 sm:h-4.5 relative z-10 transition-transform duration-500 group-hover:scale-110"
@@ -180,7 +180,7 @@ export default function Footer() {
               <Code2 size={15} />
               Navigation
             </h4>
-            <ul className="space-y-2.5 sm:space-y-3 text-white/70 font-medium text-[13px] font-display">
+            <ul className="space-y-2.5 sm:space-y-3 text-dark-textMain/70 font-medium text-[13px] font-display">
               {quickLinks.map((item) => (
                 <li key={item.name}>
                   <ScrollLink
@@ -189,7 +189,7 @@ export default function Footer() {
                     smooth={true}
                     offset={-80}
                     duration={800}
-                    className="text-white/70 font-semibold hover:text-indigo-400 cursor-pointer transition-colors relative group flex items-center gap-1.5"
+                    className="text-dark-textMain/70 font-semibold hover:text-indigo-400 cursor-pointer transition-colors relative group flex items-center gap-1.5"
                   >
                     <span className="w-1 h-1 bg-indigo-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     <span className="relative z-10 group-hover:translate-x-1 transition-transform duration-300">{item.name}</span>
@@ -205,7 +205,7 @@ export default function Footer() {
               <Globe size={16} className="transition-transform duration-300" />
               Specialization
             </h4>
-            <ul className="space-y-3 sm:space-y-3.5 text-white/70 font-medium text-xs sm:text-sm font-display">
+            <ul className="space-y-3 sm:space-y-3.5 text-dark-textMain/70 font-medium text-xs sm:text-sm font-display">
               {[
                 'Frontend Web Development',
                 'Native iOS App Development',
@@ -214,7 +214,7 @@ export default function Footer() {
               ].map((service, index) => (
                 <li key={index} className="flex items-center gap-2.5 group">
                   <span className="w-1.5 h-1.5 rounded-full bg-purple-400/50 group-hover:bg-purple-400 transition-colors duration-300" />
-                  <span className="hover:text-white cursor-default transition-colors block">
+                  <span className="hover:text-dark-textMain cursor-default transition-colors block">
                     {service}
                   </span>
                 </li>
@@ -237,12 +237,12 @@ export default function Footer() {
                 value={emailInput}
                 onChange={(e) => setEmailInput(e.target.value)}
                 placeholder="Enter your email to connect..."
-                className="w-full bg-white/[0.03] border border-white/10 hover:border-purple-500/40 focus:border-purple-500/80 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-white/40 outline-none font-mono transition-all duration-300"
+                className="w-full bg-dark-textMain/[0.03] border border-dark-textMain/10 hover:border-purple-500/40 focus:border-purple-500/80 rounded-xl px-3.5 py-2.5 text-xs text-dark-textMain placeholder-white/40 outline-none font-mono transition-all duration-300"
               />
               <button
                 type="submit"
                 aria-label="Send email"
-                className="absolute right-1.5 top-1/2 -translate-y-1/2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white p-1.5 rounded-lg transition-all duration-300 shadow-md cursor-pointer"
+                className="absolute right-1.5 top-1/2 -translate-y-1/2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-dark-textMain p-1.5 rounded-lg transition-all duration-300 shadow-md cursor-pointer"
               >
                 {isSubscribed ? <CheckCircle size={13} className="text-emerald-300" /> : <Send size={13} />}
               </button>
@@ -255,22 +255,22 @@ export default function Footer() {
             )}
 
             {/* Direct Contact Info */}
-            <ul className="space-y-2.5 pt-2 text-white/70 font-medium text-xs font-mono border-t border-white/10">
+            <ul className="space-y-2.5 pt-2 text-dark-textMain/70 font-medium text-xs font-mono border-t border-dark-textMain/10">
               <li>
-                <a href="mailto:patelrudra99098@gmail.com" className="flex items-center gap-2.5 hover:text-white transition-colors group min-w-0">
-                  <Mail size={13} className="text-purple-400 group-hover:text-white transition-colors shrink-0" />
+                <a href="mailto:patelrudra99098@gmail.com" className="flex items-center gap-2.5 hover:text-dark-textMain transition-colors group min-w-0">
+                  <Mail size={13} className="text-purple-400 group-hover:text-dark-textMain transition-colors shrink-0" />
                   <span className="truncate">patelrudra99098@gmail.com</span>
                 </a>
               </li>
               <li>
-                <a href="tel:+916354825621" className="flex items-center gap-2.5 hover:text-white transition-colors group min-w-0">
-                  <Phone size={13} className="text-purple-400 group-hover:text-white transition-colors shrink-0" />
+                <a href="tel:+916354825621" className="flex items-center gap-2.5 hover:text-dark-textMain transition-colors group min-w-0">
+                  <Phone size={13} className="text-purple-400 group-hover:text-dark-textMain transition-colors shrink-0" />
                   <span className="truncate">+91 63548 25621</span>
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
                 <MapPin size={13} className="text-purple-400 shrink-0" />
-                <span className="text-white/90 font-bold">Vadodara, Gujarat, India</span>
+                <span className="text-dark-textMain/90 font-bold">Vadodara, Gujarat, India</span>
               </li>
             </ul>
           </motion.div>
@@ -281,7 +281,7 @@ export default function Footer() {
         <div className="relative my-4 select-none pointer-events-none overflow-hidden opacity-[0.03]">
           <div className="overflow-hidden flex whitespace-nowrap">
             <motion.div
-              className="flex whitespace-nowrap text-white"
+              className="flex whitespace-nowrap text-dark-textMain"
               animate={{ x: ["0%", "-50%"] }}
               transition={{ ease: "linear", duration: 35, repeat: Infinity }}
             >
@@ -296,27 +296,27 @@ export default function Footer() {
         </div>*/}
 
         {/* Bottom Bar: Copyright & Back To Top */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.6, duration: 0.6 }}
-          className="pt-6 border-t border-white/[0.08] flex flex-col sm:flex-row justify-between items-center gap-4"
+          className="pt-6 border-t border-dark-textMain/[0.08] flex flex-col sm:flex-row justify-between items-center gap-4"
         >
           {/* Copyright Text */}
-          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-3 gap-y-1 text-[11px] font-mono text-white/50 uppercase tracking-widest text-center sm:text-left">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-3 gap-y-1 text-[11px] font-mono text-dark-textMain/50 uppercase tracking-widest text-center sm:text-left">
             <div className="flex items-center gap-2">
               <Globe size={12} className="text-indigo-400 animate-pulse" />
-              <span>&copy; {currentYear} <a href="https://www.linkedin.com/in/rudra-patel-265258313/" target="_blank" rel="noopener noreferrer" className="hover:text-white font-bold transition-colors">Rudra Patel</a></span>
+              <span>&copy; {currentYear} <a href="https://www.linkedin.com/in/rudra-patel-265258313/" target="_blank" rel="noopener noreferrer" className="hover:text-dark-textMain font-bold transition-colors">Rudra Patel</a></span>
             </div>
-            <span className="hidden sm:inline border-r border-white/10 h-3" />
-            <span className="text-white/40 flex items-center gap-1">Crafted with <Heart size={10} className="text-rose-500 fill-rose-500 inline" /> &amp; Precision</span>
+            <span className="hidden sm:inline border-r border-dark-textMain/10 h-3" />
+            <span className="text-dark-textMain/40 flex items-center gap-1">Crafted with <Heart size={10} className="text-rose-500 fill-rose-500 inline" /> &amp; Precision</span>
           </div>
 
           {/* Back To Top Button */}
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="group flex items-center gap-2.5 px-4 py-2 rounded-xl bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 hover:border-purple-400/50 text-white/70 hover:text-white transition-all duration-300 shadow-lg cursor-pointer"
+            className="group flex items-center gap-2.5 px-4 py-2 rounded-xl bg-dark-textMain/[0.03] hover:bg-dark-textMain/[0.08] border border-dark-textMain/10 hover:border-purple-400/50 text-dark-textMain/70 hover:text-dark-textMain transition-all duration-300 shadow-lg cursor-pointer"
             aria-label="Scroll to top"
           >
             <span className="text-[10px] font-mono font-bold tracking-widest uppercase text-purple-300">Top</span>

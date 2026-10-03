@@ -220,7 +220,7 @@ const CredentialCard = ({ cert, onOpen, cardVariants }) => {
         borderColor: isHovered ? `${cert.brandColor}80` : 'rgba(255,255,255,0.05)',
         boxShadow: isHovered ? `0 0 35px ${cert.brandColor}15` : 'none'
       }}
-      className="group relative backdrop-blur-xl bg-gradient-to-br from-white/[0.08] to-transparent border border-white/10 border-t-white/20 border-l-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:bg-white/[0.05] rounded-3xl p-8 flex flex-col justify-between overflow-hidden transition-all duration-500 cursor-pointer"
+      className="group relative backdrop-blur-xl bg-gradient-to-br from-white/[0.08] to-transparent border border-dark-textMain/10 border-t-dark-textMain/20 border-l-dark-textMain/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:bg-dark-textMain/[0.05] rounded-3xl p-8 flex flex-col justify-between overflow-hidden transition-all duration-500 cursor-pointer"
       onClick={onOpen}
     >
       {/* Corner brackets */}
@@ -249,7 +249,7 @@ const CredentialCard = ({ cert, onOpen, cardVariants }) => {
             </div>
             <div>
               <span className="text-[9px] font-code text-dark-textMuted uppercase tracking-widest block mb-1">{cert.issuer}</span>
-              <h3 className="text-lg md:text-xl font-bold font-bricolage text-dark-textMain group-hover:text-white transition-colors duration-300">
+              <h3 className="text-lg md:text-xl font-bold font-bricolage text-dark-textMain group-hover:text-dark-textMain transition-colors duration-300">
                 {cert.title}
               </h3>
             </div>
@@ -299,7 +299,7 @@ const CredentialCard = ({ cert, onOpen, cardVariants }) => {
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
               style={{ borderColor: isHovered ? `${cert.brandColor}30` : '' }}
-              className="p-3 bg-dark-bg/30 hover:bg-dark-bg/60 border border-dark-border/50 rounded-xl text-dark-textMuted hover:text-white transition-all duration-300"
+              className="p-3 bg-dark-bg/30 hover:bg-dark-bg/60 border border-dark-border/50 rounded-xl text-dark-textMuted hover:text-dark-textMain transition-all duration-300"
               title="Verify Externally"
             >
               <ExternalLink size={16} />
@@ -312,7 +312,7 @@ const CredentialCard = ({ cert, onOpen, cardVariants }) => {
                 e.stopPropagation();
                 navigate(`/artifacts/${cert.caseStudyId}`);
               }}
-              className="flex items-center gap-2 px-4 py-3 bg-white/5 border border-white/10 hover:border-dark-primary/30 text-dark-textMuted hover:text-white text-[10px] font-bold uppercase tracking-wider rounded-xl hover:shadow-[0_0_15px_rgba(99,102,241,0.1)] transition-all duration-500 group/btn font-bricolage cursor-pointer"
+              className="flex items-center gap-2 px-4 py-3 bg-dark-textMain/5 border border-dark-textMain/10 hover:border-dark-primary/30 text-dark-textMuted hover:text-dark-textMain text-[10px] font-bold uppercase tracking-wider rounded-xl hover:shadow-[0_0_15px_rgba(99,102,241,0.1)] transition-all duration-500 group/btn font-bricolage cursor-pointer"
               title="Explore Related Case Study"
             >
               <Briefcase size={12} className="text-dark-primary group-hover/btn:scale-110 transition-transform" />
@@ -406,7 +406,7 @@ export default function Achievements() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-4xl sm:text-6xl md:text-7xl font-display font-black tracking-tight sm:tracking-tighter text-white mb-6 leading-none"
+            className="text-4xl sm:text-6xl md:text-7xl font-display font-black tracking-tight sm:tracking-tighter text-dark-textMain mb-6 leading-none"
           >
             Verified <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-indigo-400 to-cyan-400">
@@ -419,7 +419,7 @@ export default function Achievements() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-white/60 max-w-2xl font-display leading-relaxed text-sm md:text-base text-left"
+            className="text-dark-textMain/60 max-w-2xl font-display leading-relaxed text-sm md:text-base text-left"
           >
             Verified cloud proficiencies, programming languages, and software architectures validated through official certifications and industry credentials.
           </motion.p>
@@ -455,7 +455,7 @@ export default function Achievements() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-8 bg-black/90 backdrop-blur-md"
+            className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-8 bg-dark-bg/90 backdrop-blur-md"
             onClick={() => setSelectedCert(null)}
           >
             {/* Modal Body */}
@@ -465,16 +465,15 @@ export default function Achievements() {
               exit={{ scale: 0.95, y: 20 }}
               transition={{ type: 'spring', stiffness: 260, damping: 26 }}
               style={{
-                borderColor: `${selectedCert.brandColor}40`,
-                boxShadow: `0 0 50px ${selectedCert.brandColor}15`
+                borderColor: `${selectedCert.brandColor}40`
               }}
-              className="relative w-full max-w-6xl max-h-[92vh] overflow-y-auto bg-dark-bg border rounded-3xl shadow-3xl pointer-events-auto flex flex-col justify-between"
+              className="relative w-full max-w-6xl max-h-[92vh] overflow-y-auto liquid-glass rounded-3xl pointer-events-auto flex flex-col justify-between"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Top Close Button */}
               <button
                 onClick={() => setSelectedCert(null)}
-                className="absolute top-4 right-4 md:top-6 md:right-6 w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/50 hover:text-white transition-all duration-300 hover:bg-white/10 z-[210] cursor-pointer"
+                className="absolute top-4 right-4 md:top-6 md:right-6 w-11 h-11 rounded-xl bg-dark-textMain/5 border border-dark-textMain/10 flex items-center justify-center text-dark-textMain/50 hover:text-dark-textMain transition-all duration-300 hover:bg-dark-textMain/10 z-[210] cursor-pointer"
               >
                 <X size={20} />
               </button>
@@ -500,7 +499,7 @@ export default function Achievements() {
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-2xl md:text-3xl font-bold font-bricolage text-white tracking-tight mb-4">
+                    <h3 className="text-2xl md:text-3xl font-bold font-bricolage text-dark-textMain tracking-tight mb-4">
                       {selectedCert.title}
                     </h3>
 
@@ -511,7 +510,7 @@ export default function Achievements() {
 
                     {/* Skill Tags */}
                     <div className="space-y-3 mb-6">
-                      <h4 className="text-[9px] font-code text-white/40 uppercase tracking-[0.22em] font-bold">Skills Validated</h4>
+                      <h4 className="text-[9px] font-code text-dark-textMain/40 uppercase tracking-[0.22em] font-bold">Skills Validated</h4>
                       <div className="flex flex-wrap gap-2">
                         {selectedCert.skills.map((skill, index) => (
                           <span
@@ -520,7 +519,7 @@ export default function Achievements() {
                               borderColor: `${selectedCert.brandColor}25`,
                               color: `${selectedCert.brandColor}`
                             }}
-                            className="text-[9px] font-code bg-white/[0.01] border px-3 py-1.5 rounded-xl font-bold select-none"
+                            className="text-[9px] font-code bg-dark-textMain/[0.01] border px-3 py-1.5 rounded-xl font-bold select-none"
                           >
                             {skill}
                           </span>
@@ -536,7 +535,7 @@ export default function Achievements() {
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <span className="text-[9px] font-code text-dark-textMuted uppercase block mb-1">Issue Date</span>
-                        <span className="text-xs font-bold text-white flex items-center gap-1.5">
+                        <span className="text-xs font-bold text-dark-textMain flex items-center gap-1.5">
                           <Calendar size={13} className="text-dark-primary" />
                           {selectedCert.date}
                         </span>
@@ -552,7 +551,7 @@ export default function Achievements() {
 
                     <div className="border-t border-dark-border/20 pt-4">
                       <span className="text-[9px] font-code text-dark-textMuted uppercase block mb-1.5">Credential ID</span>
-                      <div className="text-xs font-bold text-white font-mono break-all bg-dark-bg/60 border border-dark-border/60 px-3 py-2 rounded-lg flex items-center justify-between">
+                      <div className="text-xs font-bold text-dark-textMain font-mono break-all bg-dark-bg/60 border border-dark-border/60 px-3 py-2 rounded-lg flex items-center justify-between">
                         <span>{selectedCert.verificationId}</span>
                       </div>
                     </div>
@@ -562,7 +561,7 @@ export default function Achievements() {
                       <button
                         onClick={() => handleCopyHash(selectedCert.verificationHash)}
                         style={{ color: selectedCert.brandColor, borderColor: `${selectedCert.brandColor}20` }}
-                        className="w-full text-[10px] font-mono text-left hover:text-white bg-dark-bg/40 hover:bg-dark-bg/80 border px-3.5 py-2.5 rounded-lg flex items-center justify-between group transition-all duration-300 cursor-pointer"
+                        className="w-full text-[10px] font-mono text-left hover:text-dark-textMain bg-dark-bg/40 hover:bg-dark-bg/80 border px-3.5 py-2.5 rounded-lg flex items-center justify-between group transition-all duration-300 cursor-pointer"
                         title="Click to copy hash"
                       >
                         <span className="truncate mr-4">{selectedCert.verificationHash}</span>
@@ -607,7 +606,7 @@ export default function Achievements() {
                             transition={{ type: 'spring', stiffness: 260, damping: 28 }}
                             src={selectedCert.images[galleryIndex]}
                             alt={`${selectedCert.title} — ${galleryIndex + 1}`}
-                            className="max-w-full max-h-full object-contain rounded-lg shadow-2xl border border-white/5"
+                            className="max-w-full max-h-full object-contain rounded-lg shadow-2xl border border-dark-textMain/5"
                           />
                         </div>
 
@@ -615,7 +614,7 @@ export default function Achievements() {
                         {galleryIndex > 0 && (
                           <button
                             onClick={() => setGalleryIndex(i => i - 1)}
-                            className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-dark-bg/80 border border-dark-border/60 flex items-center justify-center text-white/70 hover:text-white hover:bg-dark-bg transition-all duration-200 backdrop-blur-sm z-20 cursor-pointer"
+                            className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-dark-bg/80 border border-dark-border/60 flex items-center justify-center text-dark-textMain/70 hover:text-dark-textMain hover:bg-dark-bg transition-all duration-200 backdrop-blur-sm z-20 cursor-pointer"
                           >
                             <ArrowRight size={15} className="rotate-180" />
                           </button>
@@ -623,7 +622,7 @@ export default function Achievements() {
                         {galleryIndex < selectedCert.images.length - 1 && (
                           <button
                             onClick={() => setGalleryIndex(i => i + 1)}
-                            className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-dark-bg/80 border border-dark-border/60 flex items-center justify-center text-white/70 hover:text-white hover:bg-dark-bg transition-all duration-200 backdrop-blur-sm z-20 cursor-pointer"
+                            className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-dark-bg/80 border border-dark-border/60 flex items-center justify-center text-dark-textMain/70 hover:text-dark-textMain hover:bg-dark-bg transition-all duration-200 backdrop-blur-sm z-20 cursor-pointer"
                           >
                             <ArrowRight size={15} />
                           </button>
@@ -636,12 +635,12 @@ export default function Achievements() {
                               key={i}
                               onClick={() => setGalleryIndex(i)}
                               style={i === galleryIndex ? { backgroundColor: selectedCert.brandColor } : {}}
-                              className={`w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${i === galleryIndex ? 'scale-125' : 'bg-white/25 hover:bg-white/50'
+                              className={`w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${i === galleryIndex ? 'scale-125' : 'bg-dark-textMain/25 hover:bg-dark-textMain/50'
                                 }`}
                             />
                           ))}
                           <div className="h-3 w-[1px] bg-dark-border/40" />
-                          <span className="text-[10px] font-code text-white/60 font-bold select-none">
+                          <span className="text-[10px] font-code text-dark-textMain/60 font-bold select-none">
                             {galleryIndex + 1} / {selectedCert.images.length}
                           </span>
                         </div>
@@ -654,13 +653,13 @@ export default function Achievements() {
                           transition={{ type: 'spring', stiffness: 200, damping: 25 }}
                           src={selectedCert.imagePath}
                           alt={selectedCert.title}
-                          className="max-w-full max-h-full object-contain rounded-lg shadow-2xl border border-white/5 cursor-grab active:cursor-grabbing"
+                          className="max-w-full max-h-full object-contain rounded-lg shadow-2xl border border-dark-textMain/5 cursor-grab active:cursor-grabbing"
                         />
                       </div>
                     ) : (
                       <div className="text-center p-8">
                         <Shield size={48} style={{ color: selectedCert.brandColor }} className="mx-auto mb-4 animate-pulse opacity-50" />
-                        <h5 className="font-bricolage font-bold text-white text-lg mb-2">Secure Credential</h5>
+                        <h5 className="font-bricolage font-bold text-dark-textMain text-lg mb-2">Secure Credential</h5>
                         <p className="text-dark-textMuted text-xs max-w-sm mx-auto leading-relaxed">Cryptographic proof is loaded. Use the actions panel below to download or externally verify this certification.</p>
                       </div>
                     )}
@@ -670,17 +669,17 @@ export default function Achievements() {
                       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-dark-bg/85 border border-dark-border/60 px-4 py-2 rounded-xl flex items-center gap-4 shadow-xl z-20 backdrop-blur-md">
                         <button
                           onClick={handleZoomOut}
-                          className="p-1.5 hover:bg-white/10 rounded-lg text-dark-textMuted hover:text-white transition-colors cursor-pointer"
+                          className="p-1.5 hover:bg-dark-textMain/10 rounded-lg text-dark-textMuted hover:text-dark-textMain transition-colors cursor-pointer"
                           title="Zoom Out"
                         >
                           <ZoomOut size={14} />
                         </button>
-                        <span className="text-[10px] font-code text-white font-bold min-w-[32px] text-center select-none">
+                        <span className="text-[10px] font-code text-dark-textMain font-bold min-w-[32px] text-center select-none">
                           {Math.round(zoomScale * 100)}%
                         </span>
                         <button
                           onClick={handleZoomIn}
-                          className="p-1.5 hover:bg-white/10 rounded-lg text-dark-textMuted hover:text-white transition-colors cursor-pointer"
+                          className="p-1.5 hover:bg-dark-textMain/10 rounded-lg text-dark-textMuted hover:text-dark-textMain transition-colors cursor-pointer"
                           title="Zoom In"
                         >
                           <ZoomIn size={14} />
@@ -688,7 +687,7 @@ export default function Achievements() {
                         <div className="h-4 w-[1px] bg-dark-border/40" />
                         <button
                           onClick={handleResetZoom}
-                          className="p-1.5 hover:bg-white/10 rounded-lg text-dark-textMuted hover:text-white transition-colors cursor-pointer"
+                          className="p-1.5 hover:bg-dark-textMain/10 rounded-lg text-dark-textMuted hover:text-dark-textMain transition-colors cursor-pointer"
                           title="Reset"
                         >
                           <Maximize2 size={13} />
@@ -714,7 +713,7 @@ export default function Achievements() {
                     <a
                       href={selectedCert.pdfPath}
                       download
-                      className="flex items-center gap-2 px-5 py-3 border border-dark-border/60 rounded-xl text-dark-textMuted hover:text-white hover:bg-white/5 transition-all duration-300 text-xs font-bold uppercase tracking-wider cursor-pointer"
+                      className="flex items-center gap-2 px-5 py-3 border border-dark-border/60 rounded-xl text-dark-textMuted hover:text-dark-textMain hover:bg-dark-textMain/5 transition-all duration-300 text-xs font-bold uppercase tracking-wider cursor-pointer"
                     >
                       <Download size={14} />
                       Download PDF
@@ -727,7 +726,7 @@ export default function Achievements() {
                         setSelectedCert(null);
                         navigate(`/artifacts/${selectedCert.caseStudyId}`);
                       }}
-                      className="flex items-center gap-2 px-5 py-3 bg-white/5 border border-white/10 hover:border-dark-secondary/30 text-dark-textMuted hover:text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-300 cursor-pointer"
+                      className="flex items-center gap-2 px-5 py-3 bg-dark-textMain/5 border border-dark-textMain/10 hover:border-dark-secondary/30 text-dark-textMuted hover:text-dark-textMain text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-300 cursor-pointer"
                     >
                       <Briefcase size={14} className="text-dark-secondary" />
                       Explore Case Study

@@ -5,7 +5,6 @@ import FeatureNavbar from './components/FeatureNavbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import GlobalParticles from './components/canvas/GlobalParticles';
-import ClickSpark from './components/ui/ClickSpark';
 
 import Artifacts from './pages/Artifacts';
 import CaseStudy from './pages/CaseStudy';
@@ -25,12 +24,32 @@ const PageFallback = () => (
 function App() {
   const location = useLocation();
 
-  // Removed Google Analytics tracking for privacy
+  // Prevent copying, right-clicking, and inspection shortcuts
   useEffect(() => {
-    // Tracking logic removed
-  }, [location]);
+    const handleContextMenu = (e) => e.preventDefault();
+    const handleCopy = (e) => e.preventDefault();
+    const handleKeyDown = (e) => {
+      // Prevent Ctrl+C / Cmd+C
+      if ((e.ctrlKey || e.metaKey) && e.key === 'c') {
+        e.preventDefault();
+      }
+      // Prevent Ctrl+Shift+I / Cmd+Option+I (DevTools)
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'i') {
+        e.preventDefault();
+      }
+    };
 
-  const isCaseStudyPage = location.pathname.startsWith('/artifacts/');
+    document.addEventListener('contextmenu', handleContextMenu);
+    document.addEventListener('copy', handleCopy);
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('contextmenu', handleContextMenu);
+      document.removeEventListener('copy', handleCopy);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   const isFeaturePage = location.pathname.startsWith('/artifacts') ||
     location.pathname.startsWith('/blog') ||
     location.pathname.startsWith('/achievements') ||
@@ -41,35 +60,25 @@ function App() {
       {/* Global Particle Background */}
       <GlobalParticles />
 
-      {/* Main Content Layer wrapped with ClickSpark */}
-      <ClickSpark
-        sparkColor="#ec4899"
-        sparkColor2="#6366f1"
-        sparkSize={11}
-        sparkRadius={21}
-        sparkCount={12}
-        duration={1000}
-        extraScale={0.8}
-      >
-        <div className="relative z-10 flex flex-col min-h-screen">
-          {/* Conditionally render Navbar or FeatureNavbar (unless on Case Study pages) */}
-          {!isCaseStudyPage && (isFeaturePage ? <FeatureNavbar /> : <Navbar />)}
-          <main className="flex-grow">
-            <Suspense fallback={<PageFallback />}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/artifacts" element={<Artifacts />} />
-                <Route path="/artifacts/:id" element={<CaseStudy />} />
-                <Route path="/achievements" element={<AchievementsPage />} />
-                <Route path="/contact" element={<ContactPage />} />
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/blog/:id" element={<BlogPost />} />
-              </Routes>
-            </Suspense>
-          </main>
-          {!isFeaturePage && <Footer />}
-        </div>
-      </ClickSpark>
+      {/* Main Content Layer */}
+      <div className="relative z-10 flex flex-col min-h-screen">
+        {/* Conditionally render Navbar or FeatureNavbar */}
+        {isFeaturePage ? <FeatureNavbar /> : <Navbar />}
+        <main className="flex-grow">
+          <Suspense fallback={<PageFallback />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/artifacts" element={<Artifacts />} />
+              <Route path="/artifacts/:id" element={<CaseStudy />} />
+              <Route path="/achievements" element={<AchievementsPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:id" element={<BlogPost />} />
+            </Routes>
+          </Suspense>
+        </main>
+        {!isFeaturePage && <Footer />}
+      </div>
     </div>
   );
 }

@@ -39,35 +39,40 @@ export const certifications = [
     issuer: "AWS Academy",
     date: "Sep 2026",
     icon: "aws",
-    color: "#FF9900"
+    color: "#FF9900",
+    image: "/certificate img/AWS_Academy_Graduate___Cloud_Foundations___Training_Badge_Badge20260923-20-u3dphj_page-0001.webp"
   },
   {
     title: "React.js Development",
     issuer: "Code With Harry",
     date: "2024",
     icon: "react",
-    color: "#61DAFB"
+    color: "#61DAFB",
+    image: "/certificate img/Sigma-Development.webp"
   },
   {
     title: "Node.js Backend Architecture",
     issuer: "Code With Harry",
     date: "2024",
     icon: "node",
-    color: "#339933"
+    color: "#339933",
+    image: "/certificate img/Sigma-Development.webp"
   },
   {
     title: "MongoDB Database Management",
     issuer: "Code With Harry",
     date: "2024",
     icon: "database",
-    color: "#47A248"
+    color: "#47A248",
+    image: "/certificate img/Sigma-Development.webp"
   },
   {
     title: "Data Structures & Algorithms (Java)",
     issuer: "OWASP",
     date: "2024",
     icon: "shield",
-    color: "#818CF8"
+    color: "#818CF8",
+    image: "/certificate img/DSA.webp"
   },
   {
     title: "Git & GitHub Version Control",

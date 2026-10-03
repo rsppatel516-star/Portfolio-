@@ -113,7 +113,7 @@ export default function BlogPost() {
   } : null;
 
   return (
-    <div className="min-h-screen text-dark-textMain bg-dark-bg overflow-x-hidden pb-32">
+    <div className="min-h-screen text-dark-textMain bg-transparent overflow-x-hidden pb-32">
       <SEO
         title={post.seo?.metaTitle || `${post.title} | Blog`}
         description={post.seo?.metaDescription || post.excerpt}
@@ -138,7 +138,7 @@ export default function BlogPost() {
       </div>
 
       {/* ── HERO BANNER ─────────────────────────── */}
-      <section className="relative h-[60vh] min-h-[400px] flex items-end overflow-hidden bg-dark-bg/20 backdrop-blur-md rounded-b-[3rem] border-b border-white/5 shadow-2xl">
+      <section className="relative h-[60vh] min-h-[400px] flex items-end overflow-hidden bg-dark-bg/20 backdrop-blur-md rounded-b-[3rem] border-b border-dark-textMain/5 shadow-2xl">
         <motion.div style={{ opacity: heroOpacity, scale: heroScale, y: heroY }} className="absolute inset-0 z-0">
           <img
             src={post.image}
@@ -153,7 +153,7 @@ export default function BlogPost() {
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="flex items-center gap-3 text-white hover:text-black transition-all text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] bg-white/10 backdrop-blur-md px-4 py-2.5 md:px-5 md:py-3 rounded-full border border-white/10 shadow-lg"
+            className="flex items-center gap-3 text-dark-textMain hover:text-dark-bg transition-all text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] bg-dark-textMain/10 backdrop-blur-md px-4 py-2.5 md:px-5 md:py-3 rounded-full border border-dark-textMain/10 shadow-lg"
           >
             <ArrowLeft size={16} className="transition-transform group-hover:-translate-x-1.5" />
             Back to Blog
@@ -178,7 +178,7 @@ export default function BlogPost() {
                   visible: { opacity: 1, y: 0 }
                 }}
                 transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                className="text-3xl md:text-5xl lg:text-6xl font-display font-black leading-[1.1] tracking-[-0.02em] text-white"
+                className="text-3xl md:text-5xl lg:text-6xl font-display font-black leading-[1.1] tracking-[-0.02em] text-dark-textMain"
               >
                 {post.title}
               </motion.h1>
@@ -195,7 +195,7 @@ export default function BlogPost() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={container}
-            className="flex flex-wrap items-center gap-8 py-6 border-y border-white/10"
+            className="flex flex-wrap items-center gap-8 py-6 border-y border-dark-textMain/10"
           >
             <motion.div variants={sv} className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-dark-primary/10 flex items-center justify-center">
@@ -203,7 +203,7 @@ export default function BlogPost() {
               </div>
               <div>
                 <p className="text-[10px] text-dark-textMuted uppercase tracking-widest font-bold">Published On</p>
-                <p className="text-sm font-medium text-white">{post.date}</p>
+                <p className="text-sm font-medium text-dark-textMain">{post.date}</p>
               </div>
             </motion.div>
 
@@ -213,14 +213,14 @@ export default function BlogPost() {
               </div>
               <div>
                 <p className="text-[10px] text-dark-textMuted uppercase tracking-widest font-bold">Reading Time</p>
-                <p className="text-sm font-medium text-white">{post.readTime}</p>
+                <p className="text-sm font-medium text-dark-textMain">{post.readTime}</p>
               </div>
             </motion.div>
 
             {post.tags && (
               <motion.div variants={sv} className="flex flex-wrap gap-2 pt-2 md:pt-0">
                 {post.tags.map(tag => (
-                  <div key={tag} className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] uppercase tracking-[0.2em] text-white/40">
+                  <div key={tag} className="px-3 py-1 bg-dark-textMain/5 border border-dark-textMain/10 rounded-full text-[10px] uppercase tracking-[0.2em] text-dark-textMain/40">
                     #{tag}
                   </div>
                 ))}
@@ -235,25 +235,25 @@ export default function BlogPost() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={sv}
-          className="max-w-3xl mx-auto px-6 text-white/80 leading-relaxed space-y-6 pb-20 
-          [&>h2]:text-3xl [&>h2]:font-display [&>h2]:font-bold [&>h2]:text-white [&>h2]:mt-12 [&>h2]:mb-6
+          className="max-w-3xl mx-auto px-6 text-dark-textMain/80 leading-relaxed space-y-6 pb-20 
+          [&>h2]:text-3xl [&>h2]:font-display [&>h2]:font-bold [&>h2]:text-dark-textMain [&>h2]:mt-12 [&>h2]:mb-6
           [&>p]:text-lg [&>p]:md:text-xl [&>p]:mb-6
           [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:space-y-2 [&>ul]:mb-6
           [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:space-y-2 [&>ol]:mb-6
           [&>a]:text-dark-primary hover:[&>a]:text-dark-secondary
-          [&>strong]:text-white [&>strong]:font-bold
+          [&>strong]:text-dark-textMain [&>strong]:font-bold
           [&>pre]:overflow-x-auto [&>pre]:custom-scrollbar [&>pre]:max-w-full [&>pre]:p-4 [&>pre]:rounded-2xl
-          [&>blockquote]:border-l-4 [&>blockquote]:border-dark-primary [&>blockquote]:pl-6 [&>blockquote]:italic [&>blockquote]:text-white/90"
+          [&>blockquote]:border-l-4 [&>blockquote]:border-dark-primary [&>blockquote]:pl-6 [&>blockquote]:italic [&>blockquote]:text-dark-textMain/90"
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
         {/* ── AUTHOR & SHARE BLOCK ─────────────────────────── */}
-        <div className="max-w-3xl mx-auto px-6 mt-20 pt-16 border-t border-white/10">
+        <div className="max-w-3xl mx-auto px-6 mt-20 pt-16 border-t border-dark-textMain/10">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={container}
-            className="flex flex-col md:flex-row gap-10 items-start justify-between bg-white/[0.01] p-8 rounded-[2rem] border border-white/5 hover:border-dark-primary/30 hover:bg-white/[0.02] hover:shadow-[0_15px_40px_-10px_rgba(124,58,237,0.15)] transition-all duration-500"
+            className="flex flex-col md:flex-row gap-10 items-start justify-between bg-dark-textMain/[0.01] p-8 rounded-[2rem] border border-dark-textMain/5 hover:border-dark-primary/30 hover:bg-dark-textMain/[0.02] hover:shadow-[0_15px_40px_-10px_rgba(124,58,237,0.15)] transition-all duration-500"
           >
             {/* Author */}
             <div className="flex items-center gap-6">
@@ -266,7 +266,7 @@ export default function BlogPost() {
               </div>
               <div className="space-y-1">
                 <p className="text-[10px] uppercase tracking-[0.2em] font-black text-dark-primary">Written By</p>
-                <h3 className="text-xl font-display font-bold text-white">{post.author || "Rudra Patel"}</h3>
+                <h3 className="text-xl font-display font-bold text-dark-textMain">{post.author || "Rudra Patel"}</h3>
                 <p className="text-sm text-dark-textMuted max-w-[200px]">
                   {post.author === "Rudra Patel" || !post.author
                     ? "Alchemist of digital experiences and full-stack architecture."
@@ -279,15 +279,15 @@ export default function BlogPost() {
             <div className="space-y-4">
               <p className="text-[10px] uppercase tracking-[0.2em] font-black text-dark-textMuted md:text-right">Share Article</p>
               <div className="flex items-center gap-3">
-                <button className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:text-[#1DA1F2] hover:bg-[#1DA1F2]/10 transition-all border border-white/5 hover:border-[#1DA1F2]/30">
+                <button className="w-10 h-10 rounded-full bg-dark-textMain/5 flex items-center justify-center text-dark-textMain/60 hover:text-[#1DA1F2] hover:bg-[#1DA1F2]/10 transition-all border border-dark-textMain/5 hover:border-[#1DA1F2]/30">
                   <Twitter size={18} />
                 </button>
-                <button className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:text-[#0A66C2] hover:bg-[#0A66C2]/10 transition-all border border-white/5 hover:border-[#0A66C2]/30">
+                <button className="w-10 h-10 rounded-full bg-dark-textMain/5 flex items-center justify-center text-dark-textMain/60 hover:text-[#0A66C2] hover:bg-[#0A66C2]/10 transition-all border border-dark-textMain/5 hover:border-[#0A66C2]/30">
                   <Linkedin size={18} />
                 </button>
                 <button
                   onClick={() => navigator.clipboard.writeText(window.location.href)}
-                  className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:text-dark-primary hover:bg-dark-primary/10 transition-all border border-white/5 hover:border-dark-primary/30"
+                  className="w-10 h-10 rounded-full bg-dark-textMain/5 flex items-center justify-center text-dark-textMain/60 hover:text-dark-primary hover:bg-dark-primary/10 transition-all border border-dark-textMain/5 hover:border-dark-primary/30"
                 >
                   <LinkIcon size={18} />
                 </button>

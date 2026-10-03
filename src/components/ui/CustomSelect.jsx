@@ -82,7 +82,7 @@ export default function CustomSelect({
                     flex items-center justify-between px-4 py-3 rounded-xl cursor-pointer transition-all duration-300 mb-1 last:mb-0
                     ${selected?.value === option.value 
                       ? `bg-${accentColor}/10 text-${accentColor}` 
-                      : 'hover:bg-white/5 text-dark-textMuted hover:text-dark-textMain'
+                      : 'hover:bg-dark-textMain/5 text-dark-textMuted hover:text-dark-textMain'
                     }
                   `}
                 >

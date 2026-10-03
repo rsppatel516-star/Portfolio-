@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { TypeAnimation } from 'react-type-animation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link as ScrollLink } from 'react-scroll';
-import { Github, Linkedin, Instagram, Youtube, Facebook, ArrowRight } from 'lucide-react';
+import { Github, Linkedin, Instagram, Youtube, Facebook, ArrowRight, X, Sparkles } from 'lucide-react';
 import MagneticButton from './ui/MagneticButton';
 
 // Animated styles injected once
@@ -67,13 +67,35 @@ const socialLinks = [
 
 export default function Hero() {
   const [showBadge, setShowBadge] = useState(true);
+  const [isBadgeHovered, setIsBadgeHovered] = useState(false);
+  const [badgeProgress, setBadgeProgress] = useState(100);
   const [decorativeElements, setDecorativeElements] = useState([]);
 
+  // Auto-dismiss countdown with pause-on-hover
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowBadge(false);
-    }, 5000);
+    if (!showBadge) return;
 
+    const duration = 6500;
+    const intervalTime = 50;
+    const step = (intervalTime / duration) * 100;
+
+    const interval = setInterval(() => {
+      if (!isBadgeHovered) {
+        setBadgeProgress((prev) => {
+          if (prev <= step) {
+            clearInterval(interval);
+            setShowBadge(false);
+            return 0;
+          }
+          return prev - step;
+        });
+      }
+    }, intervalTime);
+
+    return () => clearInterval(interval);
+  }, [showBadge, isBadgeHovered]);
+
+  useEffect(() => {
     // Scatter decorative floaters
     setTimeout(() => {
       setDecorativeElements([...Array(10)].map(() => ({
@@ -83,10 +105,6 @@ export default function Hero() {
         delay: Math.random() * 5
       })));
     }, 0);
-
-    return () => {
-      clearTimeout(timer);
-    };
   }, []);
 
   const containerVariants = {
@@ -204,7 +222,7 @@ export default function Hero() {
                     <motion.div
                       whileHover={{ y: -4, scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center transition-all duration-300 overflow-hidden shadow-lg hover:border-white/20"
+                      className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-dark-textMain/5 border border-dark-textMain/10 flex items-center justify-center transition-all duration-300 overflow-hidden shadow-lg hover:border-dark-textMain/20"
                     >
                       <Icon
                         className="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:scale-110"
@@ -230,7 +248,7 @@ export default function Hero() {
 
           {/* H1 Headline */}
           <motion.div variants={itemVariants} className="space-y-1 pt-1">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold tracking-tight text-white leading-[1.1]">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold tracking-tight text-dark-textMain leading-[1.1]">
               Hi, I'm{' '}
               <span className="hero-title-name inline-block hover:scale-[1.02] transition-transform duration-300">
                 Rudra Patel
@@ -259,43 +277,44 @@ export default function Hero() {
           {/* SEO-Rich Text Bio */}
           <motion.p
             variants={itemVariants}
-            className="font-display text-white/70 text-base sm:text-lg max-w-xl leading-relaxed tracking-normal"
+            className="font-display text-dark-textMain/70 text-base sm:text-lg max-w-xl leading-relaxed tracking-normal"
           >
-            I'm a <strong className="text-white font-semibold">Frontend & Native iOS Developer</strong> based in <span className="text-indigo-300">Vadodara, Gujarat</span>. I engineer high-performance mobile apps with <span className="text-purple-300 font-semibold">SwiftUI</span> and responsive web platforms using <span className="text-indigo-300 font-semibold">React & Next.js</span> — focused on speed optimization, clean architecture, and fluid 60fps transitions.
+            I'm a <strong className="text-dark-textMain font-semibold">Frontend & Native iOS Developer</strong> based in <span className="text-indigo-300">Vadodara, Gujarat</span>. I engineer high-performance mobile apps with <span className="text-purple-300 font-semibold">SwiftUI</span> and responsive web platforms using <span className="text-indigo-300 font-semibold">React & Next.js</span> — focused on speed optimization, clean architecture, and fluid 60fps transitions.
           </motion.p>
 
-          {/* Action CTA */}
-          <motion.div variants={itemVariants} className="pt-4 flex items-center justify-center lg:justify-start">
+          {/* Action CTAs */}
+          <motion.div variants={itemVariants} className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-4">
             <MagneticButton>
               <ScrollLink to="contact" smooth duration={1000} className="cursor-pointer block">
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="relative group font-display flex items-center gap-3 px-8 py-4 rounded-xl font-bold text-white text-xs sm:text-sm tracking-[0.15em] uppercase transition-all duration-500 overflow-hidden cursor-pointer shadow-[0_0_25px_rgba(99,102,241,0.25)] hover:shadow-[0_0_35px_rgba(168,85,247,0.45)]"
+                  className="relative group font-display flex items-center gap-3 px-7 py-3.5 sm:px-8 sm:py-4 rounded-xl font-bold text-dark-textMain text-xs sm:text-sm tracking-[0.12em] uppercase transition-all duration-500 overflow-hidden cursor-pointer shadow-[0_0_25px_rgba(99,102,241,0.28)]"
                 >
                   <span className="absolute inset-0 bg-gradient-to-r from-violet-600 via-indigo-600 to-purple-600 group-hover:opacity-95 transition-opacity duration-500" />
-                  <span className="absolute inset-[1px] bg-black/30 backdrop-blur-md rounded-[11px] z-0 transition-all duration-500 group-hover:bg-black/40" />
+                  <span className="absolute inset-[1px] bg-dark-bg/30 backdrop-blur-md rounded-[11px] z-0 transition-all duration-500 group-hover:bg-dark-bg/40" />
                   <span className="absolute top-0 -left-[100%] h-full w-1/2 z-0 block transform -skew-x-12 bg-gradient-to-r from-transparent via-white/25 to-transparent group-hover:animate-[sweep_1.5s_ease-in-out_infinite]" />
-                  <span className="relative z-10 flex items-center gap-2.5 text-white">
+                  <span className="relative z-10 flex items-center gap-2.5 text-dark-textMain">
                     Connect With Me
                     <motion.div
                       animate={{ x: [0, 4, 0] }}
                       transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                     >
-                      <ArrowRight size={17} className="text-indigo-200 group-hover:text-white" />
+                      <ArrowRight size={17} className="text-indigo-200 group-hover:text-dark-textMain" />
                     </motion.div>
                   </span>
                 </motion.button>
               </ScrollLink>
             </MagneticButton>
+
           </motion.div>
         </motion.div>
 
         {/* ── RIGHT COLUMN: Portrait Photo (5 Cols) ── */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.92, filter: 'blur(16px)' }}
-          animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+          initial={{ opacity: 0.9, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="lg:col-span-5 flex justify-center lg:justify-end order-1 lg:order-2 relative z-10"
         >
           {/* Ambient Rotating Vector Rings */}
@@ -304,9 +323,10 @@ export default function Hero() {
             <div className="absolute w-[380px] h-[380px] max-w-full max-h-full rounded-full border border-double border-indigo-500/20 animate-spin-counter-slow" />
           </div>
 
+
           {/* Image Frame */}
           <motion.div
-            animate={{ y: [0, -10, 0] }}
+            animate={{ y: [0, -8, 0] }}
             transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
             whileHover={{ scale: 1.01 }}
             className="relative cursor-pointer group z-10 max-w-full"
@@ -321,7 +341,7 @@ export default function Hero() {
             />
 
             {/* Photo Card */}
-            <div className="relative w-[280px] sm:w-[320px] md:w-[360px] lg:w-[400px] max-w-[calc(100vw-3rem)] aspect-[3/4] rounded-2xl overflow-hidden border border-white/15 bg-black/40 backdrop-blur-md shadow-2xl">
+            <div className="relative w-[280px] sm:w-[320px] md:w-[360px] lg:w-[400px] max-w-[calc(100vw-3rem)] aspect-[3/4] rounded-2xl overflow-hidden border border-dark-textMain/15 bg-dark-bg/40 backdrop-blur-md shadow-2xl">
               <img
                 src="/images/DSC06139.webp"
                 alt="Rudra Patel - Frontend & iOS Developer portrait"
@@ -340,31 +360,111 @@ export default function Hero() {
 
       </div>
 
-      {/* Welcome Toast Notification */}
+      {/* Welcome Toast Notification - Liquid Glass Edition */}
       <AnimatePresence>
         {showBadge && (
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}
-            className="absolute top-28 md:top-auto md:bottom-8 lg:bottom-10 left-1/2 -translate-x-1/2 z-50 max-w-[90vw]"
+            initial={{ opacity: 0, y: 35, scale: 0.92, filter: 'blur(10px)' }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              filter: 'blur(0px)'
+            }}
+            exit={{
+              opacity: 0,
+              y: 20,
+              scale: 0.94,
+              filter: 'blur(8px)',
+              transition: { duration: 0.35, ease: 'easeIn' }
+            }}
+            transition={{
+              type: 'spring',
+              stiffness: 170,
+              damping: 18,
+              delay: 0.6
+            }}
+            onMouseEnter={() => setIsBadgeHovered(true)}
+            onMouseLeave={() => setIsBadgeHovered(false)}
+            className="fixed bottom-5 sm:bottom-7 md:bottom-9 left-1/2 -translate-x-1/2 z-50 w-auto max-w-[calc(100vw-1.5rem)] sm:max-w-md cursor-pointer select-none"
           >
-            <div id="homeWelcomeBadge" className="backdrop-blur-2xl border border-white/15 px-5 py-2.5 sm:px-6 sm:py-3 rounded-lg flex flex-col relative overflow-hidden group shadow-2xl" aria-live="polite" role="status">
-              <div className="flex items-center gap-3 z-10">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></span>
-                </span>
-                <span className="text-white/90 font-display font-medium text-xs sm:text-sm tracking-wide whitespace-nowrap">Welcome to Rudra Patel's Portfolio 💻</span>
+            {/* Continuous Liquid Floating Micro-Animation Wrapper */}
+            <motion.div
+              animate={{
+                y: [0, -4, 0]
+              }}
+              transition={{
+                duration: 3.5,
+                repeat: Infinity,
+                ease: 'easeInOut'
+              }}
+              className="relative group"
+            >
+              {/* Liquid Ambient Glowing Aura */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-violet-600/35 via-indigo-500/30 to-cyan-400/35 rounded-2xl sm:rounded-full blur-xl opacity-70 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+              {/* Liquid Glass Pill Surface */}
+              <div
+                id="homeWelcomeBadge"
+                className="relative flex items-center justify-between gap-3 sm:gap-4.5 px-4 sm:px-5 py-2.5 sm:py-3 rounded-2xl sm:rounded-full backdrop-blur-2xl bg-[#070914]/80 border border-white/20 border-t-white/40 shadow-[0_16px_40px_rgba(0,0,0,0.7),inset_0_1px_1px_rgba(255,255,255,0.35),inset_0_-1px_1px_rgba(0,0,0,0.5)] overflow-hidden transition-all duration-300 group-hover:border-violet-400/50"
+                aria-live="polite"
+                role="status"
+              >
+                {/* Diagonal Specular Liquid Light Shimmer */}
+                <motion.div
+                  animate={{ x: ['-120%', '280%'] }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 4.5,
+                    ease: 'easeInOut',
+                    repeatDelay: 1.2
+                  }}
+                  className="absolute inset-y-0 w-28 bg-gradient-to-r from-transparent via-white/[0.14] to-transparent skew-x-12 pointer-events-none"
+                />
+
+                {/* Left: Glowing Live Emerald Status Beacon */}
+                <div className="flex items-center gap-2.5 sm:gap-3 z-10 shrink-0">
+                  <span className="relative flex h-2.5 w-2.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-80" />
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.9)]" />
+                  </span>
+                  <div className="w-[1px] h-3.5 bg-white/15" />
+                </div>
+
+                {/* Center Content: Ultra-Crisp Responsive Typography */}
+                <div className="flex items-center gap-2 z-10 min-w-0 pr-1">
+                  <span className="text-white/95 font-display text-[11px] sm:text-xs md:text-sm font-semibold tracking-wide whitespace-nowrap truncate">
+                    Welcome to{' '}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-300 via-indigo-200 to-cyan-300 font-bold drop-shadow-[0_0_12px_rgba(167,139,250,0.4)]">
+                      Rudra Patel&apos;s
+                    </span>{' '}
+                    Portfolio
+                  </span>
+                  <span className="inline-block text-xs sm:text-sm animate-bounce text-emerald-400">💻</span>
+                </div>
+
+                {/* Right: Dismiss Button */}
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShowBadge(false);
+                  }}
+                  className="z-10 p-1 -mr-1 rounded-full text-white/40 hover:text-white hover:bg-white/10 transition-colors cursor-pointer shrink-0"
+                  aria-label="Dismiss notification"
+                >
+                  <X size={13} className="sm:w-3.5 sm:h-3.5" />
+                </button>
+
+                {/* Bottom Liquid Countdown Progress Line */}
+                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/[0.08] overflow-hidden">
+                  <div
+                    className="h-full bg-gradient-to-r from-violet-500 via-indigo-400 via-cyan-400 to-emerald-400 transition-all duration-75 ease-linear shadow-[0_0_10px_rgba(99,102,241,0.9)]"
+                    style={{ width: `${badgeProgress}%` }}
+                  />
+                </div>
               </div>
-              <motion.div
-                initial={{ width: "100%" }}
-                animate={{ width: "0%" }}
-                transition={{ duration: 5, ease: "linear" }}
-                className="absolute bottom-0 left-0 h-[2.5px] bg-gradient-to-r from-violet-600 via-indigo-500 to-emerald-400"
-              />
-            </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

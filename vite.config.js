@@ -22,7 +22,18 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
+            if (
+              id.includes('/react/') ||
+              id.includes('\\react\\') ||
+              id.includes('/react-dom/') ||
+              id.includes('\\react-dom\\') ||
+              id.includes('/react-router/') ||
+              id.includes('\\react-router\\') ||
+              id.includes('/react-router-dom/') ||
+              id.includes('\\react-router-dom\\') ||
+              id.includes('/scheduler/') ||
+              id.includes('\\scheduler\\')
+            ) {
               return 'vendor-react';
             }
             if (id.includes('framer-motion')) {
@@ -31,13 +42,13 @@ export default defineConfig({
             if (id.includes('lucide-react') || id.includes('react-icons')) {
               return 'vendor-icons';
             }
+            if (id.includes('three') || id.includes('@react-three')) {
+              return 'vendor-three';
+            }
             return 'vendor-libs';
           }
         }
       }
     }
-  },
-  esbuild: {
-    drop: ['console', 'debugger'],
   }
 })

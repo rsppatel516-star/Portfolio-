@@ -45,7 +45,7 @@ const contactSchema = {
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-dark-bg pt-20">
+    <div className="min-h-screen bg-transparent pt-20 relative">
       <SEO 
         title="Contact & Project Inquiries"
         description="Get in touch with Rudra Patel in Vadodara, Gujarat. Ready to collaborate on your next digital project, mobile app, or engineering challenge."

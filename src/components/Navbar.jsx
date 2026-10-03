@@ -3,6 +3,7 @@ import { Link as ScrollLink } from 'react-scroll';
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowRight, ArrowLeft, Laptop, Globe } from 'lucide-react';
+import MagneticButton from './ui/MagneticButton';
 
 const navLinks = [
   { name: 'Home', to: 'home' },
@@ -14,43 +15,63 @@ const navLinks = [
   { name: 'Contact', to: 'contact' },
 ];
 
-/* Custom Animated Hamburger Button */
+/* Custom Animated Hamburger Button - Modern Asymmetrical Design */
 const MenuButton = ({ isOpen, onClick }) => {
   return (
-    <button
+    <motion.button
       onClick={onClick}
-      className="lg:hidden relative z-[120] w-11 h-11 rounded-xl flex items-center justify-center text-white  border border-white/5 transition-all hover:bg-white/10 overflow-hidden group"
+      whileHover="hover"
+      whileTap="tap"
+      initial="closed"
+      animate={isOpen ? "open" : "closed"}
+      variants={{
+        tap: { scale: 0.9 }
+      }}
+      className="lg:hidden relative z-[120] w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center bg-white/[0.03] border border-white/[0.08] hover:border-white/[0.15] backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.15)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.25)] transition-all duration-500 overflow-hidden group"
       aria-label="Toggle menu"
     >
-      <div className="absolute inset-0 bg-gradient-to-tr from-dark-primary/20 to-dark-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-      <div className="relative w-5 h-4 flex flex-col justify-between items-center">
+      {/* Liquid Inner Glow */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/20 via-purple-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full" />
+      
+      <div className="relative w-5 h-3.5 flex flex-col justify-between items-center">
         <motion.span
-          animate={isOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
-          className="w-full h-0.5 bg-white rounded-xl origin-center"
+          variants={{
+            closed: { rotate: 0, y: 0, width: "60%", alignSelf: "flex-end" },
+            hover: { width: "100%", alignSelf: "center" },
+            open: { rotate: 45, y: 6, width: "100%", alignSelf: "center" }
+          }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+          className="h-[2px] bg-dark-textMain rounded-full"
+          style={{ originX: 0.5, originY: 0.5 }}
         />
         <motion.span
-          animate={isOpen ? { opacity: 0, x: -10 } : { opacity: 1, x: 0 }}
-          className="w-full h-0.5 bg-white rounded-xl"
+          variants={{
+            closed: { opacity: 1, scale: 1 },
+            hover: { scale: 1.05 },
+            open: { opacity: 0, scale: 0.5 }
+          }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+          className="w-full h-[2px] bg-dark-textMain rounded-full"
         />
         <motion.span
-          animate={isOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
-          className="w-full h-0.5 bg-white rounded-xl origin-center"
+          variants={{
+            closed: { rotate: 0, y: 0, width: "80%", alignSelf: "flex-start" },
+            hover: { width: "100%", alignSelf: "center" },
+            open: { rotate: -45, y: -6, width: "100%", alignSelf: "center" }
+          }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+          className="h-[2px] bg-dark-textMain rounded-full"
+          style={{ originX: 0.5, originY: 0.5 }}
         />
       </div>
-    </button>
+    </motion.button>
   );
 };
 
-/* shared scroll-link / button for a nav item */
+/* shared scroll-link / button for a mobile nav item */
 const NavLink = ({ link, mobile, isHome, close, handleClick }) => {
-  const cls = mobile
-    ? 'flex items-center justify-between w-full px-4 py-3 rounded-xl font-display font-bold text-white/65 hover:text-white hover:bg-white/[0.5] transition-all text-base cursor-pointer'
-    /* Navbar link hover effect*/
-    : 'px-4 py-2 rounded-xl font-display text-sm font-semibold tracking-wide text-white/75 hover:text-white hover:bg-white/10 transition-all duration-300 relative cursor-pointer select-none';
-
-  const activeCls = mobile
-    ? '!text-white !bg-[#3f38b0]'
-    : '!text-white !bg-gradient-to-r !from-indigo-600 !via-purple-600 !to-indigo-500 font-bold px-5 py-2 !rounded-xl';
+  const cls = 'flex items-center justify-between w-full px-4 py-3 rounded-xl font-display font-bold text-dark-textMain/65 hover:text-dark-textMain hover:bg-dark-textMain/[0.5] transition-all text-base cursor-pointer';
+  const activeCls = '!text-dark-textMain !bg-[#3f38b0]';
 
   const content = (
     <span className="relative z-10 block whitespace-nowrap">
@@ -80,8 +101,66 @@ const NavLink = ({ link, mobile, isHome, close, handleClick }) => {
   );
 };
 
+/* Premium Desktop Nav Item with Magnetic, Glass Capsule, Underline, and Staggered Text */
+const DesktopNavItem = ({ link, isHome, handleClick, hoveredNav, setHoveredNav }) => {
+  const isRoute = link.type === 'route' || link.to.startsWith('/');
+  const isHovered = hoveredNav === link.name;
+  
+  const content = (
+    <MagneticButton>
+      <div 
+        className="relative px-5 py-2.5 rounded-full cursor-pointer z-10 flex items-center justify-center"
+        onMouseEnter={() => setHoveredNav(link.name)}
+      >
+        {isHovered && (
+          <motion.div
+            layoutId="navHoverCapsule"
+            className="absolute inset-0 bg-white/[0.06] backdrop-blur-md border border-white/[0.08] rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.1),inset_0_1px_1px_rgba(255,255,255,0.15)] z-0"
+            initial={false}
+            transition={{ type: "spring", stiffness: 400, damping: 30 }}
+          />
+        )}
+        
+        {/* Dynamic Underline */}
+        {isHovered && (
+          <motion.div
+            layoutId="navHoverUnderline"
+            className="absolute -bottom-[1px] left-1/2 -translate-x-1/2 w-3/4 h-[2px] bg-gradient-to-r from-transparent via-indigo-400 to-transparent z-0"
+            initial={false}
+            transition={{ type: "spring", stiffness: 400, damping: 30 }}
+          />
+        )}
+        
+        <span className="relative z-10 flex font-display text-sm font-bold tracking-wide text-dark-textMain/80 group-hover:text-dark-textMain transition-colors">
+          {link.name.split('').map((char, i) => (
+            <motion.span
+              key={i}
+              animate={{ y: isHovered ? [0, -3, 0] : 0, color: isHovered ? '#fff' : '' }}
+              transition={{ duration: 0.3, delay: i * 0.03, ease: "easeInOut" }}
+            >
+              {char === ' ' ? '\u00A0' : char}
+            </motion.span>
+          ))}
+        </span>
+      </div>
+    </MagneticButton>
+  );
+
+  if (isRoute) {
+    return <RouterLink to={link.to} className="block group">{content}</RouterLink>;
+  } else if (isHome) {
+    return (
+      <ScrollLink to={link.to} spy smooth offset={-80} duration={800} className="block group">
+        {content}
+      </ScrollLink>
+    );
+  } else {
+    return <div className="block group" onClick={() => handleClick(link.to)}>{content}</div>;
+  }
+};
+
 const ContactBtn = ({ full, isHome, close }) => {
-  const cls = `${full ? 'w-full' : ''} flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-display font-bold text-white text-xs tracking-widest uppercase transition-all backdrop-blur-md border border-white/20`;
+  const cls = `${full ? 'w-full' : ''} flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-display font-bold text-dark-textMain text-xs tracking-widest uppercase transition-all backdrop-blur-md border border-dark-textMain/20`;
   const style = { background: 'linear-gradient(135deg, rgba(124,58,237,0.65), rgba(99,102,241,0.65))', boxShadow: '0 0 20px rgba(124,58,237,0.35)' };
 
   return isHome ? (
@@ -98,6 +177,7 @@ const ContactBtn = ({ full, isHome, close }) => {
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setMenuOpen] = useState(false);
+  const [hoveredNav, setHoveredNav] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
   const isHome = location.pathname === '/';
@@ -136,7 +216,7 @@ export default function Navbar() {
       >
         <div className={`transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center justify-between gap-4 w-full relative overflow-hidden
           ${isScrolled
-            ? 'max-w-6xl py-2.5 px-4 md:px-6 bg-[#040510]/60 backdrop-blur-[36px] border border-white/15 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.85),inset_0_1px_2px_rgba(255,255,255,0.2)]'
+            ? 'max-w-6xl py-2.5 px-4 md:px-6 bg-[#040510]/60 backdrop-blur-[36px] border border-dark-textMain/15 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.85),inset_0_1px_2px_rgba(255,255,255,0.2)]'
             : 'max-w-7xl py-2.5 px-5 lg:px-6 bg-transparent border-none rounded-none shadow-none'
           }`}>
 
@@ -202,7 +282,7 @@ export default function Navbar() {
 
               {/* Brand Text */}
               <div className="flex flex-col">
-                <span className="font-bricolage font-black text-lg md:text-xl text-white tracking-tight leading-none group-hover:text-indigo-300 transition-colors duration-300">
+                <span className="font-bricolage font-black text-lg md:text-xl text-dark-textMain tracking-tight leading-none group-hover:text-indigo-300 transition-colors duration-300">
                   Rudra<span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400 font-extrabold ml-0.5">.</span>
                 </span>
               </div>
@@ -210,26 +290,28 @@ export default function Navbar() {
           </RouterLink>
 
           {/* Desktop Links / Liquid Pill Capsule Navigation */}
-          <nav className="hidden lg:flex items-center gap-1 rounded-xl relative overflow-hidden group/nav">
+          <nav 
+            className="hidden lg:flex items-center gap-1 rounded-xl relative z-10"
+            onMouseLeave={() => setHoveredNav(null)}
+          >
             {!isArtifactsPage ? (
-              navLinks.map((link, i) => (
-                <NavLink
+              navLinks.map((link) => (
+                <DesktopNavItem
                   key={link.name}
                   link={link}
-                  mobile={false}
                   isHome={isHome}
-                  close={close}
                   handleClick={handleClick}
-                  index={i}
+                  hoveredNav={hoveredNav}
+                  setHoveredNav={setHoveredNav}
                 />
               ))
             ) : (
               <RouterLink
                 to="/#projects"
-                className="group flex items-center gap-3 px-6 py-2 bg-white/5 border border-white/10 rounded-full hover:bg-dark-primary hover:border-dark-primary transition-all duration-500"
+                className="group flex items-center gap-3 px-6 py-2 bg-dark-textMain/5 border border-dark-textMain/10 rounded-full hover:bg-dark-primary hover:border-dark-primary transition-all duration-500"
               >
                 <ArrowLeft size={16} className="text-dark-primary group-hover:text-dark-bg transition-colors" />
-                <span className="text-xs font-bold uppercase tracking-[0.15em] text-white/80 group-hover:text-dark-bg transition-colors">
+                <span className="text-xs font-bold uppercase tracking-[0.15em] text-dark-textMain/80 group-hover:text-dark-bg transition-colors">
                   Back to Portfolio
                 </span>
               </RouterLink>
@@ -245,7 +327,7 @@ export default function Navbar() {
                   whileHover={{ scale: 1.05, y: -1 }}
                   whileTap={{ scale: 0.95 }}
                   transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                  className="flex items-center gap-2 px-4.5 py-2 rounded-xl bg-gradient-to-r from-purple-600/40 via-indigo-600/40 to-purple-600/40 border border-white/20 backdrop-blur-xl text-white text-xs font-bold font-display tracking-wider hover:from-purple-600 hover:to-indigo-600 hover:border-white/40 transition-all duration-300 shadow-[0_0_20px_rgba(99,102,241,0.35),inset_0_1px_1px_rgba(255,255,255,0.25)]"
+                  className="flex items-center gap-2 px-4.5 py-2 rounded-xl bg-gradient-to-r from-purple-600/40 via-indigo-600/40 to-purple-600/40 border border-dark-textMain/20 backdrop-blur-xl text-dark-textMain text-xs font-bold font-display tracking-wider hover:from-purple-600 hover:to-indigo-600 hover:border-dark-textMain/40 transition-all duration-300 shadow-[0_0_20px_rgba(99,102,241,0.35),inset_0_1px_1px_rgba(255,255,255,0.25)]"
                 >
                   <span>Hire Me</span>
                   <ArrowRight size={13} className="text-indigo-300 group-hover:translate-x-0.5 transition-transform" />
@@ -289,7 +371,7 @@ export default function Navbar() {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9, y: 20 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-                className="w-full max-w-md bg-[#050612]/75 backdrop-blur-[36px] border border-white/15 rounded-2xl overflow-hidden flex flex-col shadow-[0_32px_80px_rgba(0,0,0,0.85),inset_0_1px_2px_rgba(255,255,255,0.2)] relative pointer-events-auto"
+                className="w-full max-w-md bg-[#050612]/75 backdrop-blur-[36px] border border-dark-textMain/15 rounded-2xl overflow-hidden flex flex-col shadow-[0_32px_80px_rgba(0,0,0,0.85),inset_0_1px_2px_rgba(255,255,255,0.2)] relative pointer-events-auto"
                 onClick={e => e.stopPropagation()}
               >
                 {/* Liquid Ambient Glowing Orbs inside Mobile Drawer */}
@@ -323,7 +405,7 @@ export default function Navbar() {
                 </div>
 
                 {/* Decorative Background Text */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15vw] font-display font-black text-white/[0.03] pointer-events-none select-none">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15vw] font-display font-black text-dark-textMain/[0.03] pointer-events-none select-none">
                   MENU
                 </div>
 
@@ -338,13 +420,13 @@ export default function Navbar() {
                       />
                     </div>
                     <div className="flex flex-col">
-                      <span className="font-bricolage font-black text-white text-base tracking-wider uppercase">Menu</span>
+                      <span className="font-bricolage font-black text-dark-textMain text-base tracking-wider uppercase">Menu</span>
                       <span className="text-[10px] text-emerald-400 font-bold uppercase tracking-widest animate-pulse">Explore My Work</span>
                     </div>
                   </div>
                   <button
                     onClick={close}
-                    className="w-10 h-10 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center text-white/70 hover:text-white transition-all hover:bg-white/10"
+                    className="w-10 h-10 rounded-xl bg-dark-textMain/10 border border-dark-textMain/15 flex items-center justify-center text-dark-textMain/70 hover:text-dark-textMain transition-all hover:bg-dark-textMain/10"
                   >
                     <X size={20} />
                   </button>
@@ -383,10 +465,10 @@ export default function Navbar() {
                 </nav>
 
                 {/* Footer Liquid CTA */}
-                <div className="p-5 relative z-10 bg-white/[0.03] border-t border-white/10 flex flex-col gap-3">
+                <div className="p-5 relative z-10 bg-dark-textMain/[0.03] border-t border-dark-textMain/10 flex flex-col gap-3">
                   <div className="flex items-center justify-center gap-3 opacity-30 hover:opacity-50 transition-opacity">
-                    <Globe size={12} className="text-white" />
-                    <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-white">Case Study 💻</span>
+                    <Globe size={12} className="text-dark-textMain" />
+                    <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-dark-textMain">Case Study 💻</span>
                   </div>
                 </div>
               </motion.div>

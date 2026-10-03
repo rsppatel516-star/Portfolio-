@@ -64,18 +64,18 @@ const iconMap = {
 
 const techColors = {
   html5: 'text-[#E34F26]', css3: 'text-[#1572B6]', javascript: 'text-[#F7DF1E]',
-  react: 'text-[#61DAFB]', nextjs: 'text-white', tailwindcss: 'text-[#06B6D4]',
-  nodejs: 'text-[#339933]', express: 'text-white', api: 'text-[#00E5FF]',
+  react: 'text-[#61DAFB]', nextjs: 'text-dark-textMain', tailwindcss: 'text-[#06B6D4]',
+  nodejs: 'text-[#339933]', express: 'text-dark-textMain', api: 'text-[#00E5FF]',
   php: 'text-[#777BB4]', java: 'text-[#007396]', flutter: 'text-[#02569B]',
   reactnative: 'text-[#61DAFB]', dart: 'text-[#0175C2]', mongodb: 'text-[#47A248]',
   mysql: 'text-[#4479A1]', firebase: 'text-[#FFCA28]', git: 'text-[#F05032]',
-  github: 'text-white', vscode: 'text-[#007ACC]', xcode: 'text-[#147EFB]', figma: 'text-[#F24E1E]',
-  vercel: 'text-white', postman: 'text-[#FF6C37]', aws: 'text-[#FF9900]',
+  github: 'text-dark-textMain', vscode: 'text-[#007ACC]', xcode: 'text-[#147EFB]', figma: 'text-[#F24E1E]',
+  vercel: 'text-dark-textMain', postman: 'text-[#FF6C37]', aws: 'text-[#FF9900]',
   docker: 'text-[#2496ED]', swift: 'text-[#FA7343]',
   storyboard: 'text-[#818CF8]', mobiledesign: 'text-[#F43F5E]',
   uikit: 'text-[#2AC3FF]', mvvm: 'text-[#3ED6FF]',
-  openai: 'text-[#10A37F]', antigravity: 'text-[#3186FF]', gemini: 'text-[#8E75FF]', copilot: 'text-white', claude: 'text-[#D97757]',
-  cursor: 'text-white'
+  openai: 'text-[#10A37F]', antigravity: 'text-[#3186FF]', gemini: 'text-[#8E75FF]', copilot: 'text-dark-textMain', claude: 'text-[#D97757]',
+  cursor: 'text-dark-textMain'
 };
 
 const techHexColors = {
@@ -120,8 +120,8 @@ const FilterButton = ({ cat, activeTab, onSelect, icon }) => {
         ref={buttonRef}
         onMouseMove={handleMouseMove}
         className={`relative flex items-center gap-2 sm:gap-2.5 px-3.5 sm:px-5 md:px-7 py-2.5 sm:py-3 md:py-3.5 rounded-xl text-[9px] sm:text-[10px] font-black uppercase tracking-[0.15em] sm:tracking-[0.25em] transition-all duration-500 border overflow-hidden group/btn cursor-pointer whitespace-nowrap backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.3)] ${activeTab === cat
-          ? 'bg-gradient-to-br from-violet-600/30 to-indigo-600/30 text-white border-white/20 border-t-white/40 border-l-white/40'
-          : 'bg-gradient-to-br from-white/[0.08] to-transparent border-white/10 border-t-white/20 border-l-white/20 text-dark-textMuted hover:text-white hover:bg-white/[0.12]'
+          ? 'bg-gradient-to-br from-violet-600/30 to-indigo-600/30 text-dark-textMain border-dark-textMain/20 border-t-dark-textMain/40 border-l-dark-textMain/40'
+          : 'bg-gradient-to-br from-white/[0.08] to-transparent border-dark-textMain/10 border-t-dark-textMain/20 border-l-dark-textMain/20 text-dark-textMuted hover:text-dark-textMain hover:bg-dark-textMain/[0.12]'
           }`}
       >
         {activeTab === cat && (
@@ -219,7 +219,7 @@ export default function Skills() {
   };
 
   return (
-    <section id="skills" className="py-20 relative overflow-hidden text-white">
+    <section id="skills" className="py-20 relative overflow-hidden text-dark-textMain">
       <GridBackground
         opacity="05"
         mask="radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%)"
@@ -241,7 +241,7 @@ export default function Skills() {
                 TECHNICAL ARSENAL
               </span>
             </motion.div>
-            <h2 className="text-4xl md:text-5xl lg:text-5xl font-display font-black tracking-tight leading-[1.15] text-white">
+            <h2 className="text-4xl md:text-5xl lg:text-5xl font-display font-black tracking-tight leading-[1.15] text-dark-textMain">
               Technical <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-indigo-400 to-cyan-400">Engine & Stack</span>
             </h2>
           </div>
@@ -303,8 +303,8 @@ export default function Skills() {
                 exit={{ opacity: 0 }}
                 className="flex flex-col items-center justify-center py-20 text-center"
               >
-                <Cpu className="text-white/20 w-12 h-12 mb-4 animate-bounce" />
-                <p className="font-mono text-xs text-white/40 uppercase tracking-widest">No matching nodes in database</p>
+                <Cpu className="text-dark-textMain/20 w-12 h-12 mb-4 animate-bounce" />
+                <p className="font-mono text-xs text-dark-textMain/40 uppercase tracking-widest">No matching nodes in database</p>
               </motion.div>
             ) : (
               <motion.div
@@ -329,12 +329,12 @@ export default function Skills() {
                         borderColor: hoveredTech === tech.name ? `${techHexColors[tech.icon]}45` : undefined,
                         boxShadow: hoveredTech === tech.name ? `0 0 25px -5px ${techHexColors[tech.icon]}25` : undefined
                       }}
-                      className="group relative h-48 backdrop-blur-xl bg-gradient-to-br from-white/[0.08] to-transparent border border-white/10 border-t-white/20 border-l-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)] rounded-3xl p-6 flex flex-col items-center justify-center text-center overflow-hidden transition-all duration-500 hover:bg-white/[0.1] cursor-default"
+                      className="group relative h-48 backdrop-blur-xl bg-gradient-to-br from-white/[0.08] to-transparent border border-dark-textMain/10 border-t-dark-textMain/20 border-l-dark-textMain/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)] rounded-3xl p-6 flex flex-col items-center justify-center text-center overflow-hidden transition-all duration-500 hover:bg-dark-textMain/[0.1] cursor-default"
                     >
 
 
                       {/* Project Count Tech Stamp 
-                      <div className="absolute top-4 left-4 text-[7px] font-mono font-bold text-white/30 group-hover:text-white/60 transition-colors uppercase tracking-widest">
+                      <div className="absolute top-4 left-4 text-[7px] font-mono font-bold text-dark-textMain/30 group-hover:text-dark-textMain/60 transition-colors uppercase tracking-widest">
                         [{matchProjCount || tech.projectsCount || 0} PROJ]
                       </div>
                       */}
@@ -350,7 +350,7 @@ export default function Skills() {
                       </div>
 
                       {/* Skill Name */}
-                      <span className="text-[12px] uppercase font-black tracking-[0.25em] text-white/50 group-hover:text-white transition-colors duration-300 relative z-10 font-mono">
+                      <span className="text-[12px] uppercase font-black tracking-[0.25em] text-dark-textMain/50 group-hover:text-dark-textMain transition-colors duration-300 relative z-10 font-mono">
                         {tech.name}
                       </span>
 
@@ -369,28 +369,28 @@ export default function Skills() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="mt-16 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-8"
+          className="mt-16 pt-6 border-t border-dark-textMain/5 flex flex-col sm:flex-row items-center justify-between gap-8"
         >
           <div className="flex items-center gap-8">
             <div className="flex -space-x-3">
               {['swift', 'nodejs', 'nextjs'].map((icon, i) => (
-                <div key={i} className={`w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-base transition-transform hover:z-10 hover:scale-110 cursor-default ${techColors[icon]}`}>
+                <div key={i} className={`w-9 h-9 rounded-full bg-dark-textMain/5 flex items-center justify-center text-base transition-transform hover:z-10 hover:scale-110 cursor-default ${techColors[icon]}`}>
                   {iconMap[icon]}
                 </div>
               ))}
-              <div className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-base text-white/40 relative group/soon">
+              <div className="w-9 h-9 rounded-full bg-dark-textMain/5 flex items-center justify-center text-base text-dark-textMain/40 relative group/soon">
                 <div className="absolute inset-0 rounded-full bg-indigo-500/10 animate-pulse" />
                 <SiDocker className="opacity-40 group-hover/soon:opacity-100 transition-opacity duration-500" />
-                <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-black/90 backdrop-blur-md rounded-lg text-[7px] font-black uppercase tracking-[0.2em] opacity-0 group-hover/soon:opacity-100 group-hover/soon:-top-12 transition-all duration-500 whitespace-nowrap pointer-events-none shadow-[0_0_20px_rgba(0,0,0,0.5)] flex items-center gap-2">
+                <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-dark-bg/90 backdrop-blur-md rounded-lg text-[7px] font-black uppercase tracking-[0.2em] opacity-0 group-hover/soon:opacity-100 group-hover/soon:-top-12 transition-all duration-500 whitespace-nowrap pointer-events-none shadow-[0_0_20px_rgba(0,0,0,0.5)] flex items-center gap-2">
                   <div className="w-1 h-1 rounded-full bg-indigo-500 animate-ping" />
                   Coming Soon: Docker
                 </div>
               </div>
             </div>
-            <p className="text-[9px] font-mono uppercase tracking-widest text-white/40">Console: Nominal // System Diagnostics Online</p>
+            <p className="text-[9px] font-mono uppercase tracking-widest text-dark-textMain/40">Console: Nominal // System Diagnostics Online</p>
           </div>
 
-          <div className="flex items-center gap-4 text-white/30">
+          <div className="flex items-center gap-4 text-dark-textMain/30">
             <Zap size={12} className="text-violet-400" />
             <span className="text-[9px] font-mono uppercase tracking-widest">Always Learning . Always Building</span>
             <Zap size={12} className="text-violet-400" />
