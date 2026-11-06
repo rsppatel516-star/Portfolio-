@@ -56,7 +56,7 @@ function App() {
     location.pathname.startsWith('/contact');
 
   return (
-    <div className="min-h-screen flex flex-col bg-dark-bg text-dark-textMain relative">
+    <div className="min-h-screen flex flex-col bg-transparent text-dark-textMain relative">
       {/* Global Particle Background */}
       <GlobalParticles />
 

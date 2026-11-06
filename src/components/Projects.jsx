@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import MagneticButton from './ui/MagneticButton';
 import ProjectModal from './ui/ProjectModal';
+import SectionHeading from './ui/SectionHeading';
 
 const categoryIcons = {
   'All': LayoutGrid,
@@ -42,29 +43,29 @@ const ProjectFilterButton = ({ filter, count, activeFilter, setActiveFilter, set
   return (
     <MagneticButton onClick={() => { setActiveFilter(filter); setVisibleCount(6); }}>
       <button
-        className={`relative px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm md:text-base font-bold transition-all duration-300 focus:outline-none flex items-center gap-2.5 cursor-pointer select-none group border backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.3)] ${isActive
-          ? 'bg-gradient-to-br from-violet-600/30 to-indigo-600/30 text-dark-textMain border-dark-textMain/20 border-t-dark-textMain/40 border-l-dark-textMain/40'
-          : 'bg-gradient-to-br from-white/[0.08] to-transparent border-dark-textMain/10 border-t-dark-textMain/20 border-l-dark-textMain/20 text-dark-textMain/60 hover:text-dark-textMain hover:bg-dark-textMain/[0.12]'
+        className={`relative px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm md:text-base font-bold transition-all duration-300 focus:outline-none flex items-center gap-2.5 cursor-pointer select-none group border backdrop-blur-xl shadow-sm ${isActive
+          ? 'bg-gradient-to-br from-violet-600/20 via-indigo-600/20 to-purple-600/10 dark:from-violet-600/30 dark:to-indigo-600/30 text-indigo-900 dark:text-dark-textMain border-indigo-500/40 shadow-indigo-500/10'
+          : 'bg-white/80 dark:bg-white/[0.05] border-slate-200/90 dark:border-white/10 text-slate-600 dark:text-dark-textMuted hover:text-slate-900 dark:hover:text-dark-textMain hover:bg-slate-100/80 dark:hover:bg-dark-textMain/[0.12] hover:border-indigo-500/30'
           }`}
       >
         {isActive && (
           <motion.div
             layoutId="activeProjectFilterPill"
-            className="absolute inset-0 bg-gradient-to-r from-violet-600/30 via-indigo-600/40 to-violet-600/30 backdrop-blur-md rounded-xl"
+            className="absolute inset-0 bg-gradient-to-r from-violet-600/15 via-indigo-600/20 to-violet-600/15 dark:from-violet-600/30 dark:via-indigo-600/40 dark:to-violet-600/30 backdrop-blur-md rounded-xl"
             transition={{ type: 'spring', bounce: 0.15, duration: 0.5 }}
           />
         )}
 
         <span className="relative z-10 flex items-center gap-2">
-          <Icon size={16} className={`transition-transform duration-300 ${isActive ? 'scale-110 text-violet-300' : 'text-purple-400 group-hover:text-purple-300'}`} />
+          <Icon size={16} className={`transition-transform duration-300 ${isActive ? 'scale-110 text-indigo-600 dark:text-indigo-300' : 'text-slate-500 dark:text-dark-textMuted group-hover:text-indigo-600 dark:group-hover:text-indigo-300'}`} />
           <span className="font-display tracking-wide">{filter}</span>
         </span>
 
         {/* Animated Count Badge */}
         <span
           className={`relative z-10 px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-mono font-bold transition-all flex items-center justify-center min-w-[22px] ${isActive
-            ? 'bg-violet-500/30 text-dark-textMain border border-violet-400/40 shadow-[0_0_10px_rgba(167,139,250,0.3)]'
-            : 'bg-dark-textMain/5 text-dark-textMain/50 border border-dark-textMain/10 group-hover:border-dark-textMain/20 group-hover:text-dark-textMain/80'
+            ? 'bg-indigo-500/20 dark:bg-indigo-500/20 text-indigo-900 dark:text-indigo-200 border border-indigo-400/40 dark:border-indigo-400/40 shadow-sm'
+            : 'bg-slate-100 dark:bg-dark-textMain/5 text-slate-500 dark:text-dark-textMain/50 border border-slate-200/80 dark:border-dark-textMain/10 group-hover:border-slate-300 dark:group-hover:border-dark-textMain/20 group-hover:text-slate-800 dark:group-hover:text-dark-textMain/80'
             }`}
         >
           <AnimatedCountBadge value={count} />
@@ -124,41 +125,26 @@ export default function Projects() {
     <section id="projects" className="py-20 md:py-28 relative overflow-hidden">
       {/* Subtle Background Glows */}
       <div className="absolute top-1/3 -left-32 w-96 h-96 bg-purple-600/10 rounded-full blur-[160px] pointer-events-none" />
-      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-indigo-600/10 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-indigo-500/10 rounded-full blur-[160px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
 
-        {/* Header Section */}
-        <div className="mb-14 sm:mb-18">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-            <div>
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full text-purple-400 mb-3 bg-purple-500/10 border border-purple-500/20"
-              >
-                <FolderOpen size={15} className="text-purple-400" />
-                <span className="font-mono text-xs font-bold tracking-[0.25em] uppercase text-purple-300">
-                  FEATURED ARTIFACTS
-                </span>
-              </motion.div>
-
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-black tracking-tight leading-[1.15] text-dark-textMain">
-                Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-indigo-400 to-cyan-400">Artifacts</span>
-              </h2>
-              <p className="text-dark-textMuted text-sm sm:text-base font-bricolage max-w-xl mt-3">
-                Curated collection of native iOS mobile architectures, responsive full-stack web platforms, and spatial design systems engineered with extreme performance and fluid ergonomics.
-              </p>
-            </div>
-
-            {/* Project Animation SVG */}
+        {/* Header Section with Signature Typography, Sparkles, and Project Showcase Animation */}
+        <SectionHeading
+          badge="FEATURED ARTIFACTS"
+          badgeIcon={FolderOpen}
+          prefix="Featured "
+          highlight="Artifacts"
+          suffix=" & Production Works"
+          description="Curated collection of native iOS mobile architectures, responsive full-stack web platforms, and spatial design systems engineered with extreme performance and fluid ergonomics."
+          size="medium"
+          rightContent={
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="relative w-36 h-36 sm:w-48 sm:h-48 md:w-56 md:h-56 shrink-0 self-center lg:self-auto flex items-center justify-center rounded-2xl"
+              className="relative w-36 h-36 sm:w-48 sm:h-48 md:w-56 md:h-56 shrink-0 flex items-center justify-center rounded-2xl"
             >
               <img
                 src="/project animation.svg"
@@ -170,8 +156,8 @@ export default function Projects() {
                 className="w-full h-full object-contain relative z-10 drop-shadow-[0_0_20px_rgba(124,58,237,0.3)] select-none pointer-events-none"
               />
             </motion.div>
-          </div>
-        </div>
+          }
+        />
 
         {/* Filter Bar */}
         <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 mb-12 sm:mb-16">
@@ -203,9 +189,9 @@ export default function Projects() {
           </div>
 
           {/* Animated Project Count Indicator */}
-          <div className="flex items-center gap-3 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl border border-dark-textMain/10 bg-dark-textMain/[0.02] backdrop-blur-md text-xs sm:text-sm font-medium text-dark-textMain/60 whitespace-nowrap font-syne hover:border-violet-500/30 transition-all duration-300">
+          <div className="flex items-center gap-3 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl border border-dark-textMain/10 bg-dark-textMain/[0.02] backdrop-blur-md text-xs sm:text-sm font-medium text-dark-textMain/60 whitespace-nowrap font-syne hover:border-purple-500/30 transition-all duration-300">
             <div className="relative w-4 h-4 flex items-center justify-center shrink-0">
-              <span className="w-2 h-2 rounded-full bg-violet-400 animate-pulse shadow-[0_0_8px_#a78bfa]" />
+              <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse shadow-[0_0_8px_#c084fc]" />
             </div>
             <span className="text-dark-textMain font-black text-sm sm:text-base font-mono flex items-center gap-1">
               <AnimatedCountBadge value={filteredCount} />
@@ -216,8 +202,14 @@ export default function Projects() {
           </div>
         </div>
 
-        {/* Projects Grid: Simple, Modern & Professional Showcase */}
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-16">
+        {/* Projects Grid: Smooth Shuffling Showcase */}
+        <motion.div
+          layout
+          transition={{
+            layout: { duration: 0.45, ease: [0.22, 1, 0.36, 1] }
+          }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-16"
+        >
           <AnimatePresence mode="popLayout">
             {visibleProjects.map((project, idx) => {
               const CatIcon = categoryIcons[project.category] || Layers;
@@ -225,12 +217,28 @@ export default function Projects() {
                 <motion.div
                   key={project.id}
                   layout
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.45, delay: idx * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                  initial={{ opacity: 0, scale: 0.85, y: 15 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{
+                    opacity: 0,
+                    scale: 0.85,
+                    y: 10,
+                    transition: { duration: 0.22, ease: 'easeIn' }
+                  }}
+                  transition={{
+                    layout: {
+                      type: 'spring',
+                      stiffness: 320,
+                      damping: 28,
+                      mass: 0.8
+                    },
+                    opacity: { duration: 0.28, ease: 'easeOut' },
+                    scale: { duration: 0.28, ease: 'easeOut' },
+                    y: { duration: 0.28, ease: 'easeOut' }
+                  }}
+                  style={{ willChange: 'transform, opacity' }}
                   onClick={() => setSelectedProject(project)}
-                  className="group relative w-full aspect-[4/5] min-h-[340px] sm:min-h-[420px] md:min-h-[480px] rounded-2xl sm:rounded-3xl overflow-hidden backdrop-blur-2xl bg-[#090d1a]/80 border border-white/[0.08] hover:border-violet-500/50 shadow-[0_10px_35px_rgba(0,0,0,0.35)] hover:shadow-[0_20px_50px_rgba(124,58,237,0.22)] transition-all duration-500 cursor-pointer touch-manipulation"
+                  className="group relative w-full aspect-[4/5] min-h-[340px] sm:min-h-[420px] md:min-h-[480px] rounded-2xl sm:rounded-3xl overflow-hidden surface-panel surface-panel-hover transition-[border-color,box-shadow] duration-300 cursor-pointer touch-manipulation"
                 >
                   {/* Project Mockup Image - Full & Crisp (Taller 4:5 Framing) */}
                   <img
@@ -267,7 +275,7 @@ export default function Projects() {
 
                       {/* Project Title & Sleek Action Arrow */}
                       <div className="flex items-center justify-between gap-3">
-                        <h3 className="text-lg sm:text-xl md:text-2xl font-display font-bold text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:via-violet-200 group-hover:to-cyan-200 transition-colors line-clamp-1 sm:line-clamp-2">
+                        <h3 className="text-lg sm:text-xl md:text-2xl font-display font-bold text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:via-violet-200 group-hover:to-pink-200 transition-colors line-clamp-1 sm:line-clamp-2">
                           {project.title}
                         </h3>
 
@@ -289,9 +297,9 @@ export default function Projects() {
           {visibleCount < filteredProjects.length && (
             <MagneticButton
               onClick={() => setVisibleCount(filteredProjects.length)}
-              className="w-full sm:w-auto px-6 sm:px-9 py-3.5 sm:py-4 backdrop-blur-xl bg-white/[0.04] border border-white/[0.12] hover:border-indigo-400/50 hover:bg-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.3)] rounded-full font-bold transition-all group overflow-hidden relative font-syne text-center"
+              className="w-full sm:w-auto px-6 sm:px-9 py-3.5 sm:py-4 surface-panel hover:border-indigo-400/50 rounded-full font-bold transition-all group overflow-hidden relative font-syne text-center"
             >
-              <span className="relative z-10 flex items-center justify-center gap-2.5 uppercase tracking-wider text-xs sm:text-sm text-white">
+              <span className="relative z-10 flex items-center justify-center gap-2.5 uppercase tracking-wider text-xs sm:text-sm text-dark-textMain">
                 Show All ({filteredProjects.length})
                 <motion.span animate={{ y: [0, 4, 0] }} transition={{ repeat: Infinity, duration: 1.8 }}>
                   ↓

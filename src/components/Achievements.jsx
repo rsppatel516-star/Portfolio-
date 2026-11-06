@@ -5,6 +5,7 @@ import { Award, ExternalLink, FileText, X, Shield, Calendar, ArrowRight, Downloa
 import toast, { Toaster } from 'react-hot-toast';
 import MagneticButton from './ui/MagneticButton';
 import GridBackground from './ui/GridBackground';
+import SectionHeading from './ui/SectionHeading';
 
 // Custom Premium SVG Icons for Tech Brands
 const AWSIcon = () => (
@@ -37,10 +38,10 @@ const OSIcon = () => (
 
 const IOSIcon = () => (
   <svg
-    className="w-8 h-8 md:w-10 md:h-10"
+    className="w-8 h-8 md:w-10 md:h-10 text-dark-textMain"
     viewBox="-56.24 0 608.728 608.728"
     xmlns="http://www.w3.org/2000/svg"
-    fill="white"
+    fill="currentColor"
   >
     <path d="M273.81 52.973C313.806.257 369.41 0 369.41 0s8.271 49.562-31.463 97.306c-42.426 50.98-90.649 42.638-90.649 42.638s-9.055-40.094 26.512-86.971zM252.385 174.662c20.576 0 58.764-28.284 108.471-28.284 85.562 0 119.222 60.883 119.222 60.883s-65.833 33.659-65.833 115.331c0 92.133 82.01 123.885 82.01 123.885s-57.328 161.357-134.762 161.357c-35.565 0-63.215-23.967-100.688-23.967-38.188 0-76.084 24.861-100.766 24.861C89.33 608.73 0 455.666 0 332.628c0-121.052 75.612-184.554 146.533-184.554 46.105 0 81.883 26.588 105.852 26.588z" />
   </svg>
@@ -217,7 +218,7 @@ const CredentialCard = ({ cert, onOpen, cardVariants }) => {
       onMouseLeave={() => setIsHovered(false)}
       transition={{ type: "spring", stiffness: 200, damping: 15 }}
       style={{
-        borderColor: isHovered ? `${cert.brandColor}80` : 'rgba(255,255,255,0.05)',
+        borderColor: isHovered ? `${cert.brandColor}80` : undefined,
         boxShadow: isHovered ? `0 0 35px ${cert.brandColor}15` : 'none'
       }}
       className="group relative backdrop-blur-xl bg-gradient-to-br from-white/[0.08] to-transparent border border-dark-textMain/10 border-t-dark-textMain/20 border-l-dark-textMain/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:bg-dark-textMain/[0.05] rounded-3xl p-8 flex flex-col justify-between overflow-hidden transition-all duration-500 cursor-pointer"
@@ -388,42 +389,17 @@ export default function Achievements() {
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
 
-        {/* Header section (Left-aligned as per Blog.jsx) */}
-        <header className="mb-14 sm:mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="flex items-center gap-3 mb-6 text-purple-400 font-mono text-xs font-bold tracking-[0.3em] uppercase"
-          >
-            <div className="w-10 h-[1px] bg-purple-500/40" />
-            <Award size={15} />
-            <span>CREDENTIALS & CERTIFICATIONS</span>
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-4xl sm:text-6xl md:text-7xl font-display font-black tracking-tight sm:tracking-tighter text-dark-textMain mb-6 leading-none"
-          >
-            Verified <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-indigo-400 to-cyan-400">
-              Credentials & Badges
-            </span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-dark-textMain/60 max-w-2xl font-display leading-relaxed text-sm md:text-base text-left"
-          >
-            Verified cloud proficiencies, programming languages, and software architectures validated through official certifications and industry credentials.
-          </motion.p>
-        </header>
+        {/* Header section with Signature Typography & Sparkles */}
+        <SectionHeading
+          as="h1"
+          size="large"
+          badge="CREDENTIALS & CERTIFICATIONS"
+          badgeIcon={Award}
+          prefix="Verified "
+          highlight="Credentials"
+          suffix=" & Industry Honors"
+          description="Verified cloud proficiencies, programming languages, and software architectures validated through official certifications and industry credentials."
+        />
 
         {/* Credentials Grid */}
         <motion.div

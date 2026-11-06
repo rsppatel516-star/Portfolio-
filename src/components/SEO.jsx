@@ -22,7 +22,7 @@ export default function SEO({
   const defaultTitle = 'Rudra Patel — Digital Architect | Frontend & iOS Developer';
   const defaultDesc = 'Official Portfolio of Rudra Patel — Digital Architect, Frontend Web Developer & Native iOS Developer based in Vadodara, Gujarat, India. Specializing in React, Next.js, SwiftUI, and fluid UI/UX design.';
   const defaultKeywords = 'Rudra Patel, Digital Architect, Frontend Developer, iOS Developer, SwiftUI Developer, React Developer, Next.js, Swift, Tailwind CSS, Vadodara, Gujarat, India';
-  const defaultImage = '/images/0R7A7692.webp';
+  const defaultImage = '/images/DSC06139.webp';
 
   const titleText = title
     ? title.includes('Rudra Patel')

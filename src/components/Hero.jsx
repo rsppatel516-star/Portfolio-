@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { TypeAnimation } from 'react-type-animation';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Link as ScrollLink } from 'react-scroll';
-import { Github, Linkedin, Instagram, Youtube, Facebook, ArrowRight, X, Sparkles } from 'lucide-react';
+import { Github, Linkedin, Instagram, Youtube, Facebook, ArrowRight, Sparkles } from 'lucide-react';
 import MagneticButton from './ui/MagneticButton';
+import WelcomeToast from './ui/WelcomeToast';
 
 // Animated styles injected once
 const shimmerStyle = `
@@ -29,7 +30,7 @@ const shimmerStyle = `
     50% { opacity: 0.28; }
   }
   .hero-gradient-text {
-    background: linear-gradient(135deg, #a855f7, #ec4899, #6366f1, #3b82f6, #a855f7);
+    background: linear-gradient(135deg, #a855f7, #ec4899, #6366f1, #8b5cf6, #2300ff);
     background-size: 300% 300%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -37,7 +38,7 @@ const shimmerStyle = `
     animation: gradientShimmer 5s ease infinite;
   }
   .hero-title-name {
-    background: linear-gradient(135deg, #818cf8, #c084fc, #e879f9);
+    background: linear-gradient(135deg, #818cf8, #c084fc);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -60,40 +61,13 @@ const shimmerStyle = `
 const socialLinks = [
   { name: 'Facebook', icon: Facebook, href: 'https://www.facebook.com/profile.php?id=100082469136911', color: '#1877f2' },
   { name: 'Instagram', icon: Instagram, href: 'https://www.instagram.com/rudraa_ptll/', color: '#B72B5F' },
-  { name: 'GitHub', icon: Github, href: 'https://github.com/Rudraptl16', color: '#ffffff' },
+  { name: 'GitHub', icon: Github, href: 'https://github.com/Rudraptl16', color: '#6366f1' },
   { name: 'YouTube', icon: Youtube, href: 'https://www.youtube.com/@rudrapatel4172', color: '#ff0000' },
   { name: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/in/rudrapatel816/', color: '#0077b5' },
 ];
 
 export default function Hero() {
-  const [showBadge, setShowBadge] = useState(true);
-  const [isBadgeHovered, setIsBadgeHovered] = useState(false);
-  const [badgeProgress, setBadgeProgress] = useState(100);
   const [decorativeElements, setDecorativeElements] = useState([]);
-
-  // Auto-dismiss countdown with pause-on-hover
-  useEffect(() => {
-    if (!showBadge) return;
-
-    const duration = 6500;
-    const intervalTime = 50;
-    const step = (intervalTime / duration) * 100;
-
-    const interval = setInterval(() => {
-      if (!isBadgeHovered) {
-        setBadgeProgress((prev) => {
-          if (prev <= step) {
-            clearInterval(interval);
-            setShowBadge(false);
-            return 0;
-          }
-          return prev - step;
-        });
-      }
-    }, intervalTime);
-
-    return () => clearInterval(interval);
-  }, [showBadge, isBadgeHovered]);
 
   useEffect(() => {
     // Scatter decorative floaters
@@ -150,19 +124,16 @@ export default function Hero() {
     >
       <style>{shimmerStyle}</style>
 
-      {/* Cybernetic Tech Grid Background */}
-      <div className="absolute inset-0 hero-grid-bg z-0 pointer-events-none" />
-
-      {/* Glowing ambient blobs */}
+      {/* Glowing ambient aurora highlights */}
       <motion.div
         variants={blobVariants}
         animate="animate"
-        className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-violet-600/15 blur-[180px] pointer-events-none z-0"
+        className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-purple-600/15 dark:bg-purple-600/20 bg-indigo-500/10 blur-[160px] pointer-events-none z-0"
       />
       <motion.div
         variants={blobVariants}
         animate="animate"
-        className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-indigo-600/15 blur-[160px] pointer-events-none z-0"
+        className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-indigo-600/15 dark:bg-indigo-600/20 bg-purple-500/10 blur-[150px] pointer-events-none z-0"
       />
 
       {/* Floating Decorative Elements */}
@@ -170,7 +141,7 @@ export default function Hero() {
         {decorativeElements.map((el, i) => (
           <motion.div
             key={i}
-            className="absolute w-1.5 h-1.5 bg-indigo-400/30 rounded-full"
+            className="absolute w-1.5 h-1.5 bg-purple-400/30 rounded-full"
             initial={{
               x: el.x,
               y: el.y,
@@ -270,16 +241,16 @@ export default function Hero() {
               wrapper="p"
               speed={50}
               repeat={Infinity}
-              className="text-xl sm:text-2xl font-bold font-display tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-300"
+              className="text-xl sm:text-2xl font-bold font-display tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:to-purple-400"
             />
           </motion.div>
 
           {/* SEO-Rich Text Bio */}
           <motion.p
             variants={itemVariants}
-            className="font-display text-dark-textMain/70 text-base sm:text-lg max-w-xl leading-relaxed tracking-normal"
+            className="font-display text-dark-textMain/75 text-base sm:text-lg max-w-xl leading-relaxed tracking-normal"
           >
-            I'm a <strong className="text-dark-textMain font-semibold">Frontend & Native iOS Developer</strong> based in <span className="text-indigo-300">Vadodara, Gujarat</span>. I engineer high-performance mobile apps with <span className="text-purple-300 font-semibold">SwiftUI</span> and responsive web platforms using <span className="text-indigo-300 font-semibold">React & Next.js</span> — focused on speed optimization, clean architecture, and fluid 60fps transitions.
+            I'm a <strong className="text-dark-textMain font-semibold">Frontend & Native iOS Developer</strong> based in <span className="text-indigo-600 dark:text-indigo-400 font-semibold">Vadodara, Gujarat</span>. I engineer high-performance mobile apps with <span className="text-purple-400 dark:text-purple-500 font-semibold">SwiftUI</span> and responsive web platforms using <span className="text-indigo-500 dark:text-indigo-500 font-semibold">React & Next.js</span> — focused on speed optimization and clean architecture.
           </motion.p>
 
           {/* Action CTAs */}
@@ -289,18 +260,18 @@ export default function Hero() {
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="relative group font-display flex items-center gap-3 px-7 py-3.5 sm:px-8 sm:py-4 rounded-xl font-bold text-dark-textMain text-xs sm:text-sm tracking-[0.12em] uppercase transition-all duration-500 overflow-hidden cursor-pointer shadow-[0_0_25px_rgba(99,102,241,0.28)]"
+                  className="relative group font-display flex items-center gap-3 px-7 py-3.5 sm:px-8 sm:py-4 rounded-xl font-bold text-white text-xs sm:text-sm tracking-[0.12em] uppercase transition-all duration-500 overflow-hidden cursor-pointer"
                 >
-                  <span className="absolute inset-0 bg-gradient-to-r from-violet-600 via-indigo-600 to-purple-600 group-hover:opacity-95 transition-opacity duration-500" />
+                  <span className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500  group-hover:opacity-95 transition-opacity duration-500" />
                   <span className="absolute inset-[1px] bg-dark-bg/30 backdrop-blur-md rounded-[11px] z-0 transition-all duration-500 group-hover:bg-dark-bg/40" />
                   <span className="absolute top-0 -left-[100%] h-full w-1/2 z-0 block transform -skew-x-12 bg-gradient-to-r from-transparent via-white/25 to-transparent group-hover:animate-[sweep_1.5s_ease-in-out_infinite]" />
-                  <span className="relative z-10 flex items-center gap-2.5 text-dark-textMain">
+                  <span className="relative z-10 flex items-center gap-2.5 text-white">
                     Connect With Me
                     <motion.div
                       animate={{ x: [0, 4, 0] }}
                       transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                     >
-                      <ArrowRight size={17} className="text-indigo-200 group-hover:text-dark-textMain" />
+                      <ArrowRight size={17} className="text-indigo-200 group-hover:text-white" />
                     </motion.div>
                   </span>
                 </motion.button>
@@ -360,114 +331,8 @@ export default function Hero() {
 
       </div>
 
-      {/* Welcome Toast Notification - Liquid Glass Edition */}
-      <AnimatePresence>
-        {showBadge && (
-          <motion.div
-            initial={{ opacity: 0, y: 35, scale: 0.92, filter: 'blur(10px)' }}
-            animate={{
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              filter: 'blur(0px)'
-            }}
-            exit={{
-              opacity: 0,
-              y: 20,
-              scale: 0.94,
-              filter: 'blur(8px)',
-              transition: { duration: 0.35, ease: 'easeIn' }
-            }}
-            transition={{
-              type: 'spring',
-              stiffness: 170,
-              damping: 18,
-              delay: 0.6
-            }}
-            onMouseEnter={() => setIsBadgeHovered(true)}
-            onMouseLeave={() => setIsBadgeHovered(false)}
-            className="fixed bottom-5 sm:bottom-7 md:bottom-9 left-1/2 -translate-x-1/2 z-50 w-auto max-w-[calc(100vw-1.5rem)] sm:max-w-md cursor-pointer select-none"
-          >
-            {/* Continuous Liquid Floating Micro-Animation Wrapper */}
-            <motion.div
-              animate={{
-                y: [0, -4, 0]
-              }}
-              transition={{
-                duration: 3.5,
-                repeat: Infinity,
-                ease: 'easeInOut'
-              }}
-              className="relative group"
-            >
-              {/* Liquid Ambient Glowing Aura */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-violet-600/35 via-indigo-500/30 to-cyan-400/35 rounded-2xl sm:rounded-full blur-xl opacity-70 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
-              {/* Liquid Glass Pill Surface */}
-              <div
-                id="homeWelcomeBadge"
-                className="relative flex items-center justify-between gap-3 sm:gap-4.5 px-4 sm:px-5 py-2.5 sm:py-3 rounded-2xl sm:rounded-full backdrop-blur-2xl bg-[#070914]/80 border border-white/20 border-t-white/40 shadow-[0_16px_40px_rgba(0,0,0,0.7),inset_0_1px_1px_rgba(255,255,255,0.35),inset_0_-1px_1px_rgba(0,0,0,0.5)] overflow-hidden transition-all duration-300 group-hover:border-violet-400/50"
-                aria-live="polite"
-                role="status"
-              >
-                {/* Diagonal Specular Liquid Light Shimmer */}
-                <motion.div
-                  animate={{ x: ['-120%', '280%'] }}
-                  transition={{
-                    repeat: Infinity,
-                    duration: 4.5,
-                    ease: 'easeInOut',
-                    repeatDelay: 1.2
-                  }}
-                  className="absolute inset-y-0 w-28 bg-gradient-to-r from-transparent via-white/[0.14] to-transparent skew-x-12 pointer-events-none"
-                />
-
-                {/* Left: Glowing Live Emerald Status Beacon */}
-                <div className="flex items-center gap-2.5 sm:gap-3 z-10 shrink-0">
-                  <span className="relative flex h-2.5 w-2.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-80" />
-                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.9)]" />
-                  </span>
-                  <div className="w-[1px] h-3.5 bg-white/15" />
-                </div>
-
-                {/* Center Content: Ultra-Crisp Responsive Typography */}
-                <div className="flex items-center gap-2 z-10 min-w-0 pr-1">
-                  <span className="text-white/95 font-display text-[11px] sm:text-xs md:text-sm font-semibold tracking-wide whitespace-nowrap truncate">
-                    Welcome to{' '}
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-300 via-indigo-200 to-cyan-300 font-bold drop-shadow-[0_0_12px_rgba(167,139,250,0.4)]">
-                      Rudra Patel&apos;s
-                    </span>{' '}
-                    Portfolio
-                  </span>
-                  <span className="inline-block text-xs sm:text-sm animate-bounce text-emerald-400">💻</span>
-                </div>
-
-                {/* Right: Dismiss Button */}
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setShowBadge(false);
-                  }}
-                  className="z-10 p-1 -mr-1 rounded-full text-white/40 hover:text-white hover:bg-white/10 transition-colors cursor-pointer shrink-0"
-                  aria-label="Dismiss notification"
-                >
-                  <X size={13} className="sm:w-3.5 sm:h-3.5" />
-                </button>
-
-                {/* Bottom Liquid Countdown Progress Line */}
-                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/[0.08] overflow-hidden">
-                  <div
-                    className="h-full bg-gradient-to-r from-violet-500 via-indigo-400 via-cyan-400 to-emerald-400 transition-all duration-75 ease-linear shadow-[0_0_10px_rgba(99,102,241,0.9)]"
-                    style={{ width: `${badgeProgress}%` }}
-                  />
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Welcome Toast Notification */}
+      <WelcomeToast />
     </section>
   );
 }

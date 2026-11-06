@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { blogposts as fallbackBlogs } from '../data/blogposts';
 import ClickSpark from '../components/ui/ClickSpark';
 import MagneticButton from '../components/ui/MagneticButton';
+import SectionHeading from '../components/ui/SectionHeading';
 
 const categories = ['All', 'IT Technology', 'Designer', 'Developer & Development', 'AI', 'Artificial Intelligence / Development'];
 
@@ -95,52 +96,40 @@ export default function Blog() {
       {/* Background Decorative Elements */}
       <div className="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] bg-dark-primary/10 rounded-full blur-[120px] pointer-events-none animate-pulse" />
       <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-dark-secondary/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[url('/grid.svg')] opacity-[0.03] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:32px_32px] opacity-40 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        {/* ── Header Section ── */}
-        <header className="mb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex items-center gap-3 mb-6 text-dark-secondary font-code text-xs tracking-[0.3em] uppercase"
-          >
-            <div className="w-10 h-[1px] bg-dark-secondary/40" />
-            <BookOpen size={14} />
-            <span>Digital Journal</span>
-          </motion.div>
-
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10">
-            <motion.h1
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-4xl sm:text-6xl md:text-7xl lg:text-7xl font-display font-black tracking-tight sm:tracking-tighter animated-gradient-text leading-none"
-            >
-              Curated <br /> <span className="text-gradient">Knowledge</span>
-            </motion.h1>
-
+        {/* ── Header Section with Signature Typography & Sparkles ── */}
+        <SectionHeading
+          as="h1"
+          size="large"
+          badge="DIGITAL JOURNAL"
+          badgeIcon={BookOpen}
+          prefix="Curated "
+          highlight="Knowledge"
+          suffix=" & Engineering Logs"
+          description="Architectural deep dives, engineering retrospectives, and modern frontend & iOS implementation strategies."
+          rightContent={
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
               className="relative group max-w-md w-full"
             >
               <div className="absolute inset-0 bg-dark-primary/20 blur-xl group-hover:bg-dark-primary/30 transition-all duration-500 rounded-full" />
-              <div className="relative flex items-center bg-dark-textMain/[0.03] border border-dark-textMain/10 rounded-2xl px-6 py-4 backdrop-blur-xl focus-within:border-dark-primary/50 transition-all">
-                <Search size={20} className="text-dark-textMain/40 group-focus-within:text-dark-primary transition-colors" />
+              <div className="relative flex items-center bg-dark-textMain/[0.03] border border-dark-textMain/10 rounded-2xl px-6 py-3.5 backdrop-blur-xl focus-within:border-dark-primary/50 transition-all">
+                <Search size={18} className="text-dark-textMain/40 group-focus-within:text-dark-primary transition-colors" />
                 <input
                   type="text"
                   placeholder="Search articles, tags..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="bg-transparent border-none outline-none w-full px-4 text-dark-textMain placeholder:text-dark-textMain/20 text-sm font-medium"
+                  className="bg-transparent border-none outline-none w-full px-4 text-dark-textMain placeholder:text-dark-textMain/30 text-sm font-medium"
                 />
               </div>
             </motion.div>
-          </div>
-        </header>
+          }
+        />
 
         {/* ── Filter Bar ── */}
         <nav className="mb-16">

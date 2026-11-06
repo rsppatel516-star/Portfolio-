@@ -6,10 +6,10 @@ export default {
     extend: {
       colors: {
         dark: {
-          bg: "#0d1117",
-          surface: "#161b22",
-          primary: "#00d4ff",
-          secondary: "#7c3aed",
+          bg: "#0a0a0a",
+          surface: "#121212",
+          primary: "#6366f1",
+          secondary: "#a855f7",
           textMain: "#e6edf3",
           textMuted: "#8b949e",
           border: "#30363d",
@@ -17,8 +17,8 @@ export default {
         light: {
           bg: "#f8fafc",
           surface: "#ffffff",
-          primary: "#0891b2",
-          secondary: "#7c3aed",
+          primary: "#6366f1",
+          secondary: "#a855f7",
           textMain: "#0f172a",
           textMuted: "#64748b",
           border: "#e2e8f0",
@@ -63,7 +63,7 @@ export default {
         "glow-primary":
           "0 0 20px rgba(255, 46, 147, 0.5), 0 0 40px rgba(255, 46, 147, 0.3)",
         "glow-secondary":
-          "0 0 20px rgba(0, 229, 255, 0.5), 0 0 40px rgba(0, 229, 255, 0.3)",
+          "0 0 20px rgba(168, 85, 247, 0.5), 0 0 40px rgba(168, 85, 247, 0.3)",
         glass:
           "0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
       },

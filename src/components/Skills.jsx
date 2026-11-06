@@ -21,6 +21,7 @@ import { DiGit } from 'react-icons/di';
 import { TbBrandReactNative, TbBrandVscode } from 'react-icons/tb';
 import GridBackground from './ui/GridBackground';
 import MagneticButton from './ui/MagneticButton';
+import SectionHeading from './ui/SectionHeading';
 
 const iconMap = {
   html5: <FaHtml5 />,
@@ -94,6 +95,15 @@ const techHexColors = {
   cursor: '#ffffff'
 };
 
+const getTechHexColor = (icon) => {
+  const isLight = typeof document !== 'undefined' && (document.documentElement.getAttribute('data-theme') === 'light' || document.documentElement.classList.contains('light'));
+  const raw = techHexColors[icon] || '#6366f1';
+  if (isLight && raw.toLowerCase() === '#ffffff') {
+    return '#4f46e5';
+  }
+  return raw;
+};
+
 const categoryIcons = {
   'Frontend': <Layout size={14} />,
   'Backend': <Server size={14} />,
@@ -119,15 +129,15 @@ const FilterButton = ({ cat, activeTab, onSelect, icon }) => {
       <button
         ref={buttonRef}
         onMouseMove={handleMouseMove}
-        className={`relative flex items-center gap-2 sm:gap-2.5 px-3.5 sm:px-5 md:px-7 py-2.5 sm:py-3 md:py-3.5 rounded-xl text-[9px] sm:text-[10px] font-black uppercase tracking-[0.15em] sm:tracking-[0.25em] transition-all duration-500 border overflow-hidden group/btn cursor-pointer whitespace-nowrap backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.3)] ${activeTab === cat
-          ? 'bg-gradient-to-br from-violet-600/30 to-indigo-600/30 text-dark-textMain border-dark-textMain/20 border-t-dark-textMain/40 border-l-dark-textMain/40'
-          : 'bg-gradient-to-br from-white/[0.08] to-transparent border-dark-textMain/10 border-t-dark-textMain/20 border-l-dark-textMain/20 text-dark-textMuted hover:text-dark-textMain hover:bg-dark-textMain/[0.12]'
+        className={`relative flex items-center gap-2 sm:gap-2.5 px-3.5 sm:px-5 md:px-7 py-2.5 sm:py-3 md:py-3.5 rounded-xl text-[9px] sm:text-[10px] font-black uppercase tracking-[0.15em] sm:tracking-[0.25em] transition-all duration-500 border overflow-hidden group/btn cursor-pointer whitespace-nowrap backdrop-blur-xl shadow-sm ${activeTab === cat
+          ? 'bg-gradient-to-br from-violet-600/20 via-indigo-600/20 to-purple-600/10 dark:from-violet-600/30 dark:to-indigo-600/30 text-indigo-900 dark:text-dark-textMain border-indigo-500/40 shadow-indigo-500/10'
+          : 'bg-white/80 dark:bg-white/[0.05] border-slate-200/90 dark:border-white/10 text-slate-600 dark:text-dark-textMuted hover:text-slate-900 dark:hover:text-dark-textMain hover:bg-slate-100/80 dark:hover:bg-dark-textMain/[0.12] hover:border-indigo-500/30'
           }`}
       >
         {activeTab === cat && (
           <motion.div
             layoutId="activeSkillTab"
-            className="absolute inset-0 bg-gradient-to-r from-violet-600/20 to-indigo-600/35 backdrop-blur-md"
+            className="absolute inset-0 bg-gradient-to-r from-violet-600/15 via-indigo-600/20 to-violet-600/15 dark:from-violet-600/20 dark:to-indigo-600/35 backdrop-blur-md"
             transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
           />
         )}
@@ -135,7 +145,7 @@ const FilterButton = ({ cat, activeTab, onSelect, icon }) => {
         <div
           className="absolute inset-0 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300 pointer-events-none"
           style={{
-            background: `radial-gradient(circle 100px at ${mousePos.x}px ${mousePos.y}px, rgba(99, 101, 241, 0), transparent)`,
+            background: `radial-gradient(circle 100px at ${mousePos.x}px ${mousePos.y}px, rgba(99, 101, 241, 0.15), transparent)`,
           }}
         />
 
@@ -227,41 +237,31 @@ export default function Skills() {
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
 
-        {/* Header Section with Developer Animation SVG Graphic */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-16 gap-8 text-center lg:text-left">
-          <div className="max-w-2xl mx-auto lg:mx-0">
+        {/* Header Section with Signature Typography, Sparkles, and Developer Animation */}
+        <SectionHeading
+          badge="TECHNICAL ARSENAL"
+          badgeIcon={Code2}
+          prefix="Technical "
+          highlight="Engine & Stack"
+          suffix=" for High-Impact Software"
+          description="Comprehensive spectrum of modern frontend ecosystems, native SwiftUI architectures, scalable backend services, and AI-accelerated workflows."
+          rightContent={
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full text-purple-400 mb-4 "
+              className="w-full max-w-xs sm:max-w-sm min-h-[80px] flex items-center justify-center p-2 rounded-3xl"
             >
-              <Code2 size={16} className="text-purple-400" />
-              <span className="font-mono text-xs font-bold tracking-[0.25em] uppercase text-purple-300">
-                TECHNICAL ARSENAL
-              </span>
+              <img
+                src="/developer animation.svg"
+                alt="Developer Coding Animation"
+                loading="lazy"
+                decoding="async"
+                className="w-full max-h-[190px] object-contain drop-shadow-[0_0_25px_rgba(99,102,241,0.3)] select-none pointer-events-none"
+              />
             </motion.div>
-            <h2 className="text-4xl md:text-5xl lg:text-5xl font-display font-black tracking-tight leading-[1.15] text-dark-textMain">
-              Technical <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-indigo-400 to-cyan-400">Engine & Stack</span>
-            </h2>
-          </div>
-
-          {/* Developer Coding Animation Showcase Graphic */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="w-full max-w-xs sm:max-w-sm mx-auto lg:mx-0 min-h-[80px] flex items-center justify-center p-4 rounded-3xl "
-          >
-            <img
-              src="/developer animation.svg"
-              alt="Developer Coding Animation"
-              loading="lazy"
-              decoding="async"
-              className="w-full max-h-[200px] object-contain drop-shadow-[0_0_25px_rgba(99,102,241,0.3)] select-none pointer-events-none"
-            />
-          </motion.div>
-        </div>
+          }
+        />
 
         {/* System Category Controller */}
         {searchQuery.trim() === '' && (
@@ -326,36 +326,29 @@ export default function Skills() {
                       onMouseEnter={() => setHoveredTech(tech.name)}
                       onMouseLeave={() => setHoveredTech(null)}
                       style={{
-                        borderColor: hoveredTech === tech.name ? `${techHexColors[tech.icon]}45` : undefined,
-                        boxShadow: hoveredTech === tech.name ? `0 0 25px -5px ${techHexColors[tech.icon]}25` : undefined
+                        borderColor: hoveredTech === tech.name ? `${getTechHexColor(tech.icon)}45` : undefined,
+                        boxShadow: hoveredTech === tech.name ? `0 0 25px -5px ${getTechHexColor(tech.icon)}25` : undefined
                       }}
-                      className="group relative h-48 backdrop-blur-xl bg-gradient-to-br from-white/[0.08] to-transparent border border-dark-textMain/10 border-t-dark-textMain/20 border-l-dark-textMain/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)] rounded-3xl p-6 flex flex-col items-center justify-center text-center overflow-hidden transition-all duration-500 hover:bg-dark-textMain/[0.1] cursor-default"
+                      className="group relative h-48 backdrop-blur-xl bg-white/85 dark:bg-white/[0.04] border border-slate-200/90 dark:border-white/10 shadow-[0_4px_20px_rgba(15,23,42,0.05)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.35)] rounded-3xl p-6 flex flex-col items-center justify-center text-center overflow-hidden transition-all duration-500 hover:bg-slate-50 dark:hover:bg-white/[0.08] cursor-default"
                     >
 
-
-                      {/* Project Count Tech Stamp 
-                      <div className="absolute top-4 left-4 text-[7px] font-mono font-bold text-dark-textMain/30 group-hover:text-dark-textMain/60 transition-colors uppercase tracking-widest">
-                        [{matchProjCount || tech.projectsCount || 0} PROJ]
-                      </div>
-                      */}
-
                       {/* Floating Large Brand Glow */}
-                      <div className={`absolute -bottom-10 -right-10 text-9xl opacity-[0.01] group-hover:opacity-[0.08] transition-opacity duration-700 pointer-events-none ${techColors[tech.icon]}`}>
+                      <div className={`absolute -bottom-10 -right-10 text-9xl opacity-[0.02] dark:opacity-[0.01] group-hover:opacity-[0.1] dark:group-hover:opacity-[0.08] transition-opacity duration-700 pointer-events-none ${techColors[tech.icon]}`}>
                         {iconMap[tech.icon]}
                       </div>
 
                       {/* Main Skill Icon */}
-                      <div className={`text-5xl mb-5 transform group-hover:scale-105 transition-transform duration-500 filter drop-shadow-[0_0_15px_rgba(255,255,255,0.03)] group-hover:drop-shadow-[0_0_25px_rgba(255,255,255,0.08)] ${techColors[tech.icon]}`}>
+                      <div className={`text-5xl mb-5 transform group-hover:scale-105 transition-transform duration-500 filter drop-shadow-[0_2px_8px_rgba(15,23,42,0.08)] dark:drop-shadow-[0_0_15px_rgba(255,255,255,0.03)] ${techColors[tech.icon]}`}>
                         {iconMap[tech.icon]}
                       </div>
 
                       {/* Skill Name */}
-                      <span className="text-[12px] uppercase font-black tracking-[0.25em] text-dark-textMain/50 group-hover:text-dark-textMain transition-colors duration-300 relative z-10 font-mono">
+                      <span className="text-[12px] uppercase font-bold tracking-[0.22em] text-slate-700 dark:text-dark-textMain/60 group-hover:text-slate-900 dark:group-hover:text-dark-textMain transition-colors duration-300 relative z-10 font-mono">
                         {tech.name}
                       </span>
 
                       {/* High-Tech Scanline Scan Effect */}
-                      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-indigo-500 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                      <div className="absolute bottom-0 left-0 w-full h-[1.5px] bg-gradient-to-r from-transparent via-indigo-500 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                     </motion.div>
                   );
                 })}
@@ -369,28 +362,28 @@ export default function Skills() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="mt-16 pt-6 border-t border-dark-textMain/5 flex flex-col sm:flex-row items-center justify-between gap-8"
+          className="mt-16 pt-6 border-t border-slate-200/80 dark:border-dark-textMain/5 flex flex-col sm:flex-row items-center justify-between gap-8"
         >
           <div className="flex items-center gap-8">
             <div className="flex -space-x-3">
               {['swift', 'nodejs', 'nextjs'].map((icon, i) => (
-                <div key={i} className={`w-9 h-9 rounded-full bg-dark-textMain/5 flex items-center justify-center text-base transition-transform hover:z-10 hover:scale-110 cursor-default ${techColors[icon]}`}>
+                <div key={i} className={`w-9 h-9 rounded-full bg-slate-100 dark:bg-dark-textMain/5 border border-slate-200/80 dark:border-white/5 flex items-center justify-center text-base transition-transform hover:z-10 hover:scale-110 cursor-default ${techColors[icon]}`}>
                   {iconMap[icon]}
                 </div>
               ))}
-              <div className="w-9 h-9 rounded-full bg-dark-textMain/5 flex items-center justify-center text-base text-dark-textMain/40 relative group/soon">
+              <div className="w-9 h-9 rounded-full bg-slate-100 dark:bg-dark-textMain/5 border border-slate-200/80 dark:border-white/5 flex items-center justify-center text-base text-slate-500 dark:text-dark-textMain/40 relative group/soon">
                 <div className="absolute inset-0 rounded-full bg-indigo-500/10 animate-pulse" />
-                <SiDocker className="opacity-40 group-hover/soon:opacity-100 transition-opacity duration-500" />
-                <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-dark-bg/90 backdrop-blur-md rounded-lg text-[7px] font-black uppercase tracking-[0.2em] opacity-0 group-hover/soon:opacity-100 group-hover/soon:-top-12 transition-all duration-500 whitespace-nowrap pointer-events-none shadow-[0_0_20px_rgba(0,0,0,0.5)] flex items-center gap-2">
-                  <div className="w-1 h-1 rounded-full bg-indigo-500 animate-ping" />
+                <SiDocker className="opacity-50 group-hover/soon:opacity-100 transition-opacity duration-500" />
+                <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-slate-900 text-white dark:bg-dark-bg/90 dark:text-white backdrop-blur-md rounded-lg text-[7px] font-black uppercase tracking-[0.2em] opacity-0 group-hover/soon:opacity-100 group-hover/soon:-top-12 transition-all duration-500 whitespace-nowrap pointer-events-none shadow-[0_4px_16px_rgba(0,0,0,0.3)] flex items-center gap-2">
+                  <div className="w-1 h-1 rounded-full bg-indigo-400 animate-ping" />
                   Coming Soon: Docker
                 </div>
               </div>
             </div>
-            <p className="text-[9px] font-mono uppercase tracking-widest text-dark-textMain/40">Console: Nominal // System Diagnostics Online</p>
+            <p className="text-[9px] font-mono uppercase tracking-widest text-slate-500 dark:text-dark-textMain/40">Console: Nominal // System Diagnostics Online</p>
           </div>
 
-          <div className="flex items-center gap-4 text-dark-textMain/30">
+          <div className="flex items-center gap-4 text-slate-400 dark:text-dark-textMain/30">
             <Zap size={12} className="text-violet-400" />
             <span className="text-[9px] font-mono uppercase tracking-widest">Always Learning . Always Building</span>
             <Zap size={12} className="text-violet-400" />

@@ -1,42 +1,64 @@
-import React from 'react';
-import { useTheme } from '../hooks/useTheme';
-import { FaSun, FaMoon } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Sun, Moon, Monitor } from 'lucide-react';
+import { useTheme } from '../hooks/useTheme';
+import { THEMES } from '../utils/theme';
 
-export default function ThemeToggle() {
-  const { isDark, setIsDark } = useTheme();
+const MODES = [
+  { id: THEMES.LIGHT, icon: Sun, label: 'Light mode' },
+  { id: THEMES.DARK, icon: Moon, label: 'Dark mode' },
+  { id: THEMES.SYSTEM, icon: Monitor, label: 'System theme' },
+];
+
+export default function ThemeToggle({ compact = false, className = '' }) {
+  const { theme, resolvedTheme, setTheme, toggleTheme } = useTheme();
+  const ActiveIcon = resolvedTheme === THEMES.DARK ? Moon : Sun;
+
+  if (compact) {
+    return (
+      <button
+        type="button"
+        onClick={toggleTheme}
+        className={`theme-toggle-btn ${className}`}
+        aria-label={`Switch to ${resolvedTheme === THEMES.DARK ? 'light' : 'dark'} mode`}
+        title={`Switch to ${resolvedTheme === THEMES.DARK ? 'light' : 'dark'} mode`}
+      >
+        <div className="relative w-5 h-5 flex items-center justify-center overflow-hidden">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.span
+              key={resolvedTheme}
+              initial={{ y: -12, opacity: 0, rotate: -45 }}
+              animate={{ y: 0, opacity: 1, rotate: 0 }}
+              exit={{ y: 12, opacity: 0, rotate: 45 }}
+              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute inset-0 flex items-center justify-center text-dark-primary"
+            >
+              <ActiveIcon size={18} strokeWidth={2.25} />
+            </motion.span>
+          </AnimatePresence>
+        </div>
+      </button>
+    );
+  }
 
   return (
-    <button
-      onClick={() => setIsDark(!isDark)}
-      className="p-2 rounded-full bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border text-light-textMain dark:text-dark-textMain hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-light-primary dark:focus:ring-dark-primary"
-      aria-label="Toggle Theme"
-    >
-      <div className="relative w-5 h-5 flex items-center justify-center overflow-hidden">
-        <AnimatePresence mode="wait">
-          {isDark ? (
-            <motion.div
-              key="moon"
-              initial={{ y: -20, opacity: 0, rotate: -90 }}
-              animate={{ y: 0, opacity: 1, rotate: 0 }}
-              exit={{ y: 20, opacity: 0, rotate: 90 }}
-              transition={{ duration: 0.2 }}
-            >
-              <FaMoon className="text-dark-primary" />
-            </motion.div>
-          ) : (
-            <motion.div
-              key="sun"
-              initial={{ y: -20, opacity: 0, rotate: -90 }}
-              animate={{ y: 0, opacity: 1, rotate: 0 }}
-              exit={{ y: 20, opacity: 0, rotate: 90 }}
-              transition={{ duration: 0.2 }}
-            >
-              <FaSun className="text-yellow-500" />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    </button>
+    <div className={`theme-toggle-group ${className}`} role="group" aria-label="Theme selection">
+      {MODES.map(({ id, icon: Icon, label }) => {
+        const isActive = theme === id;
+        return (
+          <button
+            key={id}
+            type="button"
+            onClick={() => setTheme(id)}
+            className={`theme-toggle-option ${isActive ? 'theme-toggle-option-active' : ''}`}
+            aria-label={label}
+            aria-pressed={isActive}
+            title={label}
+          >
+            <Icon size={15} strokeWidth={2.25} />
+            <span className="sr-only">{label}</span>
+          </button>
+        );
+      })}
+    </div>
   );
 }

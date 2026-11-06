@@ -4,6 +4,7 @@ import { User, Download, MapPin, Clock, X, Code2, Sparkles, Briefcase, FolderOpe
 import { Link as ScrollLink } from 'react-scroll';
 import MagneticButton from './ui/MagneticButton';
 import AnimatedCounter from './ui/AnimatedCounter';
+import SectionHeading from './ui/SectionHeading';
 import { projects } from '../data/projects';
 
 const cardVariants = {
@@ -55,7 +56,7 @@ const BentoCard = ({ children, className = "", onClick = null }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={onClick}
-      className={`backdrop-blur-xl bg-gradient-to-br from-white/[0.08] to-transparent border border-dark-textMain/10 border-t-dark-textMain/20 border-l-dark-textMain/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)] rounded-3xl p-4 sm:p-5 md:p-6 flex flex-col justify-between group/card relative ${className}`}
+      className={`   surface-panel-hover border border-dark-border shadow-[0_8px_32px_rgba(0,0,0,0.06)] rounded-3xl p-4 sm:p-5 md:p-6 flex flex-col justify-between group/card relative ${className}`}
       style={{
         position: 'relative',
         overflow: 'hidden'
@@ -66,8 +67,8 @@ const BentoCard = ({ children, className = "", onClick = null }) => {
         <div
           className="absolute inset-0 pointer-events-none transition-opacity duration-300 z-0"
           style={{
-            background: `radial-gradient(280px circle at ${coords.x}px ${coords.y}px, rgba(99, 102, 241, 0.14), transparent 80%)`,
-            border: '1px solid rgba(99, 102, 241, 0.35)',
+            background: `radial-gradient(280px circle at ${coords.x}px ${coords.y}px, rgba(6, 182, 212, 0.12), transparent 80%)`,
+            border: '1px solid rgba(56, 189, 248, 0.35)',
             borderRadius: 'inherit'
           }}
         />
@@ -98,9 +99,9 @@ export default function About() {
 
   const projectsCount = projects && projects.length ? projects.length : 10;
   const stats = [
-    { label: 'Years Exp', value: 1, suffix: '+', icon: Briefcase, color: 'text-indigo-400', sub: 'Industry' },
-    { label: 'Projects', value: projectsCount, suffix: '+', icon: FolderOpen, color: 'text-purple-400', sub: 'Shipped' },
-    { label: 'Certificates', value: 6, suffix: '+', icon: Award, color: 'text-emerald-400', sub: 'Verified' },
+    { label: 'Years Exp', value: 1, suffix: '+', icon: Briefcase, color: 'text-indigo-500 dark:text-indigo-400', sub: 'Industry' },
+    { label: 'Projects', value: projectsCount, suffix: '+', icon: FolderOpen, color: 'text-purple-600 dark:text-purple-300', sub: 'Shipped' },
+    { label: 'Certificates', value: 6, suffix: '+', icon: Award, color: 'text-emerald-500 dark:text-emerald-400', sub: 'Verified' },
   ];
 
   return (
@@ -111,25 +112,15 @@ export default function About() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
 
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-8 sm:mb-12 md:mb-14 gap-6 md:gap-8 text-left">
-          <div className="max-w-2xl">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center gap-2.5 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full text-purple-400 mb-3 sm:mb-4"
-            >
-              <User size={16} className="text-purple-400" />
-              <span className="font-mono text-[10px] sm:text-xs font-bold tracking-[0.25em] uppercase text-purple-300">
-                IDENTITY PROFILE
-              </span>
-            </motion.div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-display font-black tracking-tight leading-[1.15] text-dark-textMain">
-              Crafting Digital <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-indigo-400 to-cyan-400">Gold</span> from Lines of Code
-            </h2>
-          </div>
-        </div>
+        {/* Section Header with Signature Typography & Sparkles */}
+        <SectionHeading
+          badge="IDENTITY PROFILE"
+          badgeIcon={User}
+          prefix="Crafting Digital "
+          highlight="Gold"
+          suffix=" from Lines of Code"
+          description="Translating architectural visions into pixel-perfect, high-performance web platforms and fluid native iOS applications with extreme attention to detail."
+        />
 
         {/* Bento Grid Layout */}
         <motion.div
@@ -144,36 +135,32 @@ export default function About() {
             <div className="relative z-10 h-full flex flex-col justify-between">
               <div className="flex items-center justify-between mb-3 sm:mb-4">
                 <div className="flex items-center gap-2.5 sm:gap-3">
-                  <div className="p-2 sm:p-2.5 rounded-md text-indigo-400">
+                  <div className="p-2 sm:p-2.5 rounded-md text-indigo-600 dark:text-indigo-400">
                     <User size={18} className="sm:w-5 sm:h-5" />
                   </div>
                   <h3 className="text-xl sm:text-2xl font-display font-bold text-dark-textMain">Frontend & iOS Developer</h3>
                 </div>
-                {/*<div className="flex items-center gap-1.5 sm:gap-2 border border-dark-textMain/10 px-2.5 py-1 sm:px-3 sm:py-1 rounded-lg">
-                  <Sparkles size={12} className="text-indigo-400 animate-pulse" />
-                  <span className="text-[9px] sm:text-[10px] font-code font-bold uppercase tracking-wider text-dark-textMuted">Frontend & iOS Specialist</span>
-                </div>*/}
               </div>
 
-              <div className="space-y-3 sm:space-y-4 text-dark-textMain/70 my-auto">
+              <div className="space-y-3 sm:space-y-4 text-dark-textMain/75 my-auto">
                 <p className="text-dark-textMuted leading-relaxed font-bricolage text-xs sm:text-sm md:text-base opacity-95">
                   I'm <span className="text-dark-textMain font-bold">Rudra Patel</span>, a dedicated <span className="text-dark-textMain font-semibold">Frontend Web & Native iOS Developer</span> based in Vadodara, Gujarat, India. I specialize in designing and engineering high-speed, SEO-optimized web applications and native iOS mobile experiences.
                 </p>
                 <p className="text-dark-textMuted leading-relaxed font-bricolage text-xs sm:text-sm md:text-base opacity-95">
-                  My primary focus combines <span className="text-indigo-300 font-semibold">Frontend Web Development (React, Next.js, Tailwind CSS)</span> and <span className="text-purple-300 font-semibold">iOS App Development (SwiftUI, Apple SDKs, Firebase)</span>. I build pixel-perfect user interfaces, fluid animations, and fast-loading web and mobile applications.
+                  My primary focus combines <span className="text-indigo-600 dark:text-indigo-500 font-semibold">Frontend Web Development (React, Next.js, Tailwind CSS)</span> and <span className="text-purple-600 dark:text-purple-500 font-semibold">iOS App Development (SwiftUI, Apple SDKs, Firebase)</span>. I build pixel-perfect user interfaces, fluid animations, and fast-loading web and mobile applications.
                 </p>
                 <p className="text-dark-textMuted leading-relaxed font-bricolage text-xs sm:text-sm md:text-base opacity-95">
                   Whether creating responsive web platforms or native iOS applications, I bridge intuitive UI/UX design with clean, scalable code architecture — delivering digital products that are visually engaging and built for maximum performance.
                 </p>
-                <div className="pt-2  flex flex-wrap items-center gap-2 text-sm font-display text-dark-textMuted">
-                  <span className="px-2.5 py-1 text-400 font-bold">● Web & Mobile</span>
-                  <span className="px-2.5 py-1 text-400 font-bold">● High Performance</span>
-                  <span className="px-2.5 py-1 text-400 font-bold">● Pixel Perfect</span>
+                <div className="pt-2 flex flex-wrap items-center gap-2 text-xs sm:text-sm font-display text-dark-textMuted">
+                  <span className="px-2.5 py-1 text-indigo-600 dark:text-indigo-400 font-bold">● Web & Mobile</span>
+                  <span className="px-2.5 py-1 text-purple-600 dark:text-purple-400 font-bold">● High Performance</span>
+                  <span className="px-2.5 py-1 text-pink-600 dark:text-pink-400 font-bold">● Pixel Perfect</span>
                 </div>
               </div>
 
-              <div className="pt-2 sm:pt-3 border-t border-dark-textMain/5">
-                <p className="text-dark-textMain font-medium font-display  text-xs sm:text-sm md:text-base leading-relaxed text-[#8b5cf6]">
+              <div className="pt-2 sm:pt-3 border-t border-dark-border">
+                <p className="font-medium font-display text-xs sm:text-sm md:text-base leading-relaxed text-indigo-600 dark:text-indigo-400">
                   Crafting responsive web applications and native iOS apps with modern design and high performance.
                 </p>
               </div>
@@ -196,7 +183,7 @@ export default function About() {
 
           {/* Download Resume Card */}
           <BentoCard
-            className="col-span-1 sm:col-span-1 md:col-span-1 lg:col-span-1 md:row-span-1 hover:border-dark-secondary/30 hover:shadow-[0_0_30px_rgba(124,58,237,0.1)] transition-all duration-500 group relative overflow-hidden h-auto md:h-full cursor-pointer"
+            className="col-span-1 sm:col-span-1 md:col-span-1 lg:col-span-1 md:row-span-1 hover:border-indigo-500/30 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)] transition-all duration-500 group relative overflow-hidden h-auto md:h-full cursor-pointer"
             onClick={() => setShowResumeModal(true)}
           >
             <div className="flex flex-col h-full justify-between relative z-10">
@@ -215,9 +202,8 @@ export default function About() {
                 </a>
               </div>
               <div>
-                <span className="block font-display text-sm sm:text-base mt-2 leading-tight text-dark-textMain/90">Resume</span>
+                <span className="block font-display text-sm sm:text-base mt-2 leading-tight text-dark-textMain/90 font-bold">Resume</span>
                 <span className="text-[9px] text-dark-textMuted uppercase tracking-widest block mb-2 font-semibold font-poppins">Technical CV</span>
-
               </div>
             </div>
           </BentoCard>
@@ -231,7 +217,7 @@ export default function About() {
                   <div className="p-1.5 sm:p-2 rounded-md">
                     <IconComp size={20} className={stat.color} />
                   </div>
-                  <span className="text-[9px] font-code font-bold uppercase text-dark-textMuted/70">{stat.sub}</span>
+                  <span className="text-[9px] font-code font-bold uppercase text-dark-textMuted">{stat.sub}</span>
                 </div>
 
                 <div className="my-auto py-1">
@@ -261,7 +247,7 @@ export default function About() {
                   {['SwiftUI', 'Swift', 'React', 'Next.js', 'TypeScript', 'Tailwind', 'Xcode', 'Firebase'].map(tech => (
                     <span
                       key={tech}
-                      className="px-2.5 py-1 text-[10px] font-code font-bold uppercase tracking-wider bg-dark-textMain/5 border border-dark-textMain/10 rounded-lg text-dark-textMuted hover:text-[#6366f1] hover:border-[#6366f1]/30 hover:bg-[#6366f1]/5 transition-all duration-300 cursor-default"
+                      className="px-2.5 py-1 text-[10px] font-code font-bold uppercase tracking-wider bg-dark-textMain/5 border border-dark-border rounded-lg text-dark-textMuted hover:text-[#6366f1] hover:border-[#6366f1]/30 hover:bg-[#6366f1]/5 transition-all duration-300 cursor-default"
                     >
                       {tech}
                     </span>
@@ -281,7 +267,7 @@ export default function About() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setShowResumeModal(false)}
-            className="fixed inset-0 z-[999] flex items-center justify-center p-4 bg-dark-bg/95 backdrop-blur-xl cursor-zoom-out"
+            className="fixed inset-0 z-[999] flex items-center justify-center p-4 bg-slate-950/75 dark:bg-dark-bg/95 backdrop-blur-xl cursor-zoom-out"
             style={{ perspective: 1500 }}
           >
             <motion.div
@@ -297,7 +283,7 @@ export default function About() {
                 scale: 1,
                 rotateX: 0,
                 z: 0,
-                boxShadow: "0 25px 70px rgba(0, 0, 0, 0.8), 0 0 50px rgba(139, 92, 246, 0.15)",
+                boxShadow: "0 25px 70px rgba(0, 0, 0, 0.4), 0 0 50px rgba(139, 92, 246, 0.15)",
                 transition: {
                   type: "spring",
                   damping: 22,
@@ -313,7 +299,7 @@ export default function About() {
                 transition: { duration: 0.35, ease: "easeInOut" }
               }}
               onClick={(e) => e.stopPropagation()}
-              className="relative max-w-4xl w-full bg-[#07070c]/90 border border-violet-500/20 rounded-3xl p-3 md:p-6 shadow-2xl flex flex-col items-center justify-center overflow-hidden backdrop-blur-md"
+              className="relative max-w-4xl w-full surface-panel border border-dark-border rounded-3xl p-3 md:p-6 shadow-2xl flex flex-col items-center justify-center overflow-hidden backdrop-blur-md"
             >
               {/* Dynamic Scrolling Top Glowing Shimmer Border */}
               <div className="absolute top-0 left-0 w-full h-[1.5px] bg-gradient-to-r from-transparent via-[#8b5cf6] via-[#FF2E93] to-transparent opacity-80" />
@@ -328,14 +314,14 @@ export default function About() {
                 <a
                   href="/Rudra-Patel-Resume.pdf"
                   download="Rudra-Patel-Resume.pdf"
-                  className="p-2.5 bg-dark-textMain/5 hover:bg-dark-secondary/20 border border-dark-textMain/10 hover:border-dark-secondary/30 rounded-xl text-dark-secondary transition-all cursor-pointer flex items-center justify-center shadow-lg"
+                  className="p-2.5 bg-dark-textMain/5 hover:bg-indigo-500/10 border border-dark-border hover:border-indigo-500/30 rounded-xl text-indigo-500 dark:text-indigo-400 transition-all cursor-pointer flex items-center justify-center shadow-lg"
                   title="Download Resume PDF"
                 >
                   <Download size={18} />
                 </a>
                 <button
                   onClick={() => setShowResumeModal(false)}
-                  className="p-2.5 bg-dark-textMain/5 hover:bg-red-500/20 border border-dark-textMain/10 hover:border-red-500/30 rounded-xl text-dark-textMain hover:text-red-400 transition-all cursor-pointer flex items-center justify-center shadow-lg"
+                  className="p-2.5 bg-dark-textMain/5 hover:bg-red-500/20 border border-dark-border hover:border-red-500/30 rounded-xl text-dark-textMain hover:text-red-500 transition-all cursor-pointer flex items-center justify-center shadow-lg"
                   title="Close Showcase"
                 >
                   <X size={18} />
@@ -347,7 +333,7 @@ export default function About() {
                 initial={{ scale: 1.04, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: 0.2, type: "spring", damping: 20 }}
-                className="w-full max-h-[80vh] overflow-y-auto rounded-2xl mt-12 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent border border-dark-textMain/5 bg-[#030306]/60 p-1.5"
+                className="w-full max-h-[80vh] overflow-y-auto rounded-2xl mt-12 scrollbar-thin scrollbar-thumb-dark-textMain/10 scrollbar-track-transparent border border-dark-border bg-dark-bg/40 p-1.5"
               >
                 <img
                   src="/Rudra Patel Resume.png"

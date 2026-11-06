@@ -10,9 +10,9 @@ import {
 } from 'lucide-react';
 import MagneticButton from '../components/ui/MagneticButton';
 
-const SectionLabel = ({ icon: IconComponent, label, color = "text-indigo-400" }) => (
+const SectionLabel = ({ icon: IconComponent, label, color = "text-indigo-500 dark:text-indigo-400" }) => (
   <div className={`flex items-center gap-2.5 ${color}`}>
-    <div className="w-7 h-7 rounded-lg bg-white/[0.05] border border-white/10 flex items-center justify-center shrink-0">
+    <div className="w-7 h-7 rounded-lg bg-dark-textMain/[0.05] border border-dark-border flex items-center justify-center shrink-0">
       <IconComponent size={14} />
     </div>
     <span className="text-xs font-black uppercase tracking-[0.25em] font-code">{label}</span>
@@ -131,8 +131,8 @@ export default function CaseStudy() {
       />
 
       {/* Ambient background glowing orbs */}
-      <div className="absolute top-[8%] right-[-5%] w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[160px] pointer-events-none" />
-      <div className="absolute bottom-[20%] left-[-5%] w-[450px] h-[450px] bg-purple-600/10 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute top-[8%] right-[-5%] w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute bottom-[20%] left-[-5%] w-[450px] h-[450px] bg-indigo-500/10 rounded-full blur-[160px] pointer-events-none" />
 
       {/* ── HERO BANNER SECTION ── */}
       <section className="relative h-[78vh] min-h-[520px] flex items-center justify-center overflow-hidden mb-12">
@@ -146,9 +146,9 @@ export default function CaseStudy() {
             alt={`${study.title} case study banner - ${study.category} by Rudra Patel`}
             className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-dark-bg via-dark-bg/80 to-dark-bg/40 z-10" />
-          <div className="absolute top-6 right-6 z-20 opacity-0 group-hover:opacity-100 transition-opacity bg-dark-bg/80 backdrop-blur-md border border-white/20 px-3.5 py-1.5 rounded-full text-white text-[10px] uppercase font-bold tracking-widest flex items-center gap-1.5 shadow-xl">
-            <ZoomIn size={14} /> Zoom Image
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-50/95 via-slate-50/75 to-slate-50/30 dark:from-[#080b18] dark:via-[#080b18]/80 dark:to-[#080b18]/40 z-10" />
+          <div className="absolute top-6 right-6 z-20 opacity-0 group-hover:opacity-100 transition-opacity surface-panel border border-dark-border px-3.5 py-1.5 rounded-full text-dark-textMain text-[10px] uppercase font-bold tracking-widest flex items-center gap-1.5 shadow-xl">
+            <ZoomIn size={14} className="text-indigo-500 dark:text-indigo-400" /> Zoom Image
           </div>
         </motion.div>
 
@@ -160,7 +160,7 @@ export default function CaseStudy() {
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="flex items-center gap-2.5 text-white/80 hover:text-white transition-all text-xs font-bold uppercase tracking-[0.2em] bg-white/[0.07] hover:bg-white/[0.14] backdrop-blur-xl px-4 sm:px-5 py-2.5 sm:py-3 rounded-full border border-white/15 hover:border-indigo-400/40 shadow-2xl"
+            className="flex items-center gap-2.5 text-dark-textMain transition-all text-xs font-bold uppercase tracking-[0.2em] bg-white/90 dark:bg-white/[0.07] hover:bg-white dark:hover:bg-white/[0.14] backdrop-blur-xl px-4 sm:px-5 py-2.5 sm:py-3 rounded-full border border-slate-200/90 dark:border-white/15 hover:border-indigo-400/40 shadow-xl"
           >
             <ArrowLeft size={16} className="transition-transform group-hover:-translate-x-1" />
             <span>Artifacts Vault</span>
@@ -176,12 +176,12 @@ export default function CaseStudy() {
             className="space-y-4 sm:space-y-6"
           >
             <motion.div variants={sv} className="flex flex-wrap items-center justify-center gap-2">
-              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-indigo-500/40 bg-indigo-500/10 text-indigo-300 text-[10px] font-black uppercase tracking-[0.28em] backdrop-blur-md shadow-lg shadow-indigo-500/10">
-                <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse" />
+              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-indigo-500/40 bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 text-[10px] font-black uppercase tracking-[0.28em] backdrop-blur-md shadow-md shadow-indigo-500/10">
+                <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 dark:bg-indigo-400 animate-pulse" />
                 Deep-Dive Technical Case Study
               </span>
               {study.category && (
-                <span className="px-3 py-1 rounded-full bg-white/[0.06] border border-white/10 text-white/70 text-[10px] font-mono uppercase tracking-wider">
+                <span className="px-3 py-1 rounded-full bg-white/80 dark:bg-white/[0.06] border border-slate-200/90 dark:border-white/10 text-slate-700 dark:text-white/70 text-[10px] font-mono uppercase tracking-wider shadow-sm">
                   {study.category}
                 </span>
               )}
@@ -194,7 +194,7 @@ export default function CaseStudy() {
                   visible: { opacity: 1, y: 0 }
                 }}
                 transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-black text-white tracking-tight leading-[1.1]"
+                className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-black text-dark-textMain tracking-tight leading-[1.1]"
               >
                 {study.title}
               </motion.h1>
@@ -202,7 +202,7 @@ export default function CaseStudy() {
 
             <motion.p
               variants={sv}
-              className="text-sm sm:text-lg md:text-xl font-light text-dark-textMuted max-w-3xl mx-auto leading-relaxed font-bricolage"
+              className="text-sm sm:text-lg md:text-xl font-normal text-slate-600 dark:text-dark-textMuted max-w-3xl mx-auto leading-relaxed font-bricolage"
             >
               {study.subtitle}
             </motion.p>
@@ -225,7 +225,7 @@ export default function CaseStudy() {
                   href={study.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 text-white font-display text-xs font-bold uppercase tracking-wider transition-all"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/90 dark:bg-white/[0.05] hover:bg-white dark:hover:bg-white/[0.1] border border-slate-200/90 dark:border-white/10 text-dark-textMain font-display text-xs font-bold uppercase tracking-wider transition-all shadow-sm"
                 >
                   <Github size={14} />
                   <span>View Source</span>
@@ -244,10 +244,10 @@ export default function CaseStudy() {
           className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1.5 group cursor-pointer"
           aria-label="Scroll to architecture details"
         >
-          <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-white/50 group-hover:text-indigo-400 font-code transition-colors">
+          <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-slate-500 dark:text-white/50 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 font-code transition-colors">
             Explore Architecture
           </span>
-          <ChevronDown size={14} className="text-indigo-400 animate-bounce group-hover:scale-125 transition-transform" />
+          <ChevronDown size={14} className="text-indigo-500 dark:text-indigo-400 animate-bounce group-hover:scale-125 transition-transform" />
         </motion.button>
       </section>
 
@@ -258,26 +258,26 @@ export default function CaseStudy() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={container}
-          className="grid grid-cols-2 md:grid-cols-4 p-2.5 sm:p-3.5 bg-[#080a14]/90 backdrop-blur-2xl border border-white/10 rounded-2xl gap-2.5 sm:gap-3.5 shadow-2xl"
+          className="grid grid-cols-2 md:grid-cols-4 p-2.5 sm:p-3.5 bg-dark-surface/90 backdrop-blur-2xl border border-dark-border rounded-2xl gap-2.5 sm:gap-3.5 shadow-2xl"
         >
           {[
             {
               label: "Category",
               value: study.category,
               Icon: Tag,
-              accent: "from-indigo-500/20 to-purple-500/20 text-indigo-400 border-indigo-500/30",
+              accent: "from-purple-500/20 to-indigo-500/20 text-purple-400 border-purple-500/30",
             },
             {
               label: "Role",
               value: study.role || "Lead Architect",
               Icon: User,
-              accent: "from-purple-500/20 to-pink-500/20 text-purple-400 border-purple-500/30",
+              accent: "from-indigo-500/20 to-purple-500/20 text-indigo-400 border-indigo-500/30",
             },
             {
               label: "Platform",
               value: study.platform || "Web / Modern Stack",
               Icon: Monitor,
-              accent: "from-cyan-500/20 to-blue-500/20 text-cyan-400 border-cyan-500/30",
+              accent: "from-purple-500/20 to-pink-500/20 text-pink-400 border-pink-500/30",
             },
             {
               label: "Architecture",
@@ -292,20 +292,20 @@ export default function CaseStudy() {
                 hidden: { opacity: 0, y: 15 },
                 visible: { opacity: 1, y: 0 }
               }}
-              className="p-3.5 sm:p-4 rounded-xl bg-white/[0.02] hover:bg-white/[0.05] border border-white/[0.05] hover:border-white/15 transition-all duration-300 flex flex-col justify-between gap-2.5 overflow-hidden group hover:-translate-y-0.5"
+              className="p-3.5 sm:p-4 rounded-xl bg-dark-textMain/[0.03] hover:bg-dark-textMain/[0.06] border border-dark-textMain/10 hover:border-indigo-500/30 transition-all duration-300 flex flex-col justify-between gap-2.5 overflow-hidden group hover:-translate-y-0.5"
             >
               <div className="flex items-center justify-between">
                 <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${accent} border flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
                   <IconComponent size={15} />
                 </div>
-                <span className="w-1.5 h-1.5 rounded-full bg-white/20 group-hover:bg-indigo-400 transition-colors" />
+                <span className="w-1.5 h-1.5 rounded-full bg-dark-textMain/20 group-hover:bg-indigo-400 transition-colors" />
               </div>
 
               <div className="space-y-0.5">
-                <p className="text-[10px] text-white/50 uppercase tracking-widest font-bold font-code">
+                <p className="text-[10px] text-dark-textMuted uppercase tracking-widest font-bold font-code">
                   {label}
                 </p>
-                <p className="text-xs sm:text-sm font-bold text-white tracking-tight truncate">
+                <p className="text-xs sm:text-sm font-bold text-dark-textMain tracking-tight truncate">
                   {value}
                 </p>
               </div>
@@ -330,12 +330,12 @@ export default function CaseStudy() {
               <motion.div
                 key={i}
                 variants={sv}
-                className="p-4 sm:p-5 rounded-2xl bg-white/[0.025] border border-white/[0.07] hover:border-indigo-500/30 transition-all flex flex-col justify-center text-center sm:text-left"
+                className="p-4 sm:p-5 rounded-2xl bg-white/80 dark:bg-white/[0.025] border border-slate-200/90 dark:border-white/[0.07] hover:border-indigo-500/30 transition-all flex flex-col justify-center text-center sm:text-left shadow-sm"
               >
                 <span className="text-[10px] font-code font-bold uppercase tracking-wider text-dark-textMuted">
                   {st.label}
                 </span>
-                <span className="text-xl sm:text-2xl font-display font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-indigo-200 to-indigo-400 mt-1">
+                <span className="text-xl sm:text-2xl font-display font-black text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-indigo-700 to-indigo-500 dark:from-white dark:via-indigo-200 dark:to-indigo-400 mt-1">
                   {st.value}
                 </span>
               </motion.div>
@@ -349,20 +349,20 @@ export default function CaseStudy() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={sv}
-          className="relative overflow-hidden p-6 sm:p-10 md:p-12 rounded-2xl md:rounded-3xl border border-indigo-500/20 bg-gradient-to-br from-[#0c0e1a]/95 via-[#070913]/95 to-[#0c0e1a]/95 backdrop-blur-2xl shadow-2xl space-y-4"
+          className="relative overflow-hidden p-6 sm:p-10 md:p-12 rounded-2xl md:rounded-3xl border border-indigo-500/20 bg-white/95 dark:bg-dark-surface/95 backdrop-blur-2xl shadow-xl dark:shadow-2xl space-y-4"
         >
-          <div className="absolute top-0 right-0 w-80 h-80 bg-indigo-500/10 rounded-full blur-[100px] pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-60 h-60 bg-purple-500/10 rounded-full blur-[100px] pointer-events-none" />
+          <div className="absolute top-0 right-0 w-80 h-80 bg-purple-500/10 rounded-full blur-[100px] pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-60 h-60 bg-indigo-500/10 rounded-full blur-[100px] pointer-events-none" />
 
           <div className="flex items-center justify-between">
-            <SectionLabel icon={Lightbulb} label="Overview & Architectural Narrative" color="text-indigo-400" />
-            <span className="px-3 py-1 border border-indigo-500/30 text-indigo-300 font-code text-[10px] font-bold uppercase tracking-widest rounded-md bg-indigo-500/10">
+            <SectionLabel icon={Lightbulb} label="Overview & Architectural Narrative" color="text-indigo-600 dark:text-indigo-400" />
+            <span className="px-3 py-1 border border-indigo-500/30 text-indigo-700 dark:text-indigo-300 font-code text-[10px] font-bold uppercase tracking-widest rounded-md bg-indigo-500/10">
               System Context
             </span>
           </div>
 
           <div className="relative z-10 pt-2">
-            <p className="text-sm sm:text-lg md:text-xl font-light text-white/90 leading-relaxed font-bricolage">
+            <p className="text-sm sm:text-lg md:text-xl font-normal text-slate-700 dark:text-dark-textMain/90 leading-relaxed font-bricolage">
               {study.description}
             </p>
           </div>
@@ -376,21 +376,21 @@ export default function CaseStudy() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="relative overflow-hidden p-6 sm:p-8 rounded-2xl border border-amber-500/25 bg-gradient-to-br from-amber-500/[0.06] via-amber-500/[0.02] to-transparent backdrop-blur-xl shadow-xl flex flex-col justify-between space-y-5 group hover:border-amber-500/40 transition-all duration-300"
+            className="relative overflow-hidden p-6 sm:p-8 rounded-2xl border border-amber-500/30 bg-amber-500/[0.04] dark:bg-gradient-to-br dark:from-amber-500/[0.06] dark:via-amber-500/[0.02] dark:to-transparent backdrop-blur-xl shadow-md dark:shadow-xl flex flex-col justify-between space-y-5 group hover:border-amber-500/50 transition-all duration-300"
           >
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <SectionLabel icon={AlertTriangle} label="The Challenge" color="text-amber-400" />
-                <div className="w-7 h-7 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400">
+                <SectionLabel icon={AlertTriangle} label="The Challenge" color="text-amber-600 dark:text-amber-400" />
+                <div className="w-7 h-7 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-600 dark:text-amber-400">
                   <Zap size={14} />
                 </div>
               </div>
-              <p className="text-xs sm:text-sm md:text-base leading-relaxed text-white/80 font-bricolage">
+              <p className="text-xs sm:text-sm md:text-base leading-relaxed text-slate-700 dark:text-dark-textMain/80 font-bricolage">
                 {study.problem}
               </p>
             </div>
-            <div className="pt-2 text-[10px] font-black uppercase tracking-[0.25em] text-amber-400/70 font-code flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+            <div className="pt-2 text-[10px] font-black uppercase tracking-[0.25em] text-amber-600/80 dark:text-amber-400/70 font-code flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-500 dark:bg-amber-400 animate-pulse" />
               Primary Technical Bottleneck
             </div>
           </motion.section>
@@ -401,21 +401,21 @@ export default function CaseStudy() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="relative overflow-hidden p-6 sm:p-8 rounded-2xl border border-emerald-500/25 bg-gradient-to-br from-emerald-500/[0.06] via-emerald-500/[0.02] to-transparent backdrop-blur-xl shadow-xl flex flex-col justify-between space-y-5 group hover:border-emerald-500/40 transition-all duration-300"
+            className="relative overflow-hidden p-6 sm:p-8 rounded-2xl border border-emerald-500/30 bg-emerald-500/[0.04] dark:bg-gradient-to-br dark:from-emerald-500/[0.06] dark:via-emerald-500/[0.02] dark:to-transparent backdrop-blur-xl shadow-md dark:shadow-xl flex flex-col justify-between space-y-5 group hover:border-emerald-500/50 transition-all duration-300"
           >
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <SectionLabel icon={Cpu} label="Engineered Solution" color="text-emerald-400" />
-                <div className="w-7 h-7 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                <SectionLabel icon={Cpu} label="Engineered Solution" color="text-emerald-600 dark:text-emerald-400" />
+                <div className="w-7 h-7 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
                   <Sparkles size={14} />
                 </div>
               </div>
-              <p className="text-xs sm:text-sm md:text-base leading-relaxed text-white/80 font-bricolage">
+              <p className="text-xs sm:text-sm md:text-base leading-relaxed text-slate-700 dark:text-dark-textMain/80 font-bricolage">
                 {study.solution}
               </p>
             </div>
-            <div className="pt-2 text-[10px] font-black uppercase tracking-[0.25em] text-emerald-400/70 font-code flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <div className="pt-2 text-[10px] font-black uppercase tracking-[0.25em] text-emerald-600/80 dark:text-emerald-400/70 font-code flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
               Implemented Architecture
             </div>
           </motion.section>
@@ -431,8 +431,8 @@ export default function CaseStudy() {
             className="space-y-6"
           >
             <div className="flex items-center justify-between">
-              <SectionLabel icon={Target} label="Key Architectural Features" color="text-purple-400" />
-              <span className="text-xs font-code text-white/40">
+              <SectionLabel icon={Target} label="Key Architectural Features" color="text-indigo-600 dark:text-indigo-400" />
+              <span className="text-xs font-code text-dark-textMuted">
                 {study.keyFeatures.length} Core Modules
               </span>
             </div>
@@ -445,16 +445,16 @@ export default function CaseStudy() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.06 }}
-                  className="flex items-start gap-3.5 p-4 sm:p-5 bg-[#080a14]/60 border border-white/[0.08] hover:border-purple-500/40 rounded-xl transition-all duration-300 group hover:bg-purple-500/[0.03] hover:-translate-y-0.5 shadow-lg"
+                  className="flex items-start gap-3.5 p-4 sm:p-5 bg-white/90 dark:bg-dark-surface/80 border border-slate-200/90 dark:border-dark-border hover:border-indigo-500/40 rounded-xl transition-all duration-300 group hover:bg-indigo-500/[0.03] hover:-translate-y-0.5 shadow-sm dark:shadow-lg"
                 >
-                  <div className="w-8 h-8 rounded-lg border border-purple-500/30 text-purple-300 flex items-center justify-center shrink-0 mt-0.5 group-hover:scale-110 transition-transform duration-300 bg-purple-500/10">
+                  <div className="w-8 h-8 rounded-lg border border-indigo-500/30 text-indigo-700 dark:text-indigo-300 flex items-center justify-center shrink-0 mt-0.5 group-hover:scale-110 transition-transform duration-300 bg-indigo-500/10">
                     <CheckCircle2 size={16} />
                   </div>
                   <div className="space-y-0.5">
-                    <span className="text-[10px] font-code text-purple-400/70 font-bold uppercase tracking-widest block">
+                    <span className="text-[10px] font-code text-indigo-600 dark:text-indigo-400/90 font-bold uppercase tracking-widest block">
                       Module /{String(idx + 1).padStart(2, '0')}
                     </span>
-                    <span className="text-xs sm:text-sm font-semibold text-white/90 group-hover:text-white transition-colors leading-relaxed font-bricolage">
+                    <span className="text-xs sm:text-sm font-semibold text-slate-800 dark:text-dark-textMain/90 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors leading-relaxed font-bricolage">
                       {feature}
                     </span>
                   </div>
@@ -471,14 +471,14 @@ export default function CaseStudy() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={sv}
-            className="p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.08] space-y-4"
+            className="p-6 sm:p-8 rounded-2xl bg-white/85 dark:bg-white/[0.02] border border-slate-200/90 dark:border-white/[0.08] shadow-sm space-y-4"
           >
-            <SectionLabel icon={ShieldCheck} label="Technical Deep-Dive Decisions" color="text-indigo-400" />
+            <SectionLabel icon={ShieldCheck} label="Technical Deep-Dive Decisions" color="text-indigo-600 dark:text-indigo-400" />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
               {study.techDetails.map((detail, idx) => (
-                <div key={idx} className="flex items-start gap-2.5 p-3 rounded-xl bg-white/[0.02] border border-white/[0.04]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-1.5 shrink-0" />
-                  <span className="text-xs text-white/80 font-mono leading-relaxed">{detail}</span>
+                <div key={idx} className="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200/60 dark:border-white/[0.04]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 dark:bg-indigo-400 mt-1.5 shrink-0" />
+                  <span className="text-xs text-slate-700 dark:text-white/80 font-mono leading-relaxed">{detail}</span>
                 </div>
               ))}
             </div>
@@ -494,12 +494,12 @@ export default function CaseStudy() {
             variants={sv}
             className="space-y-4"
           >
-            <SectionLabel icon={Code2} label="Technologies Used & Stack" color="text-cyan-400" />
+            <SectionLabel icon={Code2} label="Technologies Used & Stack" color="text-purple-600 dark:text-purple-400" />
             <div className="flex flex-wrap gap-2 sm:gap-2.5">
               {study.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-3.5 sm:px-4 py-2 bg-cyan-500/10 border border-cyan-500/25 rounded-xl text-cyan-300 font-bold font-code text-xs uppercase tracking-wider transition-all duration-300 shadow-md hover:scale-105 cursor-default"
+                  className="px-3.5 sm:px-4 py-2 bg-purple-500/10 border border-purple-500/25 rounded-xl text-purple-700 dark:text-purple-300 font-bold font-code text-xs uppercase tracking-wider transition-all duration-300 shadow-sm hover:scale-105 cursor-default"
                 >
                   {tag}
                 </span>
@@ -516,19 +516,19 @@ export default function CaseStudy() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={sv}
-            className="relative overflow-hidden p-6 sm:p-8 rounded-2xl border border-indigo-500/25 bg-gradient-to-br from-indigo-500/[0.08] via-purple-500/[0.03] to-transparent backdrop-blur-2xl shadow-2xl flex flex-col justify-between space-y-6"
+            className="relative overflow-hidden p-6 sm:p-8 rounded-2xl border border-indigo-500/25 bg-white/90 dark:bg-gradient-to-br dark:from-indigo-500/[0.08] dark:via-purple-500/[0.03] dark:to-transparent backdrop-blur-2xl shadow-xl flex flex-col justify-between space-y-6"
           >
-            <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-[80px] pointer-events-none" />
+            <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 rounded-full blur-[80px] pointer-events-none" />
 
             <div className="space-y-3">
-              <SectionLabel icon={TrendingUp} label="Impact & Business Outcome" color="text-indigo-400" />
-              <p className="text-base sm:text-xl font-display font-medium text-white italic leading-relaxed">
+              <SectionLabel icon={TrendingUp} label="Impact & Business Outcome" color="text-purple-600 dark:text-purple-400" />
+              <p className="text-base sm:text-xl font-display font-medium text-slate-800 dark:text-white italic leading-relaxed">
                 &quot;{study.results}&quot;
               </p>
             </div>
 
-            <div className="flex items-center gap-2 pt-2 text-[10px] font-black uppercase tracking-[0.25em] text-indigo-300 font-code">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+            <div className="flex items-center gap-2 pt-2 text-[10px] font-black uppercase tracking-[0.25em] text-indigo-500 dark:text-indigo-300 font-code">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-ping" />
               Verified Metrics Resolution
             </div>
           </motion.section>
@@ -539,13 +539,13 @@ export default function CaseStudy() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={sv}
-            className="flex flex-col justify-between p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-[#0c0e1a] to-[#060812] border border-white/10 shadow-2xl space-y-6"
+            className="flex flex-col justify-between p-6 sm:p-8 rounded-2xl bg-white/95 dark:bg-gradient-to-br dark:from-[#0c1022] dark:to-[#060913] border border-slate-200/90 dark:border-white/10 shadow-xl dark:shadow-2xl space-y-6"
           >
             <div className="space-y-2">
-              <span className="text-[10px] font-code font-bold uppercase tracking-wider text-indigo-400">
+              <span className="text-[10px] font-code font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
                 Action / Live Inspect
               </span>
-              <h3 className="text-xl sm:text-2xl font-display font-bold text-white tracking-tight">
+              <h3 className="text-xl sm:text-2xl font-display font-bold text-dark-textMain tracking-tight">
                 Inspect Production Build
               </h3>
               <p className="text-dark-textMuted text-xs sm:text-sm leading-relaxed font-bricolage">
@@ -563,7 +563,7 @@ export default function CaseStudy() {
                 </a>
               )}
               <Link to="/contact" className="flex-1">
-                <button className="w-full px-5 py-3.5 bg-white/[0.05] border border-white/15 hover:bg-white/[0.1] text-white font-bold text-xs tracking-wider uppercase rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer">
+                <button className="w-full px-5 py-3.5 bg-slate-100 hover:bg-slate-200 dark:bg-white/[0.05] dark:hover:bg-white/[0.1] border border-slate-200/90 dark:border-white/15 text-slate-800 dark:text-white font-bold text-xs tracking-wider uppercase rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer">
                   <span>Discuss Project</span>
                 </button>
               </Link>
@@ -572,20 +572,20 @@ export default function CaseStudy() {
         </div>
 
         {/* 7. Case Study Pagination (Prev / Next with Thumbnails) */}
-        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="pt-8 border-t border-slate-200/90 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
           {prevStudy && (
             <Link
               to={`/artifacts/${prevStudy.id}`}
-              className="w-full sm:w-1/2 p-4 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.06] hover:border-indigo-500/30 transition-all duration-300 flex items-center gap-3.5 group"
+              className="w-full sm:w-1/2 p-4 rounded-2xl border border-slate-200/90 dark:border-white/10 bg-white/85 dark:bg-white/[0.02] hover:bg-slate-50 dark:hover:bg-white/[0.06] hover:border-indigo-500/30 transition-all duration-300 flex items-center gap-3.5 group shadow-sm"
             >
-              <div className="p-2.5 rounded-xl bg-white/[0.05] group-hover:bg-indigo-500/20 group-hover:text-indigo-400 transition-colors shrink-0">
+              <div className="p-2.5 rounded-xl bg-slate-100 dark:bg-white/[0.05] group-hover:bg-indigo-500/20 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 text-slate-700 dark:text-white transition-colors shrink-0">
                 <ChevronLeft size={18} className="group-hover:-translate-x-0.5 transition-transform" />
               </div>
               <div className="text-left min-w-0">
                 <span className="text-[10px] text-dark-textMuted uppercase font-bold tracking-wider block font-code">
                   Previous Artifact • {prevStudy.category}
                 </span>
-                <span className="text-xs sm:text-sm font-bold text-white font-display group-hover:text-indigo-300 transition-colors truncate block">
+                <span className="text-xs sm:text-sm font-bold text-slate-800 dark:text-white font-display group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors truncate block">
                   {prevStudy.title}
                 </span>
               </div>
@@ -595,17 +595,17 @@ export default function CaseStudy() {
           {nextStudy && (
             <Link
               to={`/artifacts/${nextStudy.id}`}
-              className="w-full sm:w-1/2 p-4 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.06] hover:border-indigo-500/30 transition-all duration-300 flex items-center justify-end gap-3.5 group text-right"
+              className="w-full sm:w-1/2 p-4 rounded-2xl border border-slate-200/90 dark:border-white/10 bg-white/85 dark:bg-white/[0.02] hover:bg-slate-50 dark:hover:bg-white/[0.06] hover:border-indigo-500/30 transition-all duration-300 flex items-center justify-end gap-3.5 group text-right shadow-sm"
             >
               <div className="text-right min-w-0">
                 <span className="text-[10px] text-dark-textMuted uppercase font-bold tracking-wider block font-code">
                   Next Artifact • {nextStudy.category}
                 </span>
-                <span className="text-xs sm:text-sm font-bold text-white font-display group-hover:text-indigo-300 transition-colors truncate block">
+                <span className="text-xs sm:text-sm font-bold text-slate-800 dark:text-white font-display group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors truncate block">
                   {nextStudy.title}
                 </span>
               </div>
-              <div className="p-2.5 rounded-xl bg-white/[0.05] group-hover:bg-indigo-500/20 group-hover:text-indigo-400 transition-colors shrink-0">
+              <div className="p-2.5 rounded-xl bg-slate-100 dark:bg-white/[0.05] group-hover:bg-indigo-500/20 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 text-slate-700 dark:text-white transition-colors shrink-0">
                 <ChevronRight size={18} className="group-hover:translate-x-0.5 transition-transform" />
               </div>
             </Link>

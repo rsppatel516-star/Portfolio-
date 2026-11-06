@@ -101,8 +101,8 @@ export default function GlobalParticles() {
         radius: Math.max(width, height) * 0.36,
         vx: 0.18,
         vy: -0.16,
-        colorStart: 'rgba(6, 182, 212, 0.10)', // Cyan
-        colorMid: 'rgba(56, 189, 248, 0.04)',
+        colorStart: 'rgba(139, 92, 246, 0.10)', // Violet
+        colorMid: 'rgba(167, 139, 250, 0.04)',
         phase: Math.PI
       },
       {

@@ -4,6 +4,7 @@ import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowRight, ArrowLeft, Laptop, Globe } from 'lucide-react';
 import MagneticButton from './ui/MagneticButton';
+import ThemeToggle from './ThemeToggle';
 
 const navLinks = [
   { name: 'Home', to: 'home' },
@@ -31,8 +32,8 @@ const MenuButton = ({ isOpen, onClick }) => {
       aria-label="Toggle menu"
     >
       {/* Liquid Inner Glow */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/20 via-purple-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full" />
-      
+      <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/20 via-indigo-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full" />
+
       <div className="relative w-5 h-3.5 flex flex-col justify-between items-center">
         <motion.span
           variants={{
@@ -70,8 +71,8 @@ const MenuButton = ({ isOpen, onClick }) => {
 
 /* shared scroll-link / button for a mobile nav item */
 const NavLink = ({ link, mobile, isHome, close, handleClick }) => {
-  const cls = 'flex items-center justify-between w-full px-4 py-3 rounded-xl font-display font-bold text-dark-textMain/65 hover:text-dark-textMain hover:bg-dark-textMain/[0.5] transition-all text-base cursor-pointer';
-  const activeCls = '!text-dark-textMain !bg-[#3f38b0]';
+  const cls = 'flex items-center justify-between w-full px-4 py-3 rounded-xl font-display font-bold text-dark-textMain/70 hover:text-dark-textMain hover:bg-dark-textMain/5 transition-all text-base cursor-pointer';
+  const activeCls = '!text-dark-textMain !bg-indigo-600/20';
 
   const content = (
     <span className="relative z-10 block whitespace-nowrap">
@@ -105,22 +106,22 @@ const NavLink = ({ link, mobile, isHome, close, handleClick }) => {
 const DesktopNavItem = ({ link, isHome, handleClick, hoveredNav, setHoveredNav }) => {
   const isRoute = link.type === 'route' || link.to.startsWith('/');
   const isHovered = hoveredNav === link.name;
-  
+
   const content = (
     <MagneticButton>
-      <div 
+      <div
         className="relative px-5 py-2.5 rounded-full cursor-pointer z-10 flex items-center justify-center"
         onMouseEnter={() => setHoveredNav(link.name)}
       >
         {isHovered && (
           <motion.div
             layoutId="navHoverCapsule"
-            className="absolute inset-0 bg-white/[0.06] backdrop-blur-md border border-white/[0.08] rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.1),inset_0_1px_1px_rgba(255,255,255,0.15)] z-0"
+            className="absolute inset-0 nav-hover-capsule rounded-full z-0"
             initial={false}
             transition={{ type: "spring", stiffness: 400, damping: 30 }}
           />
         )}
-        
+
         {/* Dynamic Underline */}
         {isHovered && (
           <motion.div
@@ -130,12 +131,12 @@ const DesktopNavItem = ({ link, isHome, handleClick, hoveredNav, setHoveredNav }
             transition={{ type: "spring", stiffness: 400, damping: 30 }}
           />
         )}
-        
+
         <span className="relative z-10 flex font-display text-sm font-bold tracking-wide text-dark-textMain/80 group-hover:text-dark-textMain transition-colors">
           {link.name.split('').map((char, i) => (
             <motion.span
               key={i}
-              animate={{ y: isHovered ? [0, -3, 0] : 0, color: isHovered ? '#fff' : '' }}
+              animate={{ y: isHovered ? [0, -3, 0] : 0 }}
               transition={{ duration: 0.3, delay: i * 0.03, ease: "easeInOut" }}
             >
               {char === ' ' ? '\u00A0' : char}
@@ -216,7 +217,7 @@ export default function Navbar() {
       >
         <div className={`transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center justify-between gap-4 w-full relative overflow-hidden
           ${isScrolled
-            ? 'max-w-6xl py-2.5 px-4 md:px-6 bg-[#040510]/60 backdrop-blur-[36px] border border-dark-textMain/15 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.85),inset_0_1px_2px_rgba(255,255,255,0.2)]'
+            ? 'max-w-6xl py-2.5 px-4 md:px-6 nav-island rounded-2xl'
             : 'max-w-7xl py-2.5 px-5 lg:px-6 bg-transparent border-none rounded-none shadow-none'
           }`}>
 
@@ -254,7 +255,7 @@ export default function Navbar() {
                     repeat: Infinity,
                     ease: 'easeInOut',
                   }}
-                  className="absolute -bottom-10 right-0 w-48 h-48 bg-gradient-to-r from-cyan-500/20 via-blue-600/30 to-violet-600/25 rounded-xl blur-3xl pointer-events-none"
+                  className="absolute -bottom-10 right-0 w-48 h-48 bg-gradient-to-r from-pink-500/20 via-purple-600/25 to-indigo-500/20 rounded-xl blur-3xl pointer-events-none"
                 />
               </motion.div>
             )}
@@ -290,7 +291,7 @@ export default function Navbar() {
           </RouterLink>
 
           {/* Desktop Links / Liquid Pill Capsule Navigation */}
-          <nav 
+          <nav
             className="hidden lg:flex items-center gap-1 rounded-xl relative z-10"
             onMouseLeave={() => setHoveredNav(null)}
           >
@@ -327,7 +328,7 @@ export default function Navbar() {
                   whileHover={{ scale: 1.05, y: -1 }}
                   whileTap={{ scale: 0.95 }}
                   transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                  className="flex items-center gap-2 px-4.5 py-2 rounded-xl bg-gradient-to-r from-purple-600/40 via-indigo-600/40 to-purple-600/40 border border-dark-textMain/20 backdrop-blur-xl text-dark-textMain text-xs font-bold font-display tracking-wider hover:from-purple-600 hover:to-indigo-600 hover:border-dark-textMain/40 transition-all duration-300 shadow-[0_0_20px_rgba(99,102,241,0.35),inset_0_1px_1px_rgba(255,255,255,0.25)]"
+                  className="flex items-center gap-2 px-4.5 py-2 rounded-xl bg-gradient-to-r from-purple-600/40 via-indigo-600/40 to-purple-600/40 border border-dark-textMain/20 backdrop-blur-xl text-dark-textMain text-xs font-bold font-display tracking-wider hover:from-purple-600 hover:to-indigo-600 hover:border-dark-textMain/40 transition-all duration-300 shadow-[0_0_20px_rgba(124,58,237,0.35),inset_0_1px_1px_rgba(255,255,255,0.25)]"
                 >
                   <span>Hire Me</span>
                   <ArrowRight size={13} className="text-indigo-300 group-hover:translate-x-0.5 transition-transform" />
@@ -335,6 +336,7 @@ export default function Navbar() {
               </ScrollLink>
             )}*/}
 
+            <ThemeToggle compact />
             {/* Mobile Hamburger */}
             <MenuButton isOpen={isMobileMenuOpen} onClick={() => setMenuOpen(v => !v)} />
           </div>
@@ -371,7 +373,7 @@ export default function Navbar() {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9, y: 20 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-                className="w-full max-w-md bg-[#050612]/75 backdrop-blur-[36px] border border-dark-textMain/15 rounded-2xl overflow-hidden flex flex-col shadow-[0_32px_80px_rgba(0,0,0,0.85),inset_0_1px_2px_rgba(255,255,255,0.2)] relative pointer-events-auto"
+                className="w-full max-w-md nav-island rounded-2xl overflow-hidden flex flex-col relative pointer-events-auto"
                 onClick={e => e.stopPropagation()}
               >
                 {/* Liquid Ambient Glowing Orbs inside Mobile Drawer */}
@@ -400,7 +402,7 @@ export default function Navbar() {
                       repeat: Infinity,
                       ease: 'easeInOut',
                     }}
-                    className="absolute -bottom-10 -right-10 w-60 h-60 bg-gradient-to-r from-cyan-500/25 via-blue-600/30 to-violet-600/35 rounded-xl blur-3xl pointer-events-none"
+                    className="absolute -bottom-10 -right-10 w-60 h-60 bg-gradient-to-r from-pink-500/25 via-purple-600/25 to-indigo-500/25 rounded-xl blur-3xl pointer-events-none"
                   />
                 </div>
 
@@ -465,7 +467,11 @@ export default function Navbar() {
                 </nav>
 
                 {/* Footer Liquid CTA */}
-                <div className="p-5 relative z-10 bg-dark-textMain/[0.03] border-t border-dark-textMain/10 flex flex-col gap-3">
+                <div className="p-5 relative z-10 bg-dark-textMain/[0.03] border-t border-dark-textMain/10 flex flex-col gap-4">
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="text-[10px] font-code uppercase tracking-widest text-dark-textMuted">Appearance</span>
+                    <ThemeToggle />
+                  </div>
                   <div className="flex items-center justify-center gap-3 opacity-30 hover:opacity-50 transition-opacity">
                     <Globe size={12} className="text-dark-textMain" />
                     <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-dark-textMain">Case Study 💻</span>

@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ArrowRight, ArrowLeft, Globe, Sparkles } from 'lucide-react';
+import { X, ArrowRight, ArrowLeft, Globe } from 'lucide-react';
 import MagneticButton from './ui/MagneticButton';
+import ThemeToggle from './ThemeToggle';
 
 const featureLinks = [
   { name: 'Home', to: '/' },
   { name: 'Artifacts', to: '/artifacts' },
+  { name: 'Blog', to: '/blog' },
   { name: 'Credentials', to: '/achievements' },
-  { name: 'Contact', to: '/contact' }
+  { name: 'Contact', to: '/contact' },
 ];
 
-/* Custom Animated Hamburger Button - Modern Asymmetrical Design matching main Navbar */
+/* Custom Animated Hamburger Button - Identical to Navbar.jsx */
 const MenuButton = ({ isOpen, onClick }) => {
   return (
     <motion.button
@@ -27,7 +29,7 @@ const MenuButton = ({ isOpen, onClick }) => {
       aria-label="Toggle menu"
     >
       {/* Liquid Inner Glow */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/20 via-purple-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full" />
+      <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/20 via-indigo-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full" />
 
       <div className="relative w-5 h-3.5 flex flex-col justify-between items-center">
         <motion.span
@@ -37,7 +39,7 @@ const MenuButton = ({ isOpen, onClick }) => {
             open: { rotate: 45, y: 6, width: "100%", alignSelf: "center" }
           }}
           transition={{ duration: 0.3, ease: "easeOut" }}
-          className="h-[2px] bg-white rounded-full"
+          className="h-[2px] bg-dark-textMain rounded-full"
           style={{ originX: 0.5, originY: 0.5 }}
         />
         <motion.span
@@ -47,7 +49,7 @@ const MenuButton = ({ isOpen, onClick }) => {
             open: { opacity: 0, scale: 0.5 }
           }}
           transition={{ duration: 0.3, ease: "easeOut" }}
-          className="w-full h-[2px] bg-white rounded-full"
+          className="w-full h-[2px] bg-dark-textMain rounded-full"
         />
         <motion.span
           variants={{
@@ -56,7 +58,7 @@ const MenuButton = ({ isOpen, onClick }) => {
             open: { rotate: -45, y: -6, width: "100%", alignSelf: "center" }
           }}
           transition={{ duration: 0.3, ease: "easeOut" }}
-          className="h-[2px] bg-white rounded-full"
+          className="h-[2px] bg-dark-textMain rounded-full"
           style={{ originX: 0.5, originY: 0.5 }}
         />
       </div>
@@ -64,55 +66,56 @@ const MenuButton = ({ isOpen, onClick }) => {
   );
 };
 
-/* Premium Desktop Nav Item with Magnetic, Glass Capsule, Underline, and Staggered Text */
+/* Desktop Nav Item with Magnetic, Glass Capsule, Underline, and Staggered Text (matching Navbar.jsx) */
 const DesktopNavItem = ({ link, hoveredNav, setHoveredNav }) => {
   const location = useLocation();
   const isActive = location.pathname === link.to || (link.to !== '/' && location.pathname.startsWith(link.to));
   const isHovered = hoveredNav === link.name;
 
   return (
-    <RouterLink to={link.to} className="block group">
-      <MagneticButton>
-        <div
-          className="relative px-5 py-2.5 rounded-full cursor-pointer z-10 flex items-center justify-center"
-          onMouseEnter={() => setHoveredNav(link.name)}
+    <MagneticButton>
+      <RouterLink
+        to={link.to}
+        className="relative px-5 py-2.5 rounded-full cursor-pointer z-10 flex items-center justify-center group"
+        onMouseEnter={() => setHoveredNav(link.name)}
+      >
+        {isHovered && (
+          <motion.div
+            layoutId="featureNavHoverCapsule"
+            className="absolute inset-0 nav-hover-capsule rounded-full z-0"
+            initial={false}
+            transition={{ type: "spring", stiffness: 400, damping: 30 }}
+          />
+        )}
+
+        {/* Dynamic Underline */}
+        {(isHovered || isActive) && (
+          <motion.div
+            layoutId="featureNavHoverUnderline"
+            className="absolute -bottom-[1px] left-1/2 -translate-x-1/2 w-3/4 h-[2px] bg-gradient-to-r from-transparent via-indigo-400 to-transparent z-0"
+            initial={false}
+            transition={{ type: "spring", stiffness: 400, damping: 30 }}
+          />
+        )}
+
+        <span
+          className={`relative z-10 flex font-display text-sm font-bold tracking-wide transition-colors ${isActive
+              ? 'text-indigo-600 dark:text-indigo-300 font-extrabold'
+              : 'text-dark-textMain/80 group-hover:text-dark-textMain'
+            }`}
         >
-          {/* Active or Hovered Glass Capsule */}
-          {(isHovered || (isActive && !hoveredNav)) && (
-            <motion.div
-              layoutId="featureNavHoverCapsule"
-              className="absolute inset-0 bg-white/[0.08] backdrop-blur-md border border-white/[0.12] rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.15),inset_0_1px_1px_rgba(255,255,255,0.2)] z-0"
-              initial={false}
-              transition={{ type: "spring", stiffness: 400, damping: 30 }}
-            />
-          )}
-
-          {/* Dynamic Underline */}
-          {(isHovered || (isActive && !hoveredNav)) && (
-            <motion.div
-              layoutId="featureNavHoverUnderline"
-              className="absolute -bottom-[1px] left-1/2 -translate-x-1/2 w-3/4 h-[2px] bg-gradient-to-r from-transparent via-indigo-400 to-transparent z-0"
-              initial={false}
-              transition={{ type: "spring", stiffness: 400, damping: 30 }}
-            />
-          )}
-
-          <span className={`relative z-10 flex font-display text-sm font-bold tracking-wide transition-colors ${
-            isActive ? 'text-white font-extrabold' : 'text-white/70 group-hover:text-white'
-          }`}>
-            {link.name.split('').map((char, i) => (
-              <motion.span
-                key={i}
-                animate={{ y: isHovered ? [0, -3, 0] : 0, color: (isHovered || isActive) ? '#fff' : '' }}
-                transition={{ duration: 0.3, delay: i * 0.03, ease: "easeInOut" }}
-              >
-                {char === ' ' ? '\u00A0' : char}
-              </motion.span>
-            ))}
-          </span>
-        </div>
-      </MagneticButton>
-    </RouterLink>
+          {link.name.split('').map((char, i) => (
+            <motion.span
+              key={i}
+              animate={{ y: isHovered ? [0, -3, 0] : 0 }}
+              transition={{ duration: 0.3, delay: i * 0.03, ease: "easeInOut" }}
+            >
+              {char === ' ' ? '\u00A0' : char}
+            </motion.span>
+          ))}
+        </span>
+      </RouterLink>
+    </MagneticButton>
   );
 };
 
@@ -120,6 +123,7 @@ export default function FeatureNavbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setMenuOpen] = useState(false);
   const [hoveredNav, setHoveredNav] = useState(null);
+  const location = useLocation();
 
   useEffect(() => {
     const fn = () => setIsScrolled(window.scrollY > 20);
@@ -130,63 +134,76 @@ export default function FeatureNavbar() {
 
   useEffect(() => {
     document.body.style.overflow = isMobileMenuOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [isMobileMenuOpen]);
 
   const close = () => setMenuOpen(false);
 
   return (
     <>
+      {/* ── HEADER ─────────────────────────── */}
       <motion.header
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed z-[110] left-0 right-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex justify-center px-4 md:px-8 ${
-          isScrolled ? 'top-3 md:top-4' : 'top-4 lg:top-5'
-        }`}
+        className={`fixed z-[110] left-0 right-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex justify-center px-4 md:px-8 ${isScrolled ? 'top-3 md:top-4' : 'top-4 lg:top-5'
+          }`}
       >
         <div
-          onMouseLeave={() => setHoveredNav(null)}
-          className={`transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center justify-between gap-4 w-full relative overflow-hidden ${
-            isScrolled
-              ? 'max-w-6xl py-2.5 px-4 md:px-6 bg-[#040510]/75 backdrop-blur-[36px] border border-white/15 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.85),inset_0_1px_2px_rgba(255,255,255,0.2)]'
-              : 'max-w-7xl py-2.5 px-5 lg:px-6 bg-[#040510]/40 backdrop-blur-xl border border-white/10 rounded-2xl shadow-lg'
-          }`}
+          className={`transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center justify-between gap-4 w-full relative overflow-hidden ${isScrolled
+              ? 'max-w-6xl py-2.5 px-4 md:px-6 nav-island rounded-2xl'
+              : 'max-w-7xl py-2.5 px-5 lg:px-6 bg-transparent border-none rounded-none shadow-none'
+            }`}
         >
-          {/* Liquid Ambient Glowing Orbs */}
-          <div className="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none -z-10">
-            <motion.div
-              animate={{
-                x: ['-30%', '90%', '-30%'],
-                y: ['-40%', '40%', '-40%'],
-                scale: [1, 1.3, 1],
-              }}
-              transition={{
-                duration: 12,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-              className="absolute -top-10 left-0 w-44 h-44 bg-gradient-to-r from-purple-600/30 via-indigo-500/20 to-pink-500/30 rounded-full blur-3xl pointer-events-none"
-            />
-            <motion.div
-              animate={{
-                x: ['90%', '-30%', '90%'],
-                y: ['40%', '-40%', '40%'],
-                scale: [1.2, 0.9, 1.2],
-              }}
-              transition={{
-                duration: 15,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-              className="absolute -bottom-10 right-0 w-48 h-48 bg-gradient-to-r from-cyan-500/20 via-blue-600/30 to-violet-600/25 rounded-full blur-3xl pointer-events-none"
-            />
-          </div>
+          {/* Liquid Ambient Glowing Orbs (visible when scrolled) */}
+          <AnimatePresence>
+            {isScrolled && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.6 }}
+                className="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none -z-10"
+              >
+                <motion.div
+                  animate={{
+                    x: ['-30%', '90%', '-30%'],
+                    y: ['-40%', '40%', '-40%'],
+                    scale: [1, 1.3, 1],
+                  }}
+                  transition={{
+                    duration: 12,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  }}
+                  className="absolute -top-10 left-0 w-44 h-44 bg-gradient-to-r from-purple-600/25 via-indigo-500/20 to-pink-400/25 rounded-full blur-3xl pointer-events-none"
+                />
+                <motion.div
+                  animate={{
+                    x: ['90%', '-30%', '90%'],
+                    y: ['40%', '-40%', '40%'],
+                    scale: [1.2, 0.9, 1.2],
+                  }}
+                  transition={{
+                    duration: 15,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  }}
+                  className="absolute -bottom-10 right-0 w-48 h-48 bg-gradient-to-r from-pink-500/20 via-purple-600/25 to-indigo-500/20 rounded-xl blur-3xl pointer-events-none"
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Logo Branding */}
           <RouterLink
             to="/"
-            onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); close(); }}
+            onClick={() => {
+              window.scrollTo(0, 0);
+              close();
+            }}
             className="flex items-center gap-3 shrink-0 z-10 relative group"
           >
             <motion.div
@@ -195,32 +212,34 @@ export default function FeatureNavbar() {
               transition={{ type: "spring", stiffness: 400, damping: 25 }}
               className="flex items-center gap-3"
             >
-              {/* Avatar Icon Box with Glowing Ring */}
+              {/* Avatar Icon Box */}
               <div className="relative shrink-0">
-                <div className="w-10 h-10 md:w-11 md:h-11 rounded-2xl p-1 flex items-center justify-center transition-all duration-300 overflow-hidden bg-white/[0.04] border border-white/10 group-hover:border-indigo-400/40">
+                <div className="w-10 h-10 md:w-11 md:h-11 transition-all duration-500 overflow-hidden">
                   <img
                     src="/images/navbar-avatar.webp"
                     alt="Rudra Patel"
-                    className="w-full h-full object-contain drop-shadow-md group-hover:scale-110 transition-transform duration-300"
+                    className="w-full h-full object-contain"
                   />
                 </div>
-                <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 border-2 border-[#040510] shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
               </div>
 
               {/* Brand Text */}
               <div className="flex flex-col">
-                <span className="font-bricolage font-black text-lg md:text-xl text-white tracking-tight leading-none group-hover:text-indigo-300 transition-colors duration-300">
-                  Rudra<span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400 font-extrabold ml-0.5">.</span>
-                </span>
-                <span className="text-[9px] font-mono text-white/40 uppercase tracking-widest mt-0.5">
-                  Portfolio Vault
+                <span className="font-bricolage font-black text-lg md:text-xl text-dark-textMain tracking-tight leading-none group-hover:text-purple-400 transition-colors duration-300">
+                  Rudra
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-indigo-400 to-pink-400 font-extrabold ml-0.5">
+                    .
+                  </span>
                 </span>
               </div>
             </motion.div>
           </RouterLink>
 
-          {/* Desktop Links / Total Blur & Liquid Pill Capsule Navigation */}
-          <nav className="hidden lg:flex items-center gap-1.5 p-1 rounded-full relative z-10 bg-white/[0.02] border border-white/[0.06]">
+          {/* Desktop Links / Liquid Pill Capsule Navigation */}
+          <nav
+            className="hidden lg:flex items-center gap-1 rounded-xl relative z-10"
+            onMouseLeave={() => setHoveredNav(null)}
+          >
             {featureLinks.map((link) => (
               <DesktopNavItem
                 key={link.name}
@@ -231,33 +250,16 @@ export default function FeatureNavbar() {
             ))}
           </nav>
 
-          {/* Right Area: Availability + Contact CTA + Mobile Menu Button */}
+          {/* Right side tools */}
           <div className="flex items-center gap-3 z-10">
-            {/* Live Availability Badge on Desktop */}
-            <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Available for Work</span>
-            </div>
-
-            {/* Desktop Contact CTA */}
-            <div className="hidden sm:block">
-              <MagneticButton>
-                <RouterLink to="/contact">
-                  <button className="flex items-center gap-2 px-5 py-2.5 rounded-xl font-display font-bold text-white text-xs tracking-widest uppercase transition-all backdrop-blur-md border border-white/20 bg-gradient-to-r from-violet-600 via-indigo-600 to-purple-600 shadow-[0_0_20px_rgba(124,58,237,0.35)] hover:shadow-[0_0_30px_rgba(99,102,241,0.55)] cursor-pointer">
-                    <span>Contact</span>
-                    <ArrowRight size={13} />
-                  </button>
-                </RouterLink>
-              </MagneticButton>
-            </div>
-
-            {/* Mobile Hamburger Button */}
+            <ThemeToggle compact />
+            {/* Mobile Hamburger */}
             <MenuButton isOpen={isMobileMenuOpen} onClick={() => setMenuOpen((v) => !v)} />
           </div>
         </div>
       </motion.header>
 
-      {/* Mobile Drawer Overlay */}
+      {/* ── MOBILE DRAWER ──────────────────── */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <>
@@ -271,7 +273,7 @@ export default function FeatureNavbar() {
               onClick={close}
               className="fixed inset-0 z-[112] lg:hidden"
               style={{
-                background: 'rgba(2, 2, 10, 0.82)',
+                background: 'rgba(2, 2, 10, 0.78)',
                 backdropFilter: 'blur(28px)',
                 WebkitBackdropFilter: 'blur(28px)',
                 pointerEvents: 'all',
@@ -287,11 +289,11 @@ export default function FeatureNavbar() {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9, y: 20 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-                className="w-full max-w-md bg-[#050612]/85 backdrop-blur-[36px] border border-white/15 rounded-[2rem] overflow-hidden flex flex-col shadow-[0_32px_80px_rgba(0,0,0,0.85),inset_0_1px_2px_rgba(255,255,255,0.2)] relative pointer-events-auto"
+                className="w-full max-w-md nav-island rounded-2xl overflow-hidden flex flex-col relative pointer-events-auto"
                 onClick={(e) => e.stopPropagation()}
               >
-                {/* Liquid Ambient Orbs inside Mobile Drawer */}
-                <div className="absolute inset-0 overflow-hidden rounded-[2rem] pointer-events-none -z-10">
+                {/* Liquid Ambient Glowing Orbs inside Mobile Drawer */}
+                <div className="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none -z-10">
                   <motion.div
                     animate={{
                       x: ['-40%', '80%', '-40%'],
@@ -316,14 +318,19 @@ export default function FeatureNavbar() {
                       repeat: Infinity,
                       ease: 'easeInOut',
                     }}
-                    className="absolute -bottom-10 -right-10 w-60 h-60 bg-gradient-to-r from-cyan-500/25 via-blue-600/30 to-violet-600/35 rounded-full blur-3xl pointer-events-none"
+                    className="absolute -bottom-10 -right-10 w-60 h-60 bg-gradient-to-r from-pink-500/25 via-purple-600/25 to-indigo-500/25 rounded-xl blur-3xl pointer-events-none"
                   />
                 </div>
 
+                {/* Decorative Background Text */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15vw] font-display font-black text-dark-textMain/[0.03] pointer-events-none select-none">
+                  MENU
+                </div>
+
                 {/* Header */}
-                <div className="px-7 pt-7 pb-4 flex items-center justify-between relative z-10">
+                <div className="px-8 pt-8 pb-4 flex items-center justify-between relative z-10">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-2xl bg-gradient-to-b from-white/15 to-white/5 border border-white/20 p-1 flex items-center justify-center overflow-hidden shrink-0 shadow-lg">
+                    <div className="w-9 h-9 rounded-2xl p-0.5 flex items-center justify-center overflow-hidden shrink-0 shadow-lg">
                       <img
                         src="/images/navbar-avatar.webp"
                         alt="Avatar"
@@ -331,50 +338,66 @@ export default function FeatureNavbar() {
                       />
                     </div>
                     <div className="flex flex-col">
-                      <span className="font-bricolage font-black text-white text-base tracking-wider uppercase">Navigation</span>
-                      <span className="text-[10px] text-emerald-400 font-bold uppercase tracking-widest flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                        Available for Work
+                      <span className="font-bricolage font-black text-dark-textMain text-base tracking-wider uppercase">
+                        Menu
+                      </span>
+                      <span className="text-[10px] text-emerald-400 font-bold uppercase tracking-widest animate-pulse">
+                        Explore My Work
                       </span>
                     </div>
                   </div>
                   <button
                     onClick={close}
-                    className="w-10 h-10 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center text-white/70 hover:text-white transition-all hover:bg-white/20 cursor-pointer"
+                    className="w-10 h-10 rounded-xl bg-dark-textMain/10 border border-dark-textMain/15 flex items-center justify-center text-dark-textMain/70 hover:text-dark-textMain transition-all hover:bg-dark-textMain/10 cursor-pointer"
                   >
                     <X size={20} />
                   </button>
                 </div>
 
                 {/* Links */}
-                <nav className="px-6 py-4 flex flex-col gap-2 relative z-10">
-                  {featureLinks.map((link, i) => (
-                    <motion.div
-                      key={link.name}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.08 + i * 0.04 }}
-                    >
-                      <RouterLink
-                        to={link.to}
-                        onClick={close}
-                        className="flex items-center justify-between w-full px-4 py-3 rounded-xl font-display font-bold text-white/80 hover:text-white hover:bg-white/[0.08] transition-all text-base cursor-pointer"
+                <nav className="px-6 py-4 flex flex-col gap-1.5 relative z-10 max-h-[60vh] overflow-y-auto no-scrollbar">
+                  {featureLinks.map((link, i) => {
+                    const isActive =
+                      location.pathname === link.to ||
+                      (link.to !== '/' && location.pathname.startsWith(link.to));
+
+                    return (
+                      <motion.div
+                        key={link.name}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.1 + i * 0.05 }}
                       >
-                        <span>{link.name}</span>
-                        <ArrowRight size={15} className="opacity-40" />
-                      </RouterLink>
-                    </motion.div>
-                  ))}
+                        <RouterLink
+                          to={link.to}
+                          onClick={close}
+                          className={`flex items-center justify-between w-full px-4 py-3 rounded-xl font-display font-bold transition-all text-base cursor-pointer ${isActive
+                              ? '!text-dark-textMain !bg-indigo-600/20'
+                              : 'text-dark-textMain/70 hover:text-dark-textMain hover:bg-dark-textMain/5'
+                            }`}
+                        >
+                          <span className="relative z-10 block whitespace-nowrap">{link.name}</span>
+                          <ArrowRight size={15} className="opacity-30 shrink-0" />
+                        </RouterLink>
+                      </motion.div>
+                    );
+                  })}
                 </nav>
 
                 {/* Footer Liquid CTA */}
-                <div className="p-6 relative z-10 bg-white/[0.02] border-t border-white/10 flex flex-col gap-3">
-                  <RouterLink to="/contact" onClick={close}>
-                    <button className="w-full py-3.5 rounded-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 text-white font-bold text-sm tracking-wider uppercase shadow-[0_0_20px_rgba(99,102,241,0.4)] border border-white/20 flex items-center justify-center gap-2 cursor-pointer">
-                      <span>Get In Touch</span>
-                      <ArrowRight size={16} />
-                    </button>
-                  </RouterLink>
+                <div className="p-5 relative z-10 bg-dark-textMain/[0.03] border-t border-dark-textMain/10 flex flex-col gap-4">
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="text-[10px] font-code uppercase tracking-widest text-dark-textMuted">
+                      Appearance
+                    </span>
+                    <ThemeToggle />
+                  </div>
+                  <div className="flex items-center justify-center gap-3 opacity-30 hover:opacity-50 transition-opacity">
+                    <Globe size={12} className="text-dark-textMain" />
+                    <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-dark-textMain">
+                      Rudra Patel 💻
+                    </span>
+                  </div>
                 </div>
               </motion.div>
             </div>
